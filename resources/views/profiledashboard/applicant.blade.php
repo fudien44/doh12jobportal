@@ -1,0 +1,714 @@
+@extends('layouts.app')
+
+@section('content')
+<span id="particles-js" ></span>
+<div class="content-header mt-3">
+  <div class="container">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<section class="py-5">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title text-gray text-xl">My Profile</h3>
+                <div class="card-tools">
+                    <button class="btn btn-sm btn-success btn-edit-profile d-none">Edit Profile
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        @if($users->profile && $users->profile->picture_link)
+                        <img src="{{ asset('storage/app/public')}}/{{$users->id}}/{{$users->profile->picture_link}}" alt="photo will appear here" class="rounded-circle profile-picture" width="160" />
+                        @else
+                        <img src="{{ asset('public/img/profile.png') }}" alt="user" class="rounded-circle profile-picture" width="160">
+                        @endif
+                    </div>
+                    <div class="col-md-12 text-center">
+                         <h2 class="text-primary">{{$users->fname}} {{$users->lname}}</h2>
+                    </div>
+                    <div class="col-md-12">
+                        <form id="applicant-info-form" method="POST" enctype="multipart/form-data">
+                            {{csrf_field()}}
+                            <input type="hidden" name="profile_id" value="{{$profile->id}}">
+                            <table id="applicant-info-table" class="table table-bordered table-hover">
+                                <h3>Personal Information</h3>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h6 class="card-subtitle req-field">First name:</h6>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-border required" name="fname" value="{{$users->fname}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h6 class="card-subtitle req-field">Middle name:</h6>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-border required" name="mname" value="{{$users->mname}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h6 class="card-subtitle req-field">Last name:</h6>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-border required" name="lname" value="{{$users->lname}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6 class="card-subtitle req-field">Extension:</h6>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-border required" name="extension" value="{{$profile->extension}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6 class="card-subtitle req-field">Date of Birth:</h6>
+                                        <div class="form-group">
+                                            <input type="date"class="form-control form-control-border" id="dob" name="dob" value="{{$profile->dob}}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h6 class="card-subtitle req-field">Age:</h6>
+                                        <input type="text" class="form-control form-control-border required" disabled id="age" name="age">
+                                    </div>
+                                    <div class="col-md-4">
+                                      <h6 class="card-subtitle req-field">Gender:</h6>
+                                      <select class="form-control form-control-border gender" name="gender">
+                                        <option selected value="">Select Gender</option>
+                                        <option value="0">Male</option>
+                                        <option value="1">Female</option>
+                                        <option value="2">Transgender</option>
+                                        <option value="3">Two-Spirit</option>
+                                        <option value="4">Cisgender</option>
+                                        <option value="5">Non-binary</option>
+                                        <option value="6">Genderqueer</option>
+                                        <option value="7">Gender expression</option>
+                                        <option value="8">Gender fluid</option>
+                                        <option value="9">Gender neutral</option>
+                                      </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6 class="card-subtitle req-field">Ethnicity:</h6>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-border required" name="ethnicity" value="{{$profile->ethnicity}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h6 class="card-subtitle req-field">Religion:</h6>
+                                          <select class="form-control form-control-border religion" name="religion">
+                                            <option selected value="">Select Religion</option>
+                                            <option value="AGLIP">AGLIPAY</option><option value="ALLY">ALLIANCE OF BIBLE CHRISTIAN COMMUNITIES</option><option value="ANGLI">ANGLICAN</option><option value="BAPTI">BAPTIST</option><option value="BRNAG">BORN AGAIN CHRISTIAN</option><option value="BUDDH">BUDDHISM</option><option value="CATHO">CATHOLIC</option><option value="XTIAN">CHRISTIAN</option><option value="CHOG">CHURCH OF GOD</option><option value="EVANG">EVANGELICAL</option><option value="IGNIK">IGLESIA NI CRISTO</option><option value="MUSLI">ISLAM</option><option value="JEWIT">JEHOVAHS WITNESS</option><option value="MORMO">LDS-MORMONS</option><option value="LRCM">LIFE RENEWAL CHRISTIAN MINISTRY</option><option value="LUTHR">LUTHERAN</option><option value="METOD">METHODIST</option><option value="PENTE">PENTECOSTAL</option><option value="PROTE">PROTESTANT</option><option value="SVDAY">SEVENTH DAY ADVENTIST</option><option value="UCCP">UCCP</option><option value="UNKNO">UNKNOWN</option><option value="WESLY">WESLEYAN</option>
+                                          </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h6 class="card-subtitle req-field">Civil Status:</h6>
+                                          <select class="form-control form-control-border civilstat" name="civilstat">
+                                            <option selected value="">Select Status</option>
+                                            <option value="0">Single</option>
+                                            <option value="1">Married</option>
+                                            <option value="2">Separated</option>
+                                            <option value="3">Widowed</option>
+                                            <option value="3">Other</option>
+                                          </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <h3>Contact</h3>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h6 class="card-subtitle req-field">Address:</h6>
+                                        <div class="form-group">
+                                            <textarea class="form-control form-control-border required" name="address" rows="2">{{$profile->address}}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6 class="card-subtitle req-field">Contact Number:</h6>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-border required" name="contactno" value="{{$users->contactno}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6 class="card-subtitle req-field">Email Address:</h6>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-border required" name="email" value="{{$users->email}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <h3>Education</h3>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h6 class="card-subtitle req-field">Highest Educational Attainment:</h6>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-border required" name="highest_education" value="{{$profile->highest_education}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6 class="card-subtitle req-field">Course Title:</h6>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-border required" name="course" value="{{$profile->course}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h6 class="card-subtitle req-field">Name Of School/University:</h6>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-border required" name="school" value="{{$profile->school}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h6 class="card-subtitle req-field">Eligibility/License/Honor Graduate (If Applicable):</h6>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-border required" name="eligibility" value="{{$profile->eligibility}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <h3>Other Information</h3>
+                                <hr>
+                                <div class="row">
+                                     <div class="col-sm-4">
+                                         <h6 class="card-subtitle req-field">PWD:</h6>
+                                        <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="is_pwd"value="1" onchange="stat(1)" @if($profile->is_pwd == '1')checked @endif>
+                                                <label class="form-check-label">No</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="is_pwd"value="0" onchange="stat(0)" @if($profile->is_pwd == '0')checked @endif>
+                                                <label class="form-check-label">Yes</label>
+                                            </div>
+                                            <div class="form-group" id="status">
+                                            <input type="text" class="form-control form-control-border required" name="pwd_no" placeholder="Please Specify I.D. No." value="{{$profile->pwd_no}}">
+                                        </div>
+                                     </div>
+                                     <div class="col-md-4">
+                                         <h6 class="card-subtitle req-field">Solo Parent</h6>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="is_solpar"value="1"onchange="solo(1)"@if($profile->is_solpar == '1')checked @endif>
+                                            <label class="form-check-label">No</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="is_solpar"value="0"onchange="solo(0)"@if($profile->is_solpar == '0')checked @endif>
+                                            <label class="form-check-label">Yes</label>
+                                        </div>
+                                        <div class="form-group" id="solopar">
+                                            <input type="text" class="form-control form-control-border required" name="soloparent_no" placeholder="Please Specify I.D. No." value="{{$profile->soloparent_no}}">
+                                        </div>
+                                     </div>
+                                     <div class="col-sm-6">
+                                        <h6 class="card-subtitle req-field">Work Experience:</h6>
+                                        <div class="form-group">
+                                             <textarea class="summernote workexp" name="work_experience">{{$profile->work_experience}}
+                                            </textarea>
+                                        </div>
+                                     </div>
+                                     <div class="col-sm-6">
+                                        <h6 class="card-subtitle req-field">Training:</h6>
+                                        <div class="form-group">
+                                             <textarea class="summernote training" name="training">{{$profile->training}}
+                                         </textarea>
+                                        </div>
+                                     </div>
+                                     <div class="col-sm-12">
+                                        <h3>Personal Data Sheet</h3><hr>
+                                        @if($users->pds)
+                                        @foreach($users->pds as $key => $pds)
+                                        <a href="#" data-toggle="modal" data-target="#pds-xl-{{$key}}">MYPDS {{$key}} </a><br>
+                                        <div class="modal fade" id="pds-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h4 class="modal-title">Personal Data Sheet</h4>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-pds" data-id="{{$pds->id}}">
+                                                      <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                              </div>
+                                              <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                        <div class="dropzone" id="pdsFile" name="pds_file"></div>
+                                     </div>
+                                     <div class="col-sm-12">
+                                        <h3>Transcript of Record</h3><hr>
+                                        @if($users->tor)
+                                        @foreach($users->tor as $key => $tor)
+                                        <a href="#" data-toggle="modal" data-target="#tor-xl-{{$key}}">TOR {{$key}} </a><br>
+                                        <div class="modal fade" id="tor-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h4 class="modal-title">transcript of record</h4>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-tor" data-id="{{$tor->id}}">
+                                                      <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                              </div>
+                                              <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                        <div class="dropzone" id="torFile"></div>
+                                     </div>
+                                     <div class="col-sm-12">
+                                        <h3>Eligibility</h3><hr>
+                                        @if($users->elig)
+                                        @foreach($users->elig as $key => $elig)
+                                        <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility {{$key}} </a><br>
+                                        <div class="modal fade" id="elig-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h4 class="modal-title">Eligibility</h4>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-elig" data-id="{{$elig->id}}">
+                                                      <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                              </div>
+                                              <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                        <div class="dropzone" id="eligFile"></div>
+                                     </div>
+                                     <div class="col-sm-12">
+                                        <h3>Other Supporting Documents</h3>
+                                        <hr>
+                                        <div class="dropzone" id="otherFile"></div>
+                                        @if($users->odoc)
+                                        @foreach($users->odoc as $key => $odoc)
+                                        <a href="#" data-toggle="modal" data-target="#doc-xl-{{$key}}">Other Document {{$key}} </a><br>
+                                        <div class="modal fade" id="doc-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h4 class="modal-title">Other Document</h4>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-doc" data-id="{{$odoc->id}}">
+                                                      <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$odoc->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                              </div>
+                                              <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                     </div>
+                                    <button type="submit" class="btn float btn-save-profile"><i class="fas fa-save"></i></button>
+                                </div>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endsection
+@section('js')
+<script>
+    $(function () {
+    bsCustomFileInput.init();
+      $('.summernote').summernote({
+        height: 100,
+        codemirror: {
+          theme: 'paper'
+        }
+      })
+      $('.datemask').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+      $('.select2').select2()
+    });
+    $(".btn-save-profile").click(function (e) {
+        $( "#applicant-info-form" ).trigger( "submit" );
+    });
+    Dropzone.autoDiscover = false,
+    $("#pdsFile").dropzone({
+      addRemoveLinks: true,
+      autoProcessQueue: false,
+      maxFiles: 100,
+      parallelUploads: 10000,
+      acceptedFiles: ".pdf",
+      paramName: "mypds[]",
+      url: "{{secure_url('/save-application-update')}}",
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      init: function() {
+        var myDropzone = this;
+        // Update selector to match your button
+        $(".btn-save-profile").click(function (e) {
+            if (myDropzone.getUploadingFiles().length > 0 && myDropzone.getQueuedFiles().length > 0) {
+                myDropzone.processQueue();
+            }
+        });
+        this.on('sending', function(file, xhr, formData) {
+            // Append all form inputs to the formData Dropzone will POST
+            var data = $('#applicant-info-form').serializeArray();
+            $.each(data, function(key, el) {
+                formData.append(el.name, el.value);
+            });
+            $.toast({
+                heading: 'Uploading',
+                text: 'Uploading Personal Data Sheet',
+                position: 'top-center'
+            })
+        });
+        this.on("success", function(file, responseText) {
+            $.toast({
+                heading: 'Saved',
+                text: 'Successfully Saved Personal Data Sheet, Refresh page to apply changes',
+                position: 'top-center'
+            })
+        });
+      }   
+    });
+    $("#torFile").dropzone({
+      addRemoveLinks: true,
+      autoProcessQueue: false,
+      maxFiles: 100,
+      parallelUploads: 10000,
+      acceptedFiles: ".pdf",
+      url: "{{secure_url('/save-application-update')}}",
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      paramName: "mytor[]",
+      init: function() {
+        var myDropzone = this;
+        // Update selector to match your button
+        $(".btn-save-profile").click(function (e) {
+            if (myDropzone.getUploadingFiles().length > 0 && myDropzone.getQueuedFiles().length > 0) {
+                myDropzone.processQueue();
+            }
+        });
+        this.on('sending', function(file, xhr, formData) {
+            // Append all form inputs to the formData Dropzone will POST
+            var data = $('#applicant-info-form').serializeArray();
+            $.each(data, function(key, el) {
+                formData.append(el.name, el.value);
+            });
+            $.toast({
+                heading: 'Uploading',
+                text: 'Uploading Transcript of Records',
+                position: 'top-center'
+            })
+        });
+        this.on("success", function(file, responseText) {
+            $.toast({
+                heading: 'Saved',
+                text: 'Successfully Saved Transcript of Records, Refresh page to apply changes',
+                position: 'top-center'
+            })
+        });
+      }   
+    });
+    $("#eligFile").dropzone({
+      addRemoveLinks: true,
+      autoProcessQueue: false,
+      maxFiles: 100,
+      parallelUploads: 10000,
+      acceptedFiles: ".pdf",
+      url: "{{secure_url('/save-application-update')}}",
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      paramName: "myelig[]",
+      init: function() {
+        var myDropzone = this;
+        // Update selector to match your button
+        $(".btn-save-profile").click(function (e) {
+            if (myDropzone.getUploadingFiles().length > 0 && myDropzone.getQueuedFiles().length > 0) {
+                myDropzone.processQueue();
+            }
+        });
+        this.on('sending', function(file, xhr, formData) {
+            // Append all form inputs to the formData Dropzone will POST
+            var data = $('#applicant-info-form').serializeArray();
+            $.each(data, function(key, el) {
+                formData.append(el.name, el.value);
+            });
+            $.toast({
+                heading: 'Uploading',
+                text: 'Uploading Eligibility File',
+                position: 'top-center'
+            })
+        });
+        this.on("success", function(file, responseText) {
+            $.toast({
+                heading: 'Saved',
+                text: 'Successfully Saved Eligibility File, Refresh page to apply changes',
+                position: 'top-center'
+            })
+        });
+      }   
+    });
+    $("#otherFile").dropzone({
+      addRemoveLinks: true,
+      autoProcessQueue: false,
+      maxFiles: 100,
+      parallelUploads: 10000,
+      acceptedFiles: ".pdf",
+      url: "{{secure_url('/save-application-update')}}",
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      paramName: "myother[]",
+      init: function() {
+        var myDropzone = this;
+        // Update selector to match your button
+        $(".btn-save-profile").click(function (e) {
+            if (myDropzone.getUploadingFiles().length > 0 && myDropzone.getQueuedFiles().length > 0) {
+                myDropzone.processQueue();
+            }
+        });
+        this.on('sending', function(file, xhr, formData) {
+            // Append all form inputs to the formData Dropzone will POST
+            var data = $('#applicant-info-form').serializeArray();
+            $.each(data, function(key, el) {
+                formData.append(el.name, el.value);
+            });
+            $.toast({
+                heading: 'Uploading',
+                text: 'Uploading Other Supporting Documents',
+                position: 'top-center'
+            })
+        });
+        this.on("success", function(file, responseText) {
+            $.toast({
+                heading: 'Saved',
+                text: 'Successfully Saved Other Supporting Documents, Refresh page to apply changes',
+                position: 'top-center'
+            })
+        });
+      }   
+    });
+    $("#upProfile").change(function () {
+        const file = this.files[0];
+        if (file) {
+            if(this.files[0].size > 5000000) {
+                $.toast({
+                    heading: 'Required',
+                    text: 'Upload Limit: 5mb',
+                    position: 'top-center'
+                })
+                $(this).val('');
+            } else {
+                let reader = new FileReader();
+                reader.onload = function (event) {
+                    $(".profile-picture")
+                      .attr("src", event.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    });
+    $('#applicant-info-form').on('submit',function(e){
+        var url = "{{ secure_url('save-application-update') }}";
+        e.preventDefault();
+        $(".loading").show();
+        $('#applicant-info-form').ajaxSubmit({
+            url:  url,
+            type: "post",
+            success: function(data){
+            if(data == 'email') {
+                $(".loading").hide();
+                $.toast({
+                    heading: 'Error',
+                    text: 'Email already exist',
+                    showHideTransition: 'fade',
+                    position: 'top-center',
+                    icon: 'error'
+                })
+            } else {
+                $.toast({
+                    heading: 'Info',
+                    text: 'Successfully update profile',
+                    showHideTransition: 'fade',
+                    position: 'top-center',
+                    icon: 'error'
+                })
+                $(".loading").hide();
+                $('.btn-save-profile').addClass('d-none')
+                $('.btn-edit-profile').removeClass('d-none')
+                $("#applicant-info-form").css({ 'pointer-events' : 'none'});
+            }
+            },
+            error: function (data) {
+                $(".loading").hide();
+                $.toast({
+                    heading: 'Error',
+                    text: 'Something went wrong, Please finish profiling',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                })
+            },
+        });
+    });
+    var dobs = $('#dob').val();
+    function age(dob) {
+        if(dob) {
+            dob = new Date(dob);
+            var today = new Date();
+            var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
+            $('#age').val(age+' year(s) old');
+        }
+    }
+    $(document).ready(function () {
+        var gender = "{!!$profile->gender!!}";
+        var religion = "{!!$profile->religion!!}";
+        var civilstat = "{!!$profile->civilstat!!}";
+        $('.gender option[value="'+gender+'"]').attr("selected", "selected");
+        $('.religion option[value="'+religion+'"]').attr("selected", "selected");
+        $('.civilstat option[value="'+civilstat+'"]').attr("selected", "selected");
+        age(dobs)
+    });
+    $('#dob').change(function(){
+         age($(this).val())
+    });
+    function stat(x){
+	if (x == 0) document.getElementById("status").style.display = "block";
+	else document.getElementById("status").style.display ="none";
+	return;
+	}
+    function solo(s){
+	if (s == 0) document.getElementById("solopar").style.display = "block";
+	else document.getElementById("solopar").style.display ="none";
+	return;
+	}
+    $( ".btn-edit-profile" ).on( "click", function() {
+        $('.btn-save-profile').removeClass('d-none')
+        $('.dropzone').removeClass('d-none')
+        $("#applicant-info-form").css({ 'pointer-events' : ''});
+    } );
+    $( ".btn-delete-pds" ).on( "click", function() {
+        var id = $(this).attr('data-id');
+        var url = "{{ secure_url('/delete-pds') }}";
+        $.ajax({
+            async: true,
+            url: url,
+            type: 'GET',
+            data: {
+                id: id
+            },
+            success : function(data){
+                $.toast({
+                    heading: 'Deleted',
+                    text: 'Successfully Deleted',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                })
+                setTimeout(function(){
+                  window.location.reload(false);
+              },500);
+            }
+        });
+    } );
+    $( ".btn-delete-tor" ).on( "click", function() {
+        var id = $(this).attr('data-id');
+        var url = "{{ secure_url('/delete-tor') }}";
+        $.ajax({
+            async: true,
+            url: url,
+            type: 'GET',
+            data: {
+                id: id
+            },
+            success : function(data){
+                $.toast({
+                    heading: 'Deleted',
+                    text: 'Successfully Deleted',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                })
+                setTimeout(function(){
+                  window.location.reload(false);
+              },500);
+            }
+        });
+    } );
+    $( ".btn-delete-elig" ).on( "click", function() {
+        var id = $(this).attr('data-id');
+        var url = "{{ secure_url('/delete-elig') }}";
+        $.ajax({
+            async: true,
+            url: url,
+            type: 'GET',
+            data: {
+                id: id
+            },
+            success : function(data){
+                $.toast({
+                    heading: 'Deleted',
+                    text: 'Successfully Deleted',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                })
+                setTimeout(function(){
+                  window.location.reload(false);
+              },500);
+            }
+        });
+    } );
+    $( ".btn-delete-doc" ).on( "click", function() {
+        var id = $(this).attr('data-id');
+        var url = "{{ secure_url('/delete-doc') }}";
+        $.ajax({
+            async: true,
+            url: url,
+            type: 'GET',
+            data: {
+                id: id
+            },
+            success : function(data){
+                $.toast({
+                    heading: 'Deleted',
+                    text: 'Successfully Deleted',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                })
+                setTimeout(function(){
+                  window.location.reload(false);
+              },500);
+            }
+        });
+    } );
+</script>
+  @endsection
+
+

@@ -1,0 +1,250 @@
+@extends('layouts.app')
+
+@section('content')
+<span id="particles-js" ></span>
+<div class="content-header mt-3">
+  <div class="container">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<div class="content-header mt-3">
+  <div class="container">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<div class="container-fluid">
+	<div class="card">
+      <div class="card-header">
+        <h3 class="card-title">MY APPLICATIONS</h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body">
+        <table id="my_jobs_tbl" class="table table-bordered table-hover">
+          <thead>
+          <tr>
+            <th></th>
+            <th>JOB TITLE</th>
+            <th>APPLIED ON</th>
+            <th>DATE CLOSED</th>
+            <th>STATUS</th>
+          </tr>
+          </thead>
+          <tbody>
+            @foreach($user->myjobs as $mj)
+            <tr>
+              <td class="text-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#modal_app_letter" data-id="{{$mj->id}}">Upload Application</button>
+
+                  <div class="btn-group">
+                    <button title="Application history" type="button" class="btn btn-default" data-toggle="dropdown">
+                      <i class="fas fa-history"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                      @if(count($mj->letters) > 0)
+                      @foreach($mj->letters as $l)
+                        <a class="dropdown-item btn-view-app" href="#" data-id="{{$mj->id}}" data-file="{{$l->file_upload}}" data-user="{{Auth::user()->id}}" data-title="{{$mj->job->job_title}}"><i class="fas fa-file-pdf"></i> {{$l->file_name}}</a>
+                      @endforeach
+                      @endif
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td>{{$mj->job->job_title}}</td>
+              <td>{{date('F d,Y',strtotime($mj->created_at))}}</td>
+              <td>{{date('F d,Y',strtotime($mj->job->date_closed))}}</td>
+              <td class="text-center">
+                @if(count($mj->msg) > 0)
+                {!! $mj->latst->tp() !!}
+                @else
+                <small class="badge badge-danger" style="cursor: pointer;"><i class="far fa-clock"></i> In review</small>
+                @endif
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div> 
+</div>
+<div class="modal fade" id="modal_app_letter">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Upload Application Letter</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form id="app_upload" method="POST">
+        @csrf
+        <div class="form-group">
+          <label>File Name</label>
+          <input type="text" class="form-control form-control-border" name="file_name" placeholder="File name" required>
+        </div>
+        <label for="customFile">Upload Application(Max:10mb)<br>Accepted file:.pdf</label>
+        <div class="custom-file">
+          <input type="hidden" name="app_id" class="app_id">
+          <input type="file" class="custom-file-input" id="customFileApp" name="app_letter_name" accept=".pdf" required>
+          <label class="custom-file-label" for="customFileApp">Choose file</label>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="modal-view-app" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title job-title-modal">My application</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <embed id="view-app" frameborder="0" width="100%" height="800px"></embed>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="modal-track-app" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title job-title-modal">Status</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body track-message-content">
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+@endsection
+@section('js')
+<script>
+	$(function () {
+    bsCustomFileInput.init();
+		$('#my_jobs_tbl').DataTable({
+	      "paging": true,
+	      "searching": true,
+	      "ordering": true,
+	      "info": true,
+	      "autoWidth": true,
+	      "responsive": true,
+	    });
+	});
+  $('#app_upload').on('submit',function(e){
+      var url = "{{ secure_url('/save-app-letter') }}";
+      e.preventDefault();
+      $(".loading").show();
+      $('#app_upload').ajaxSubmit({
+          url:  url,
+          type: "POST",
+          success: function(data){
+            setTimeout(function(){
+                window.location.reload(false);
+            },500);
+          },
+          error: function (data) {
+              $(".loading").hide();
+              $.toast({
+                  heading: 'Error',
+                  text: 'Something went wrong, Please contact administrator',
+                  showHideTransition: 'fade',
+                  icon: 'error'
+              })
+          },
+      });
+  });
+  $("#customFileApp").on("change", function (e) {
+
+      if(this.files[0].size > 10097152){
+         alert("File is too big!");
+         this.value = "";
+      }
+      if(this.value.split('.').pop() != 'pdf') {
+        alert('Invalid Format!')
+        this.value = "";
+      }
+
+  });
+  $('#my_jobs_tbl').on('click', '.btn-upload',function() {
+      var id = $(this).attr('data-id');
+      $('.app_id').val(id)
+  });
+  $('#my_jobs_tbl').on('click', '.btn-view-app',function() {
+      $('#modal-view-app').modal('show');
+      var me =  $(this).attr('data-title');
+      var title = "My Application -"+me;
+      $('.job-title-modal').html(title)
+      var id = $(this).attr('data-id');
+      $('.app_id').val(id)
+      var user = $(this).attr('data-user');
+      var file = $(this).attr('data-file');
+      var url = "{{ asset('storage/app/public') }}/"+user+"/"+file; 
+      jQuery('embed#view-app').attr('src', url);
+  });
+  var appid;
+  $('#modal-track-app').on('shown.bs.modal', function (e) {
+    var url = "{{secure_url('/track-message')}}/"+appid;
+    $(".loading").show();
+    $.ajax({
+        url: url,
+        type: 'GET',
+        async: false,
+        success : function(data){
+          $(".loading").hide();
+          $('.track-message-content').html(data)
+        },
+        error: function (data) {
+            $(".loading").hide();
+            $.toast({
+                heading: 'Error',
+                text: 'Something went wrong, Please contact administrator',
+                showHideTransition: 'fade',
+                position: 'top-center',
+                icon: 'error'
+            })
+        },
+    });
+  });
+  function getAppID(id) {
+    appid = id;
+  }
+</script>
+@endsection
