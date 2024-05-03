@@ -43,6 +43,17 @@
                             <table id="applicant-info-table" class="table table-bordered table-hover">
                                 <h3>Personal Information</h3>
                                 <hr>
+                                <div class="col-md-4">
+                                    <h6 class="card-subtitle req-field">Upload Photo:</h6>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                          <div class="custom-file">
+                                            <input type="file" name="picture_link" class="custom-file-input" id="upProfile" accept="image/jpeg, image/png">
+                                            <label class="custom-file-label" for="upProfile">Choose photo</label>
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <h6 class="card-subtitle req-field">First name:</h6>
@@ -207,25 +218,11 @@
                                             <input type="text" class="form-control form-control-border required" name="soloparent_no" placeholder="Please Specify I.D. No." value="{{$profile->soloparent_no}}">
                                         </div>
                                      </div>
-                                     <div class="col-sm-6">
-                                        <h6 class="card-subtitle req-field">Work Experience:</h6>
-                                        <div class="form-group">
-                                             <textarea class="summernote workexp" name="work_experience">{{$profile->work_experience}}
-                                            </textarea>
-                                        </div>
-                                     </div>
-                                     <div class="col-sm-6">
-                                        <h6 class="card-subtitle req-field">Training:</h6>
-                                        <div class="form-group">
-                                             <textarea class="summernote training" name="training">{{$profile->training}}
-                                         </textarea>
-                                        </div>
-                                     </div>
                                      <div class="col-sm-12">
                                         <h3>Personal Data Sheet</h3><hr>
                                         @if($users->pds)
                                         @foreach($users->pds as $key => $pds)
-                                        <a href="#" data-toggle="modal" data-target="#pds-xl-{{$key}}">MYPDS {{$key}} </a><br>
+                                        <a href="#" data-toggle="modal" data-target="#pds-xl-{{$key}}">Personal Data Sheet {{(int)$key + 1}} </a><br>
                                         <div class="modal fade" id="pds-xl-{{$key}}">
                                             <div class="modal-dialog modal-xl">
                                               <div class="modal-content">
@@ -254,7 +251,7 @@
                                         <h3>Transcript of Record</h3><hr>
                                         @if($users->tor)
                                         @foreach($users->tor as $key => $tor)
-                                        <a href="#" data-toggle="modal" data-target="#tor-xl-{{$key}}">TOR {{$key}} </a><br>
+                                        <a href="#" data-toggle="modal" data-target="#tor-xl-{{$key}}">Transcript of Record {{(int)$key + 1}} </a><br>
                                         <div class="modal fade" id="tor-xl-{{$key}}">
                                             <div class="modal-dialog modal-xl">
                                               <div class="modal-content">
@@ -283,7 +280,7 @@
                                         <h3>Eligibility</h3><hr>
                                         @if($users->elig)
                                         @foreach($users->elig as $key => $elig)
-                                        <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility {{$key}} </a><br>
+                                        <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility {{(int)$key + 1}} </a><br>
                                         <div class="modal fade" id="elig-xl-{{$key}}">
                                             <div class="modal-dialog modal-xl">
                                               <div class="modal-content">
@@ -314,7 +311,7 @@
                                         <div class="dropzone" id="otherFile"></div>
                                         @if($users->odoc)
                                         @foreach($users->odoc as $key => $odoc)
-                                        <a href="#" data-toggle="modal" data-target="#doc-xl-{{$key}}">Other Document {{$key}} </a><br>
+                                        <a href="#" data-toggle="modal" data-target="#doc-xl-{{$key}}">Other Document {{(int)$key + 1}} </a><br>
                                         <div class="modal fade" id="doc-xl-{{$key}}">
                                             <div class="modal-dialog modal-xl">
                                               <div class="modal-content">
@@ -383,6 +380,16 @@
                 myDropzone.processQueue();
             }
         });
+        this.on('error', function(file, xhr, formData) {
+            $.toast({
+                heading: 'Invalid File Format',
+                text: 'Only PDF File will accept!',
+                position: 'top-center',
+                icon: 'error',
+                hideAfter: false
+            })
+            this.removeFile(file);
+        });
         this.on('sending', function(file, xhr, formData) {
             // Append all form inputs to the formData Dropzone will POST
             var data = $('#applicant-info-form').serializeArray();
@@ -420,6 +427,16 @@
             if (myDropzone.getUploadingFiles().length > 0 && myDropzone.getQueuedFiles().length > 0) {
                 myDropzone.processQueue();
             }
+        });
+        this.on('error', function(file, xhr, formData) {
+            $.toast({
+                heading: 'Invalid File Format',
+                text: 'Only PDF File will accept!',
+                position: 'top-center',
+                icon: 'error',
+                hideAfter: false
+            })
+            this.removeFile(file);
         });
         this.on('sending', function(file, xhr, formData) {
             // Append all form inputs to the formData Dropzone will POST
@@ -459,6 +476,16 @@
                 myDropzone.processQueue();
             }
         });
+        this.on('error', function(file, xhr, formData) {
+            $.toast({
+                heading: 'Invalid File Format',
+                text: 'Only PDF File will accept!',
+                position: 'top-center',
+                icon: 'error',
+                hideAfter: false
+            })
+            this.removeFile(file);
+        });
         this.on('sending', function(file, xhr, formData) {
             // Append all form inputs to the formData Dropzone will POST
             var data = $('#applicant-info-form').serializeArray();
@@ -497,6 +524,16 @@
                 myDropzone.processQueue();
             }
         });
+        this.on('error', function(file, xhr, formData) {
+            $.toast({
+                heading: 'Invalid File Format',
+                text: 'Only PDF File will accept!',
+                position: 'top-center',
+                icon: 'error',
+                hideAfter: false
+            })
+            this.removeFile(file);
+        });
         this.on('sending', function(file, xhr, formData) {
             // Append all form inputs to the formData Dropzone will POST
             var data = $('#applicant-info-form').serializeArray();
@@ -520,6 +557,7 @@
     });
     $("#upProfile").change(function () {
         const file = this.files[0];
+        var fileExtension = ['pdf'];
         if (file) {
             if(this.files[0].size > 5000000) {
                 $.toast({
@@ -528,7 +566,16 @@
                     position: 'top-center'
                 })
                 $(this).val('');
-            } else {
+            } else if($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+                $.toast({
+                    heading: 'Invalid File Format',
+                    text: 'Only image File will accept!',
+                    position: 'top-center',
+                    icon: 'error',
+                    hideAfter: false
+                })
+                $(this).val('');
+            }else {
                 let reader = new FileReader();
                 reader.onload = function (event) {
                     $(".profile-picture")
@@ -602,15 +649,15 @@
          age($(this).val())
     });
     function stat(x){
-	if (x == 0) document.getElementById("status").style.display = "block";
-	else document.getElementById("status").style.display ="none";
-	return;
-	}
+    if (x == 0) document.getElementById("status").style.display = "block";
+    else document.getElementById("status").style.display ="none";
+    return;
+    }
     function solo(s){
-	if (s == 0) document.getElementById("solopar").style.display = "block";
-	else document.getElementById("solopar").style.display ="none";
-	return;
-	}
+    if (s == 0) document.getElementById("solopar").style.display = "block";
+    else document.getElementById("solopar").style.display ="none";
+    return;
+    }
     $( ".btn-edit-profile" ).on( "click", function() {
         $('.btn-save-profile').removeClass('d-none')
         $('.dropzone').removeClass('d-none')

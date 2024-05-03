@@ -30,9 +30,11 @@
     <div class="card">
       <div class="card-header">
         <h3 class="card-title">JOB POSTING</h3>
+        @if(Auth::user()->level == 2)
         <div class="float-sm-right">
           <button type="button" class="btn btn-block btn-success btn-sm" data-toggle="modal" data-target="#modal-job-post"><i class="fas fa-plus"></i> ADD JOB</button>
         </div>
+        @endif
       </div>
       <!-- /.card-header -->
       <div class="card-body">
