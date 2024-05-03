@@ -16,7 +16,7 @@ class IsSuperAdmin
     public function handle($request, Closure $next)
     {
         if(auth()->user()) {
-            if(auth()->user()->level == 2){
+            if(auth()->user()->level == 2 || auth()->user()->level == 1){
                 return $next($request);
             }
         }

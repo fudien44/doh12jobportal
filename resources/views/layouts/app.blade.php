@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="{{ asset('public/img/doh.png') }}">
@@ -50,12 +51,12 @@
       <div class="collapse navbar-collapse order-3" id="navbarCollapse">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
-          @if(Auth::user())
+          @if(Auth::user() && (Auth::user()->level == 0))
           <li class="nav-item">
             <a href="{{asset('/')}}" class="nav-link text-white font-weight-light"><b>JOB OPPORTUNITIES</b></a>
           </li>
           @endif
-          @if(Auth::user())
+          @if(Auth::user() && (Auth::user()->level == 0))
           <li class="nav-item">
             <a href="{{asset('/jobs/apply')}}" class="nav-link text-white font-weight-light"><b>MY APPLICATIONS</b></a>
           </li>
@@ -130,7 +131,7 @@
       Created By: DOH XII ICT-UNIT
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; {{date('Y')}}</strong> DOH XII JOB PORTAL All rights reserved.
+    <strong>Copyright &copy; 2024</strong> DOH XII JOB PORTAL All rights reserved.
   </footer>
 </div>
 <div class="modal fade" id="modal-profile" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
