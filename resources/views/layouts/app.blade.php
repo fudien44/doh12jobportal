@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="{{ asset('public/img/doh.png') }}">
+  <link rel="icon" href="{{ asset('public/img/ro12.png') }}">
   <title>DOH XII JOB PORTAL</title>
 
   <!-- Google Font: Source Sans Pro -->

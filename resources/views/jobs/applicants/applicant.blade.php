@@ -93,7 +93,7 @@
             </td>
 
             <td>{{$a->applicant->profile ? $a->applicant->profile->eligibility : ''}}</td>
-            <td></td>
+            <td>{{$j->latst}}</td>
           </tr>
           @endforeach
         </tbody>

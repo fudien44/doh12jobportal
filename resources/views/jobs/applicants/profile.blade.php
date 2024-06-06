@@ -180,39 +180,13 @@
                             <input type="text" class="form-control form-control-border required" name="soloparent_no" placeholder="Please Specify I.D. No." value="{{$profile->soloparent_no}}">
                         </div>
                      </div>
-                     <div class="col-sm-12">
-                        <div class="form-group">
-                            <div class="info-box">
-                              <span class="info-box-icon bg-success"><i class="fas fa-briefcase"></i></span>
-
-                              <div class="info-box-content">
-                                <span class="info-box-text font-weight-bold">Work Experience:</span>
-                                {!!$profile->work_experience!!}
-                              </div>
-                              <!-- /.info-box-content -->
-                            </div>
-                        </div>
-                     </div>
-                     <div class="col-sm-12">
-                        <div class="form-group">
-                            <div class="info-box">
-                              <span class="info-box-icon bg-success"><i class="fas fa-chart-line"></i></span>
-
-                              <div class="info-box-content">
-                                <span class="info-box-text font-weight-bold">Trainings:</span>
-                                 {!!$profile->training!!}
-                              </div>
-                              <!-- /.info-box-content -->
-                            </div>
-                        </div>
-                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <h3>Personal Data Sheet</h3><hr>
                         @if($users->pds)
                         @foreach($users->pds as $key => $pds)
-                        <a href="#" data-toggle="modal" data-target="#pds-xl-{{$key}}">MYPDS {{$key}} </a><br>
+                        <a href="#" data-toggle="modal" data-target="#pds-xl-{{$key}}">Personal Data Sheet {{(int)$key + 1}} </a><br>
                         <div class="modal fade" id="pds-xl-{{$key}}">
                             <div class="modal-dialog modal-xl">
                               <div class="modal-content">
@@ -242,7 +216,7 @@
                         <h3>Transcript of Record</h3><hr>
                         @if($users->tor)
                         @foreach($users->tor as $key => $tor)
-                        <a href="#" data-toggle="modal" data-target="#tor-xl-{{$key}}">TOR {{$key}} </a><br>
+                        <a href="#" data-toggle="modal" data-target="#tor-xl-{{$key}}">TOR {{(int)$key + 1}} </a><br>
                         <div class="modal fade" id="tor-xl-{{$key}}">
                             <div class="modal-dialog modal-xl">
                               <div class="modal-content">
@@ -272,7 +246,7 @@
                         <h3>Eligibility</h3><hr>
                         @if($users->elig)
                         @foreach($users->elig as $key => $elig)
-                        <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility {{$key}} </a><br>
+                        <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility {{(int)$key + 1}} </a><br>
                         <div class="modal fade" id="elig-xl-{{$key}}">
                             <div class="modal-dialog modal-xl">
                               <div class="modal-content">
@@ -303,7 +277,7 @@
                         <hr>
                         @if($users->odoc)
                         @foreach($users->odoc as $key => $odoc)
-                        <a href="#" data-toggle="modal" data-target="#doc-xl-{{$key}}">Other Document {{$key}} </a><br>
+                        <a href="#" data-toggle="modal" data-target="#doc-xl-{{$key}}">Other Document {{(int)$key + 1}} </a><br>
                         <div class="modal fade" id="doc-xl-{{$key}}">
                             <div class="modal-dialog modal-xl">
                               <div class="modal-content">

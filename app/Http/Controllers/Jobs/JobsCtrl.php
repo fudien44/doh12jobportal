@@ -92,8 +92,11 @@ class JobsCtrl extends Controller
         if($user) {
             if(!$user->profile) {
                 Session::put('is_applied', 'Please Finish your profile');
-            }
-            else if($j) {
+            } else if(!$user->pds) {
+                Session::put('is_applied', 'Please provide Personal Data Sheet');
+            } else if(!$user->tor) {
+                Session::put('is_applied', 'Please provide Transcript of Record');
+            } else if($j) {
                 if($j->date_closed <= $ct && $ct->format('H') >= 17) {
                     $j->update(['status' => '1']);
                     Session::put('is_applied', 'This position has already been filled. Thank you for your application.');
@@ -154,7 +157,7 @@ class JobsCtrl extends Controller
         }
     }
     public function applicants(Request $req) {
-        $apps = User::orderBy('lname','asc')->get();
+        $apps = User::where('level', '!=', '2')->orderBy('lname','asc')->get();
         return view('jobs.applicants',[
             'apps' => $apps
         ]);

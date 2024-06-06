@@ -42,7 +42,7 @@ class HomeController extends Controller
         $jobs = $jobs->orderBy('date_posted','ASC')->get();
         $jobsposted = Jobs::all();
         $apps = Application::all();
-        $users = User::all();
+        $users = User::where('level','!=','2')->get();
         $ct = Carbon::now();
         foreach ($jobsposted as $key => $val) {
             $j = Jobs::where('id',$val->id)->where('status','0')->whereDate('date_closed', '=', $ct)->first();

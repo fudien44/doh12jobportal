@@ -35,7 +35,6 @@
       <table id="applicants_tbl" class="table table-bordered table-hover">
         <thead>
           <tr>
-            <th>Date Submitted</th>
             <th>Surname</th>
             <th>First Name</th>
             <th>Middle Name</th>
@@ -48,7 +47,6 @@
             <th>Ethnicity</th>
             <th>Solo Parent</th>
             <th>PWD</th>
-            <th>Position Applied</th>
             <th>Eligibility</th>
             <th>Remarks</th>
           </tr>
@@ -56,15 +54,6 @@
         <tbody>
           @foreach($apps as $a)
           <tr>
-            <td>
-              @if($a->myjobs->count() > 0)
-              @foreach($a->myjobs as $j)
-              <a href="#" class="text-secondary font-weight-bold btn-app-info" data-id="{{$j->id}}">
-                {{$j->job->created_at ? date('m/d/Y', strtotime($j->job->created_at)): ''}}
-              </a><br>
-              @endforeach
-              @endif
-            </td>
             <td>
               <a class="text-success font-weight-bold href-app-profile" data-id="{{$a->id}}" href="#">{{$a->lname}}</a>
             </td>
@@ -83,15 +72,6 @@
             <td>{{$a->profile ? $a->profile->ethnicity : ''}}</td>
             <td>{{$a->profile ? $a->profile->solpar() : ''}}</td>
             <td>{{$a->profile ? $a->profile->pwd() : ''}}</td>
-            <td>
-              @if($a->myjobs->count() > 0)
-              @foreach($a->myjobs as $j)
-              <a href="#" class="text-secondary font-weight-bold btn-app-info" data-id="{{$j->id}}">
-                {{$j->job->job_title ?? ''}}
-              </a><br>
-              @endforeach
-              @endif
-            </td>
 
             <td>{{$a->profile ? $a->profile->eligibility : ''}}</td>
             <td></td>

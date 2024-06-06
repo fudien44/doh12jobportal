@@ -13,6 +13,10 @@ use App\EligFile;
 use App\OtherFile;
 use App\TorFile;
 use App\PdsFile;
+use App\Coe;
+use App\Ipcr;
+use App\Tc;
+use App\Wes;
 class ProfileController extends Controller
 {
     public function __construct()
@@ -93,7 +97,59 @@ class ProfileController extends Controller
         $tor = $request->file('mytor');
         $elig = $request->file('myelig');
         $other = $request->file('myother');
-        if($request->hasFile('mypds')) {
+        $wes = $request->file('mywes');
+        $tc = $request->file('mytc');
+        $coe = $request->file('mycoe');
+        $ipcr = $request->file('myipcr');
+        if($request->hasFile('mywes')) {
+            foreach ($wes as $key => $val) {
+                if($val->getClientMimeType() === 'application/pdf') {
+                    $filename = 'wes'.$user_id.$u->lname.str_random(5).'.'.$val->getClientOriginalExtension();
+                    $path = "public/".$user_id.'/'.$filename;
+                    Storage::disk('local')->put($path, file_get_contents($val));
+                    Wes::create([
+                        'user_id' => $user_id,
+                        'filename' => $filename
+                    ]);
+                }
+            }
+        }if($request->hasFile('mytc')) {
+            foreach ($tc as $key => $val) {
+                if($val->getClientMimeType() === 'application/pdf') {
+                    $filename = 'tc'.$user_id.$u->lname.str_random(5).'.'.$val->getClientOriginalExtension();
+                    $path = "public/".$user_id.'/'.$filename;
+                    Storage::disk('local')->put($path, file_get_contents($val));
+                    Tc::create([
+                        'user_id' => $user_id,
+                        'filename' => $filename
+                    ]);
+                }
+            }
+        }if($request->hasFile('mycoe')) {
+            foreach ($coe as $key => $val) {
+                if($val->getClientMimeType() === 'application/pdf') {
+                    $filename = 'mycoe'.$user_id.$u->lname.str_random(5).'.'.$val->getClientOriginalExtension();
+                    $path = "public/".$user_id.'/'.$filename;
+                    Storage::disk('local')->put($path, file_get_contents($val));
+                    Coe::create([
+                        'user_id' => $user_id,
+                        'filename' => $filename
+                    ]);
+                }
+            }
+        }if($request->hasFile('myipcr')) {
+            foreach ($ipcr as $key => $val) {
+                if($val->getClientMimeType() === 'application/pdf') {
+                    $filename = 'mypds'.$user_id.$u->lname.str_random(5).'.'.$val->getClientOriginalExtension();
+                    $path = "public/".$user_id.'/'.$filename;
+                    Storage::disk('local')->put($path, file_get_contents($val));
+                    Ipcr::create([
+                        'user_id' => $user_id,
+                        'filename' => $filename
+                    ]);
+                }
+            }
+        }if($request->hasFile('mypds')) {
             foreach ($pds as $key => $val) {
                 if($val->getClientMimeType() === 'application/pdf') {
                     $filename = 'mypds'.$user_id.$u->lname.str_random(5).'.'.$val->getClientOriginalExtension();

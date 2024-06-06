@@ -219,15 +219,20 @@
                                         </div>
                                      </div>
                                      <div class="col-sm-12">
-                                        <h3>Personal Data Sheet</h3><hr>
+                                        <br>
+                                        <h3>Attachments</h3>
+                                        <hr>
+                                     </div>
+                                     <div class="col-sm-12">
+                                        <h5>Personal Data Sheet(CS Form No. 212, Revised 2017)</h5><hr>
                                         @if($users->pds)
                                         @foreach($users->pds as $key => $pds)
-                                        <a href="#" data-toggle="modal" data-target="#pds-xl-{{$key}}">Personal Data Sheet {{(int)$key + 1}} </a><br>
+                                        <a href="#" data-toggle="modal" data-target="#pds-xl-{{$key}}">Personal Data Sheet(CS Form No. 212, Revised 2017) {{(int)$key + 1}} </a><br>
                                         <div class="modal fade" id="pds-xl-{{$key}}">
                                             <div class="modal-dialog modal-xl">
                                               <div class="modal-content">
                                                 <div class="modal-header">
-                                                  <h4 class="modal-title">Personal Data Sheet</h4>
+                                                  <h4 class="modal-title">Personal Data Sheet(CS Form No. 212, Revised 2017)</h4>
                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                   </button>
@@ -248,15 +253,73 @@
                                         <div class="dropzone" id="pdsFile" name="pds_file"></div>
                                      </div>
                                      <div class="col-sm-12">
-                                        <h3>Transcript of Record</h3><hr>
+                                        <h5>CSC Work Experience Sheet</h5><hr>
+                                        @if($users->wes)
+                                        @foreach($users->wes as $key => $wes)
+                                        <a href="#" data-toggle="modal" data-target="#wes-xl-{{$key}}">CSC Work Experience Sheet {{(int)$key + 1}} </a><br>
+                                        <div class="modal fade" id="wes-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h4 class="modal-title">CSC Work Experience Sheet</h4>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-wes" data-id="{{$wes->id}}">
+                                                      <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$wes->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                              </div>
+                                              <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                        <div class="dropzone" id="wesFile" name="wes_file"></div>
+                                     </div>
+                                     <div class="col-sm-12">
+                                        <h5>Training Certificates</h5><hr>
+                                        @if($users->tc)
+                                        @foreach($users->tc as $key => $tc)
+                                        <a href="#" data-toggle="modal" data-target="#tc-xl-{{$key}}">Training Certificates {{(int)$key + 1}} </a><br>
+                                        <div class="modal fade" id="tc-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h4 class="modal-title">Training Certificates</h4>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-tc" data-id="{{$tc->id}}">
+                                                      <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tc->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                              </div>
+                                              <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                        <div class="dropzone" id="tcFile" name="tc_file"></div>
+                                     </div>
+                                     <div class="col-sm-12">
+                                        <h5>Diploma & Transcript of Record</h5><hr>
                                         @if($users->tor)
                                         @foreach($users->tor as $key => $tor)
-                                        <a href="#" data-toggle="modal" data-target="#tor-xl-{{$key}}">Transcript of Record {{(int)$key + 1}} </a><br>
+                                        <a href="#" data-toggle="modal" data-target="#tor-xl-{{$key}}">Diploma & Transcript of Record {{(int)$key + 1}} </a><br>
                                         <div class="modal fade" id="tor-xl-{{$key}}">
                                             <div class="modal-dialog modal-xl">
                                               <div class="modal-content">
                                                 <div class="modal-header">
-                                                  <h4 class="modal-title">transcript of record</h4>
+                                                  <h4 class="modal-title">Diploma & Transcript of Record </h4>
                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                   </button>
@@ -277,15 +340,44 @@
                                         <div class="dropzone" id="torFile"></div>
                                      </div>
                                      <div class="col-sm-12">
-                                        <h3>Eligibility</h3><hr>
+                                        <h5>Certificate of Employment</h5><hr>
+                                        @if($users->coe)
+                                        @foreach($users->coe as $key => $coe)
+                                        <a href="#" data-toggle="modal" data-target="#coe-xl-{{$key}}">Certificate of Employment {{(int)$key + 1}} </a><br>
+                                        <div class="modal fade" id="coe-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h4 class="modal-title">Certificate of Employment</h4>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-coe" data-id="{{$coe->id}}">
+                                                      <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$coe->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                              </div>
+                                              <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                        <div class="dropzone" id="coeFile" name="coe_file"></div>
+                                     </div>
+                                     <div class="col-sm-12">
+                                        <h5>Eligibility/PRC/Board Rating</h5><hr>
                                         @if($users->elig)
                                         @foreach($users->elig as $key => $elig)
-                                        <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility {{(int)$key + 1}} </a><br>
+                                        <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility/PRC {{(int)$key + 1}} </a><br>
                                         <div class="modal fade" id="elig-xl-{{$key}}">
                                             <div class="modal-dialog modal-xl">
                                               <div class="modal-content">
                                                 <div class="modal-header">
-                                                  <h4 class="modal-title">Eligibility</h4>
+                                                  <h4 class="modal-title">Eligibility/PRC</h4>
                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                   </button>
@@ -306,7 +398,36 @@
                                         <div class="dropzone" id="eligFile"></div>
                                      </div>
                                      <div class="col-sm-12">
-                                        <h3>Other Supporting Documents</h3>
+                                        <h5>IPCR/Performance Evaluation</h5><hr>
+                                        @if($users->ipcr)
+                                        @foreach($users->ipcr as $key => $ipcr)
+                                        <a href="#" data-toggle="modal" data-target="#ipcr-xl-{{$key}}">IPCR/Performance Evaluation {{(int)$key + 1}} </a><br>
+                                        <div class="modal fade" id="ipcr-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h4 class="modal-title">IPCR/Performance Evaluation</h4>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-ipcr" data-id="{{$ipcr->id}}">
+                                                      <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$ipcr->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                              </div>
+                                              <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                        <div class="dropzone" id="ipcrFile" name="ipcr_file"></div>
+                                     </div>
+                                     <div class="col-sm-12">
+                                        <h5>Other Supporting Documents</h5>
                                         <hr>
                                         <div class="dropzone" id="otherFile"></div>
                                         @if($users->odoc)
@@ -363,10 +484,206 @@
         $( "#applicant-info-form" ).trigger( "submit" );
     });
     Dropzone.autoDiscover = false,
+    $("#wesFile").dropzone({
+      addRemoveLinks: true,
+      autoProcessQueue: false,
+      maxFiles: 2000,
+      parallelUploads: 10000,
+      acceptedFiles: ".pdf",
+      paramName: "mywes[]",
+      url: "{{secure_url('/save-application-update')}}",
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      init: function() {
+        var myDropzone = this;
+        // Update selector to match your button
+        $(".btn-save-profile").click(function (e) {
+            if (myDropzone.getUploadingFiles().length > 0 || myDropzone.getQueuedFiles().length > 0) {
+                myDropzone.processQueue();
+            }
+        });
+        this.on('error', function(file, xhr, formData) {
+            $.toast({
+                heading: 'Invalid File Format',
+                text: 'Only PDF File will accept!',
+                position: 'top-center',
+                icon: 'error',
+                hideAfter: false
+            })
+            this.removeFile(file);
+        });
+        this.on('sending', function(file, xhr, formData) {
+            // Append all form inputs to the formData Dropzone will POST
+            var data = $('#applicant-info-form').serializeArray();
+            $.each(data, function(key, el) {
+                formData.append(el.name, el.value);
+            });
+            $.toast({
+                heading: 'Uploading',
+                text: 'Uploading Work Experience Sheet',
+                position: 'top-center'
+            })
+        });
+        this.on("success", function(file, responseText) {
+            $.toast({
+                heading: 'Saved',
+                text: 'Successfully Saved Work Experience Sheet, Refresh page to apply changes',
+                position: 'top-center'
+            })
+            this.removeFile(file);
+        });
+      }   
+    });
+    $("#tcFile").dropzone({
+      addRemoveLinks: true,
+      autoProcessQueue: false,
+      maxFiles: 2000,
+      parallelUploads: 10000,
+      acceptedFiles: ".pdf",
+      paramName: "mytc[]",
+      url: "{{secure_url('/save-application-update')}}",
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      init: function() {
+        var myDropzone = this;
+        // Update selector to match your button
+        $(".btn-save-profile").click(function (e) {
+            if (myDropzone.getUploadingFiles().length > 0 || myDropzone.getQueuedFiles().length > 0) {
+                myDropzone.processQueue();
+            }
+        });
+        this.on('error', function(file, xhr, formData) {
+            $.toast({
+                heading: 'Invalid File Format',
+                text: 'Only PDF File will accept!',
+                position: 'top-center',
+                icon: 'error',
+                hideAfter: false
+            })
+            this.removeFile(file);
+        });
+        this.on('sending', function(file, xhr, formData) {
+            // Append all form inputs to the formData Dropzone will POST
+            var data = $('#applicant-info-form').serializeArray();
+            $.each(data, function(key, el) {
+                formData.append(el.name, el.value);
+            });
+            $.toast({
+                heading: 'Uploading',
+                text: 'Uploading Training Certificates',
+                position: 'top-center'
+            })
+        });
+        this.on("success", function(file, responseText) {
+            $.toast({
+                heading: 'Saved',
+                text: 'Successfully Saved Training Certificates, Refresh page to apply changes',
+                position: 'top-center'
+            })
+            this.removeFile(file);
+        });
+      }   
+    });
+    $("#coeFile").dropzone({
+      addRemoveLinks: true,
+      autoProcessQueue: false,
+      maxFiles: 2000,
+      parallelUploads: 10000,
+      acceptedFiles: ".pdf",
+      paramName: "mycoe[]",
+      url: "{{secure_url('/save-application-update')}}",
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      init: function() {
+        var myDropzone = this;
+        // Update selector to match your button
+        $(".btn-save-profile").click(function (e) {
+            if (myDropzone.getUploadingFiles().length > 0 || myDropzone.getQueuedFiles().length > 0) {
+                myDropzone.processQueue();
+            }
+        });
+        this.on('error', function(file, xhr, formData) {
+            $.toast({
+                heading: 'Invalid File Format',
+                text: 'Only PDF File will accept!',
+                position: 'top-center',
+                icon: 'error',
+                hideAfter: false
+            })
+            this.removeFile(file);
+        });
+        this.on('sending', function(file, xhr, formData) {
+            // Append all form inputs to the formData Dropzone will POST
+            var data = $('#applicant-info-form').serializeArray();
+            $.each(data, function(key, el) {
+                formData.append(el.name, el.value);
+            });
+            $.toast({
+                heading: 'Uploading',
+                text: 'Uploading Certificate of Employment',
+                position: 'top-center'
+            })
+        });
+        this.on("success", function(file, responseText) {
+            $.toast({
+                heading: 'Saved',
+                text: 'Successfully Saved Certificate of Employment, Refresh page to apply changes',
+                position: 'top-center'
+            })
+            this.removeFile(file);
+        });
+      }   
+    });
+    $("#ipcrFile").dropzone({
+      addRemoveLinks: true,
+      autoProcessQueue: false,
+      maxFiles: 2000,
+      parallelUploads: 10000,
+      acceptedFiles: ".pdf",
+      paramName: "myipcr[]",
+      url: "{{secure_url('/save-application-update')}}",
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      init: function() {
+        var myDropzone = this;
+        // Update selector to match your button
+        $(".btn-save-profile").click(function (e) {
+            if (myDropzone.getUploadingFiles().length > 0 || myDropzone.getQueuedFiles().length > 0) {
+                myDropzone.processQueue();
+            }
+        });
+        this.on('error', function(file, xhr, formData) {
+            $.toast({
+                heading: 'Invalid File Format',
+                text: 'Only PDF File will accept!',
+                position: 'top-center',
+                icon: 'error',
+                hideAfter: false
+            })
+            this.removeFile(file);
+        });
+        this.on('sending', function(file, xhr, formData) {
+            // Append all form inputs to the formData Dropzone will POST
+            var data = $('#applicant-info-form').serializeArray();
+            $.each(data, function(key, el) {
+                formData.append(el.name, el.value);
+            });
+            $.toast({
+                heading: 'Uploading',
+                text: 'Uploading IPCR/Performace Evaluation',
+                position: 'top-center'
+            })
+        });
+        this.on("success", function(file, responseText) {
+            $.toast({
+                heading: 'Saved',
+                text: 'Successfully Saved IPCR/Performace Evaluation, Refresh page to apply changes',
+                position: 'top-center'
+            })
+            this.removeFile(file);
+        });
+      }   
+    });
     $("#pdsFile").dropzone({
       addRemoveLinks: true,
       autoProcessQueue: false,
-      maxFiles: 100,
+      maxFiles: 2000,
       parallelUploads: 10000,
       acceptedFiles: ".pdf",
       paramName: "mypds[]",
@@ -376,7 +693,7 @@
         var myDropzone = this;
         // Update selector to match your button
         $(".btn-save-profile").click(function (e) {
-            if (myDropzone.getUploadingFiles().length > 0 && myDropzone.getQueuedFiles().length > 0) {
+            if (myDropzone.getUploadingFiles().length > 0 || myDropzone.getQueuedFiles().length > 0) {
                 myDropzone.processQueue();
             }
         });
@@ -408,13 +725,14 @@
                 text: 'Successfully Saved Personal Data Sheet, Refresh page to apply changes',
                 position: 'top-center'
             })
+            this.removeFile(file);
         });
       }   
     });
     $("#torFile").dropzone({
       addRemoveLinks: true,
       autoProcessQueue: false,
-      maxFiles: 100,
+      maxFiles: 2000,
       parallelUploads: 10000,
       acceptedFiles: ".pdf",
       url: "{{secure_url('/save-application-update')}}",
@@ -424,7 +742,7 @@
         var myDropzone = this;
         // Update selector to match your button
         $(".btn-save-profile").click(function (e) {
-            if (myDropzone.getUploadingFiles().length > 0 && myDropzone.getQueuedFiles().length > 0) {
+            if (myDropzone.getUploadingFiles().length > 0 || myDropzone.getQueuedFiles().length > 0) {
                 myDropzone.processQueue();
             }
         });
@@ -456,13 +774,14 @@
                 text: 'Successfully Saved Transcript of Records, Refresh page to apply changes',
                 position: 'top-center'
             })
+            this.removeFile(file);
         });
       }   
     });
     $("#eligFile").dropzone({
       addRemoveLinks: true,
       autoProcessQueue: false,
-      maxFiles: 100,
+      maxFiles: 2000,
       parallelUploads: 10000,
       acceptedFiles: ".pdf",
       url: "{{secure_url('/save-application-update')}}",
@@ -472,7 +791,7 @@
         var myDropzone = this;
         // Update selector to match your button
         $(".btn-save-profile").click(function (e) {
-            if (myDropzone.getUploadingFiles().length > 0 && myDropzone.getQueuedFiles().length > 0) {
+            if (myDropzone.getUploadingFiles().length > 0 || myDropzone.getQueuedFiles().length > 0) {
                 myDropzone.processQueue();
             }
         });
@@ -504,13 +823,14 @@
                 text: 'Successfully Saved Eligibility File, Refresh page to apply changes',
                 position: 'top-center'
             })
+            this.removeFile(file);
         });
       }   
     });
     $("#otherFile").dropzone({
       addRemoveLinks: true,
       autoProcessQueue: false,
-      maxFiles: 100,
+      maxFiles: 2000,
       parallelUploads: 10000,
       acceptedFiles: ".pdf",
       url: "{{secure_url('/save-application-update')}}",
@@ -520,7 +840,7 @@
         var myDropzone = this;
         // Update selector to match your button
         $(".btn-save-profile").click(function (e) {
-            if (myDropzone.getUploadingFiles().length > 0 && myDropzone.getQueuedFiles().length > 0) {
+            if (myDropzone.getUploadingFiles().length > 0 || myDropzone.getQueuedFiles().length > 0) {
                 myDropzone.processQueue();
             }
         });
@@ -552,12 +872,13 @@
                 text: 'Successfully Saved Other Supporting Documents, Refresh page to apply changes',
                 position: 'top-center'
             })
+            this.removeFile(file);
         });
       }   
     });
     $("#upProfile").change(function () {
         const file = this.files[0];
-        var fileExtension = ['pdf'];
+        var fileExtension = ['jpeg','jpg','png','img'];
         if (file) {
             if(this.files[0].size > 5000000) {
                 $.toast({
@@ -569,7 +890,7 @@
             } else if($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
                 $.toast({
                     heading: 'Invalid File Format',
-                    text: 'Only image File will accept!',
+                    text: 'Only image File will accept! eg. jpeg, jpg, png, img',
                     position: 'top-center',
                     icon: 'error',
                     hideAfter: false

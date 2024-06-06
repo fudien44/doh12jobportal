@@ -81,6 +81,18 @@ class User extends Authenticatable implements MustVerifyEmail
     public function tor() {
         return $this->hasMany(TorFile::class, 'user_id', 'id');
     }
+    public function wes() {
+        return $this->hasMany(Wes::class, 'user_id', 'id');
+    }
+    public function tc() {
+        return $this->hasMany(Tc::class, 'user_id', 'id');
+    }
+    public function coe() {
+        return $this->hasMany(Coe::class, 'user_id', 'id');
+    }
+    public function ipcr() {
+        return $this->hasMany(Ipcr::class, 'user_id', 'id');
+    }
     public function elig() {
         return $this->hasMany(EligFile::class, 'user_id', 'id');
     }
