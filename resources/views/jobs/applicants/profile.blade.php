@@ -183,55 +183,111 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <h3>Personal Data Sheet</h3><hr>
+                        <h5>Personal Data Sheet(CS Form No. 212, Revised 2017)</h5>
                         @if($users->pds)
                         @foreach($users->pds as $key => $pds)
-                        <a href="#" data-toggle="modal" data-target="#pds-xl-{{$key}}">Personal Data Sheet {{(int)$key + 1}} </a><br>
+                        <a href="#" data-toggle="modal" data-target="#pds-xl-{{$key}}">Personal Data Sheet(CS Form No. 212, Revised 2017) {{(int)$key + 1}} </a><br>
                         <div class="modal fade" id="pds-xl-{{$key}}">
                             <div class="modal-dialog modal-xl">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h4 class="modal-title">Personal Data Sheet</h4>
+                                  <h4 class="modal-title">Personal Data Sheet(CS Form No. 212, Revised 2017)</h4>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                    <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}" type="application/pdf" width="100%" height="800px">
-                                        <p>Your web browser doesn't have a PDF plugin or File is too big.
-                                        Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}">click here to
-                                        download the PDF file.</a></p>
-                                      </object>
+                                    <a class="btn btn-app bg-danger btn-delete-pds" data-id="{{$pds->id}}">
+                                      <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}" frameborder="0" width="100%" height="800px"></embed>
                                 </div>
                               </div>
                               <!-- /.modal-content -->
                             </div>
                             <!-- /.modal-dialog -->
                         </div>
-                        <hr>
                         @endforeach
                         @endif
+                        <hr>
                      </div>
                      <div class="col-sm-12">
-                        <h3>Transcript of Record</h3><hr>
+                        <h5>CSC Work Experience Sheet</h5>
+                        @if($users->wes)
+                        @foreach($users->wes as $key => $wes)
+                        <a href="#" data-toggle="modal" data-target="#wes-xl-{{$key}}">CSC Work Experience Sheet {{(int)$key + 1}} </a><br>
+                        <div class="modal fade" id="wes-xl-{{$key}}">
+                            <div class="modal-dialog modal-xl">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h4 class="modal-title">CSC Work Experience Sheet</h4>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <a class="btn btn-app bg-danger btn-delete-wes" data-id="{{$wes->id}}">
+                                      <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$wes->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                </div>
+                              </div>
+                              <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        @endforeach
+                        @endif
+                        <hr>
+                     </div>
+                     <div class="col-sm-12">
+                        <h5>Training Certificates</h5>
+                        @if($users->tc)
+                        @foreach($users->tc as $key => $tc)
+                        <a href="#" data-toggle="modal" data-target="#tc-xl-{{$key}}">Training Certificates {{(int)$key + 1}} </a><br>
+                        <div class="modal fade" id="tc-xl-{{$key}}">
+                            <div class="modal-dialog modal-xl">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Training Certificates</h4>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <a class="btn btn-app bg-danger btn-delete-tc" data-id="{{$tc->id}}">
+                                      <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tc->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                </div>
+                              </div>
+                              <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        @endforeach
+                        @endif
+                        <hr>
+                     </div>
+                     <div class="col-sm-12">
+                        <h5>Diploma & Transcript of Record</h5>
                         @if($users->tor)
                         @foreach($users->tor as $key => $tor)
-                        <a href="#" data-toggle="modal" data-target="#tor-xl-{{$key}}">TOR {{(int)$key + 1}} </a><br>
+                        <a href="#" data-toggle="modal" data-target="#tor-xl-{{$key}}">Diploma & Transcript of Record {{(int)$key + 1}} </a><br>
                         <div class="modal fade" id="tor-xl-{{$key}}">
                             <div class="modal-dialog modal-xl">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h4 class="modal-title">transcript of record</h4>
+                                  <h4 class="modal-title">Diploma & Transcript of Record </h4>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                    <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}" type="application/pdf" width="100%" height="800px">
-                                        <p>Your web browser doesn't have a PDF plugin or File is too big.
-                                        Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}">click here to
-                                        download the PDF file.</a></p>
-                                      </object>
+                                    <a class="btn btn-app bg-danger btn-delete-tor" data-id="{{$tor->id}}">
+                                      <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}" frameborder="0" width="100%" height="800px"></embed>
                                 </div>
                               </div>
                               <!-- /.modal-content -->
@@ -243,25 +299,53 @@
                         <hr>
                      </div>
                      <div class="col-sm-12">
-                        <h3>Eligibility</h3><hr>
+                        <h5>Certificate of Employment</h5>
+                        @if($users->coe)
+                        @foreach($users->coe as $key => $coe)
+                        <a href="#" data-toggle="modal" data-target="#coe-xl-{{$key}}">Certificate of Employment {{(int)$key + 1}} </a><br>
+                        <div class="modal fade" id="coe-xl-{{$key}}">
+                            <div class="modal-dialog modal-xl">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Certificate of Employment</h4>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <a class="btn btn-app bg-danger btn-delete-coe" data-id="{{$coe->id}}">
+                                      <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$coe->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                </div>
+                              </div>
+                              <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        @endforeach
+                        @endif
+                        <hr>
+                     </div>
+                     <div class="col-sm-12">
+                        <h5>Eligibility/PRC/Board Rating</h5>
                         @if($users->elig)
                         @foreach($users->elig as $key => $elig)
-                        <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility {{(int)$key + 1}} </a><br>
+                        <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility/PRC {{(int)$key + 1}} </a><br>
                         <div class="modal fade" id="elig-xl-{{$key}}">
                             <div class="modal-dialog modal-xl">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h4 class="modal-title">Eligibility</h4>
+                                  <h4 class="modal-title">Eligibility/PRC</h4>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                    <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}" type="application/pdf" width="100%" height="800px">
-                                        <p>Your web browser doesn't have a PDF plugin or File is too big.
-                                        Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}">click here to
-                                        download the PDF file.</a></p>
-                                      </object>
+                                    <a class="btn btn-app bg-danger btn-delete-elig" data-id="{{$elig->id}}">
+                                      <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}" frameborder="0" width="100%" height="800px"></embed>
                                 </div>
                               </div>
                               <!-- /.modal-content -->
@@ -273,8 +357,36 @@
                         <hr>
                      </div>
                      <div class="col-sm-12">
-                        <h3>Other Supporting Documents</h3>
+                        <h5>IPCR/Performance Evaluation</h5>
+                        @if($users->ipcr)
+                        @foreach($users->ipcr as $key => $ipcr)
+                        <a href="#" data-toggle="modal" data-target="#ipcr-xl-{{$key}}">IPCR/Performance Evaluation {{(int)$key + 1}} </a><br>
+                        <div class="modal fade" id="ipcr-xl-{{$key}}">
+                            <div class="modal-dialog modal-xl">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h4 class="modal-title">IPCR/Performance Evaluation</h4>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <a class="btn btn-app bg-danger btn-delete-ipcr" data-id="{{$ipcr->id}}">
+                                      <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$ipcr->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                </div>
+                              </div>
+                              <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        @endforeach
+                        @endif
                         <hr>
+                     </div>
+                     <div class="col-sm-12">
+                        <h5>Other Supporting Documents</h5> 
                         @if($users->odoc)
                         @foreach($users->odoc as $key => $odoc)
                         <a href="#" data-toggle="modal" data-target="#doc-xl-{{$key}}">Other Document {{(int)$key + 1}} </a><br>
@@ -288,11 +400,10 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                    <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$odoc->filename}}" type="application/pdf" width="100%" height="800px">
-                                        <p>Your web browser doesn't have a PDF plugin or File is too big.
-                                        Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$odoc->filename}}">click here to
-                                        download the PDF file.</a></p>
-                                      </object>
+                                    <a class="btn btn-app bg-danger btn-delete-doc" data-id="{{$odoc->id}}">
+                                      <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$odoc->filename}}" frameborder="0" width="100%" height="800px"></embed>
                                 </div>
                               </div>
                               <!-- /.modal-content -->
@@ -301,6 +412,7 @@
                         </div>
                         @endforeach
                         @endif
+                        <hr>
                      </div>
                 </div>
             </table>

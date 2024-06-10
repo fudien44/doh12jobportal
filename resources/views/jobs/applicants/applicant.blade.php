@@ -39,6 +39,7 @@
       <table id="applicants_tbl" class="table table-bordered table-hover">
         <thead>
           <tr>
+            <th></th>
             <th>Date Submitted</th>
             <th>Surname</th>
             <th>First Name</th>
@@ -60,13 +61,17 @@
         <tbody>
           @foreach($apps->applicants as $a)
           <tr>
-            <td>
               @php
               $j = $a->applicant->myjobs->where('job_id',$apps->id)->first();
               @endphp
+            <td>
+              <a class="btn btn-success btn-app-info" data-id="{{$j->id}}" href="#"><i class="fas fa-mail-bulk"></i></a>
+              <a class="btn btn-info href-app-profile" data-id="{{$a->id}}" href="#"><i class="fas fa-eye"></i></a>
+            </td>
+            <td>
               <a href="#" class="text-secondary font-weight-bold btn-app-info" data-id="{{$j->id}}">
-                {{$j->job->created_at ? date('m/d/Y', strtotime($j->job->created_at)): ''}}
-              </a><br>
+                {{$j->job->created_at ? date('m/d/Y h:i a', strtotime($j->created_at)): ''}}
+              </a>
             </td>
             <td>
               <a class="text-success font-weight-bold href-app-profile" data-id="{{$a->id}}" href="#">{{$a->applicant->lname}}</a>

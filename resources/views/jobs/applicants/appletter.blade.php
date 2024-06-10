@@ -71,6 +71,7 @@
           <label>Type of Message</label>
           <select class="form-control-lg select2 type_message" name="type_message" required>
             <option selected value="">Select Type of message</option>
+            <option value="5">Missing Requirements</option>
             <option value="0">Not Qualified (Based on minimum QS)</option>
             <option value="1">Qualified for exam</option>
             <option value="2">Not Accepted</option>

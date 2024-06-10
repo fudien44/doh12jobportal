@@ -43,7 +43,7 @@
           <tr>
             <th>ACTIONS</th>
             <th>JOB TITLE</th>
-            <th>DIVISION/SECTION</th>
+            <th>Place of Assignment</th>
             <th>DATE POSTED</th>
             <th>DATE CLOSED</th>
             <th>TOTAL APPLICANTS</th>
@@ -103,7 +103,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Salary Grade</label>
-              <select class="form-control-lg select2 salary_grade" name="salary_grade" >
+              <select class="form-control-lg select2 salary_grade" name="salary_grade" required>
                 <option selected value="">Select Salary Grade</option>
                 @foreach($salary as $s)
                 <option value="{{$s->id}}">{{$s->salary_grade}}</option>

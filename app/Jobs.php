@@ -67,7 +67,7 @@ class Jobs extends Model
         return $this->hasMany(Application::class, 'job_id', 'id')
         ->with('applicant')
         ->join('users','users.id','=','applications.user_id')
-        ->orderBy('users.lname','asc');
+        ->orderBy('applications.created_at','desc');
     }
     public function notq() {
         return $this->hasMany(Application::class, 'job_id', 'id')
