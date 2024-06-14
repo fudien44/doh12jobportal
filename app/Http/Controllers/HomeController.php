@@ -39,17 +39,19 @@ class HomeController extends Controller
         } else {
             Session::forget('sjob');
         }
-        $jobs = $jobs->orderBy('date_posted','ASC')->get();
         $jobsposted = Jobs::all();
         $apps = Application::all();
         $users = User::where('level','!=','2')->get();
-        $ct = Carbon::now();
+        $ct = date('Y-m-d');
         foreach ($jobsposted as $key => $val) {
-            $j = Jobs::where('id',$val->id)->where('status','0')->whereDate('date_closed', '=', $ct)->first();
-            if($j && $ct->format('H') == 17) {
-                $j->update(['status' => '1']);
+            $j = Jobs::where('id',$val->id)->first();
+            if($j) {
+                if($ct > $j->date_closed) {
+                    $j->update(['status' => '1']);
+                }
             }
         }
+        $jobs = $jobs->orderBy('date_posted','ASC')->get();
         return view('home', [
             'jobs' => $jobs,
             'jobsposted' => $jobsposted,

@@ -86,9 +86,9 @@ class JobsCtrl extends Controller
     }
     public function jobsapply(Request $req) {
         $jobid = base64_decode($req->job);
-        $ct = Carbon::now();
+        $ct = date('Y-m-d');
         $user = Auth::user();
-        $j = Jobs::where('id',$jobid)->whereDate('date_closed', '<=', $ct)->first();
+        $j = Jobs::find($jobid);
         if($user) {
             if(!$user->profile) {
                 Session::put('is_applied', 'Please Finish your profile');
@@ -97,7 +97,7 @@ class JobsCtrl extends Controller
             } else if(!$user->tor) {
                 Session::put('is_applied', 'Please provide Transcript of Record');
             } else if($j) {
-                if($j->date_closed <= $ct && $ct->format('H') >= 17) {
+                if($ct > $j->date_closed) {
                     $j->update(['status' => '1']);
                     Session::put('is_applied', 'This position has already been filled. Thank you for your application.');
                 } else {

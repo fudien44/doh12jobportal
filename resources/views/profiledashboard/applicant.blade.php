@@ -492,7 +492,7 @@
       acceptedFiles: ".pdf",
       paramName: "mywes[]",
       url: "{{secure_url('/save-application-update')}}",
-      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       init: function() {
         var myDropzone = this;
         // Update selector to match your button
@@ -504,7 +504,7 @@
         this.on('error', function(file, xhr, formData) {
             $.toast({
                 heading: 'Invalid File Format',
-                text: 'Only PDF File will accept!',
+                text: 'Only PDF File will accept/Upload size too large!',
                 position: 'top-center',
                 icon: 'error',
                 hideAfter: false
@@ -541,7 +541,7 @@
       acceptedFiles: ".pdf",
       paramName: "mytc[]",
       url: "{{secure_url('/save-application-update')}}",
-      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       init: function() {
         var myDropzone = this;
         // Update selector to match your button
@@ -553,7 +553,7 @@
         this.on('error', function(file, xhr, formData) {
             $.toast({
                 heading: 'Invalid File Format',
-                text: 'Only PDF File will accept!',
+                text: 'Only PDF File will accept/Upload size too large!',
                 position: 'top-center',
                 icon: 'error',
                 hideAfter: false
@@ -590,7 +590,7 @@
       acceptedFiles: ".pdf",
       paramName: "mycoe[]",
       url: "{{secure_url('/save-application-update')}}",
-      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       init: function() {
         var myDropzone = this;
         // Update selector to match your button
@@ -602,7 +602,7 @@
         this.on('error', function(file, xhr, formData) {
             $.toast({
                 heading: 'Invalid File Format',
-                text: 'Only PDF File will accept!',
+                text: 'Only PDF File will accept/Upload size too large!',
                 position: 'top-center',
                 icon: 'error',
                 hideAfter: false
@@ -639,7 +639,7 @@
       acceptedFiles: ".pdf",
       paramName: "myipcr[]",
       url: "{{secure_url('/save-application-update')}}",
-      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       init: function() {
         var myDropzone = this;
         // Update selector to match your button
@@ -651,7 +651,7 @@
         this.on('error', function(file, xhr, formData) {
             $.toast({
                 heading: 'Invalid File Format',
-                text: 'Only PDF File will accept!',
+                text: 'Only PDF File will accept/Upload size too large!',
                 position: 'top-center',
                 icon: 'error',
                 hideAfter: false
@@ -688,7 +688,7 @@
       acceptedFiles: ".pdf",
       paramName: "mypds[]",
       url: "{{secure_url('/save-application-update')}}",
-      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       init: function() {
         var myDropzone = this;
         // Update selector to match your button
@@ -700,7 +700,7 @@
         this.on('error', function(file, xhr, formData) {
             $.toast({
                 heading: 'Invalid File Format',
-                text: 'Only PDF File will accept!',
+                text: 'Only PDF File will accept/Upload size too large!',
                 position: 'top-center',
                 icon: 'error',
                 hideAfter: false
@@ -736,7 +736,7 @@
       parallelUploads: 10000,
       acceptedFiles: ".pdf",
       url: "{{secure_url('/save-application-update')}}",
-      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       paramName: "mytor[]",
       init: function() {
         var myDropzone = this;
@@ -749,7 +749,7 @@
         this.on('error', function(file, xhr, formData) {
             $.toast({
                 heading: 'Invalid File Format',
-                text: 'Only PDF File will accept!',
+                text: 'Only PDF File will accept/Upload size too large!',
                 position: 'top-center',
                 icon: 'error',
                 hideAfter: false
@@ -785,7 +785,7 @@
       parallelUploads: 10000,
       acceptedFiles: ".pdf",
       url: "{{secure_url('/save-application-update')}}",
-      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       paramName: "myelig[]",
       init: function() {
         var myDropzone = this;
@@ -798,7 +798,7 @@
         this.on('error', function(file, xhr, formData) {
             $.toast({
                 heading: 'Invalid File Format',
-                text: 'Only PDF File will accept!',
+                text: 'Only PDF File will accept/Upload size too large!',
                 position: 'top-center',
                 icon: 'error',
                 hideAfter: false
@@ -834,7 +834,7 @@
       parallelUploads: 10000,
       acceptedFiles: ".pdf",
       url: "{{secure_url('/save-application-update')}}",
-      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf',
+      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       paramName: "myother[]",
       init: function() {
         var myDropzone = this;
@@ -847,7 +847,7 @@
         this.on('error', function(file, xhr, formData) {
             $.toast({
                 heading: 'Invalid File Format',
-                text: 'Only PDF File will accept!',
+                text: 'Only PDF File will accept/Upload size too large!',
                 position: 'top-center',
                 icon: 'error',
                 hideAfter: false
