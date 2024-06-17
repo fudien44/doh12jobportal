@@ -39,7 +39,7 @@
       <table id="applicants_tbl" class="table table-bordered table-hover">
         <thead>
           <tr>
-            <th></th>
+            <th>Action</th>
             <th>Date Submitted</th>
             <th>Surname</th>
             <th>First Name</th>
@@ -66,7 +66,7 @@
               @endphp
             <td>
               <a class="btn btn-success btn-app-info" data-id="{{$j->id}}" href="#"><i class="fas fa-mail-bulk"></i></a>
-              <a class="btn btn-info href-app-profile" data-id="{{$a->id}}" href="#"><i class="fas fa-eye"></i></a>
+              <a class="btn btn-info" data-id="{{$a->id}}" href="{{('applicant/profile')}}?uid={{base64_encode($a->id)}}"><i class="fas fa-eye"></i></a>
             </td>
             <td>
               <a href="#" class="text-secondary font-weight-bold btn-app-info" data-id="{{$j->id}}">
@@ -98,7 +98,7 @@
             </td>
 
             <td>{{$a->applicant->profile ? $a->applicant->profile->eligibility : ''}}</td>
-            <td>{{$j->latst}}</td>
+            <td>{!! $j->latst ? $j->latst->tp() : '' !!}</td>
           </tr>
           @endforeach
         </tbody>

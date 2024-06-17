@@ -197,10 +197,16 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
+                                    @if(Auth::user()->level == 2 || Auth::user()->id == $pds->user_id)
                                     <a class="btn btn-app bg-danger btn-delete-pds" data-id="{{$pds->id}}">
                                       <i class="fas fa-trash"></i> Delete
                                     </a>
-                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                    @endif
+                                    <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}" type="application/pdf" width="100%" height="800px">
+                                        <p>Your web browser doesn't have a PDF plugin.
+                                        Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}">click here to
+                                        download the PDF file.</a></p>
+                                    </object>
                                 </div>
                               </div>
                               <!-- /.modal-content -->
@@ -226,10 +232,16 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
+                                    @if(Auth::user()->level == 2 || Auth::user()->id == $wes->user_id)
                                     <a class="btn btn-app bg-danger btn-delete-wes" data-id="{{$wes->id}}">
                                       <i class="fas fa-trash"></i> Delete
                                     </a>
-                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$wes->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                    @endif
+                                    <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$wes->filename}}" type="application/pdf" width="100%" height="800px">
+                                        <p>Your web browser doesn't have a PDF plugin.
+                                        Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$wes->filename}}">click here to
+                                        download the PDF file.</a></p>
+                                    </object>
                                 </div>
                               </div>
                               <!-- /.modal-content -->
@@ -255,10 +267,16 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
+                                    @if(Auth::user()->level == 2 || Auth::user()->id == $tc->user_id)
                                     <a class="btn btn-app bg-danger btn-delete-tc" data-id="{{$tc->id}}">
                                       <i class="fas fa-trash"></i> Delete
                                     </a>
-                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tc->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                    @endif
+                                    <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tc->filename}}" type="application/pdf" width="100%" height="800px">
+                                      <p>Your web browser doesn't have a PDF plugin.
+                                      Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tc->filename}}">click here to
+                                      download the PDF file.</a></p>
+                                    </object>
                                 </div>
                               </div>
                               <!-- /.modal-content -->
@@ -284,10 +302,16 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
+                                    @if(Auth::user()->level == 2 || Auth::user()->id == $tor->user_id)
                                     <a class="btn btn-app bg-danger btn-delete-tor" data-id="{{$tor->id}}">
                                       <i class="fas fa-trash"></i> Delete
                                     </a>
-                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                    @endif
+                                    <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}" type="application/pdf" width="100%" height="800px">
+                                      <p>Your web browser doesn't have a PDF plugin.
+                                      Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}">click here to
+                                      download the PDF file.</a></p>
+                                    </object>
                                 </div>
                               </div>
                               <!-- /.modal-content -->
@@ -313,10 +337,16 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
+                                    @if(Auth::user()->level == 2 || Auth::user()->id == $coe->user_id)
                                     <a class="btn btn-app bg-danger btn-delete-coe" data-id="{{$coe->id}}">
                                       <i class="fas fa-trash"></i> Delete
                                     </a>
-                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$coe->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                    @endif
+                                    <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$coe->filename}}" type="application/pdf" width="100%" height="800px">
+                                      <p>Your web browser doesn't have a PDF plugin.
+                                      Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$coe->filename}}">click here to
+                                      download the PDF file.</a></p>
+                                    </object>
                                 </div>
                               </div>
                               <!-- /.modal-content -->
@@ -342,10 +372,16 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
+                                    @if(Auth::user()->level == 2 || Auth::user()->id == $elig->user_id)
                                     <a class="btn btn-app bg-danger btn-delete-elig" data-id="{{$elig->id}}">
                                       <i class="fas fa-trash"></i> Delete
                                     </a>
-                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                    @endif
+                                    <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}" type="application/pdf" width="100%" height="800px">
+                                      <p>Your web browser doesn't have a PDF plugin.
+                                      Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}">click here to
+                                      download the PDF file.</a></p>
+                                    </object>
                                 </div>
                               </div>
                               <!-- /.modal-content -->
@@ -371,10 +407,16 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
+                                    @if(Auth::user()->level == 2 || Auth::user()->id == $ipcr->user_id)
                                     <a class="btn btn-app bg-danger btn-delete-ipcr" data-id="{{$ipcr->id}}">
                                       <i class="fas fa-trash"></i> Delete
                                     </a>
-                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$ipcr->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                    @endif
+                                    <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$ipcr->filename}}" type="application/pdf" width="100%" height="800px">
+                                      <p>Your web browser doesn't have a PDF plugin.
+                                      Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$ipcr->filename}}">click here to
+                                      download the PDF file.</a></p>
+                                  </object>
                                 </div>
                               </div>
                               <!-- /.modal-content -->
@@ -400,9 +442,11 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
+                                    @if(Auth::user()->level == 2 || Auth::user()->id == $odoc->user_id)
                                     <a class="btn btn-app bg-danger btn-delete-doc" data-id="{{$odoc->id}}">
                                       <i class="fas fa-trash"></i> Delete
                                     </a>
+                                    @endif
                                     <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$odoc->filename}}" frameborder="0" width="100%" height="800px"></embed>
                                 </div>
                               </div>

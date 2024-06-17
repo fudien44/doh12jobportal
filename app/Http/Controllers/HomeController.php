@@ -12,6 +12,7 @@ use App\Division;
 use App\User;
 use App\Profile;
 use App\Application;
+use App\SalGrade;
 class HomeController extends Controller
 {
     /**
@@ -29,62 +30,75 @@ class HomeController extends Controller
 
     public function index(Request $req)
     {
-        $jobs = Jobs::where('status','0');
-        if($req->jobs_title) {
-            $job_title = $req->jobs_title;
-            $jobs = $jobs->where(function($q) use($job_title) {
-                $q->where('job_title', 'like', '%' .$job_title. '%');
-            });
-            Session::put('sjob',$job_title);
+        if(\Auth::user() && \Auth::user()->level == 2) {
+            return redirect()->to('job-posting');
+        } else if(\Auth::user() && \Auth::user()->level == 1) {
+            $jobs = Jobs::whereRaw('FIND_IN_SET(?, drp)', \Auth::user()->id)->orderBy('job_title','asc')->get();
+            $salary = SalGrade::all();
+            $us = User::where('level', 1)->get();
+            return view('jobs.jobspost',[
+                'jobs' => $jobs,
+                'salary' => $salary,
+                'us' => $us,
+            ]);
         } else {
-            Session::forget('sjob');
-        }
-        $jobsposted = Jobs::all();
-        $apps = Application::all();
-        $users = User::where('level','!=','2')->get();
-        $ct = date('Y-m-d');
-        foreach ($jobsposted as $key => $val) {
-            $j = Jobs::where('id',$val->id)->first();
-            if($j) {
-                if($ct > $j->date_closed) {
-                    $j->update(['status' => '1']);
+            $jobs = Jobs::where('status','0');
+            if($req->jobs_title) {
+                $job_title = $req->jobs_title;
+                $jobs = $jobs->where(function($q) use($job_title) {
+                    $q->where('job_title', 'like', '%' .$job_title. '%');
+                });
+                Session::put('sjob',$job_title);
+            } else {
+                Session::forget('sjob');
+            }
+            $jobsposted = Jobs::all();
+            $apps = Application::all();
+            $users = User::where('level','!=','2')->get();
+            $ct = date('Y-m-d');
+            foreach ($jobsposted as $key => $val) {
+                $j = Jobs::where('id',$val->id)->first();
+                if($j) {
+                    if($ct > $j->date_closed) {
+                        $j->update(['status' => '1']);
+                    }
                 }
             }
+            $jobs = $jobs->orderBy('date_posted','ASC')->get();
+            return view('home', [
+                'jobs' => $jobs,
+                'jobsposted' => $jobsposted,
+                'users' => $users,
+                'apps' => $apps,
+            ]);
+            // if (Auth::user() && !Auth::user()->email_verified_at) {
+            //     return redirect()->route('otp');
+            // }
+            // else if(Auth::guest()) {
+            //     return view('home', [
+            //         'divisions' => $divisions,
+            //         'jobs' => $jobs,
+            //         'jobsposted' => $jobsposted,
+            //         'users' => $users
+            //     ]);
+            // }
+            // else if(Auth::user()->void==0) {
+            //     // return redirect()->route('otp');
+            //     return view('home', [
+            //         'divisions' => $divisions,
+            //         'jobs' => $jobs,
+            //         'jobsposted' => $jobsposted,
+            //         'users' => $users
+            //     ]);
+            // } else {
+            //     return view('home', [
+            //         'divisions' => $divisions,
+            //         'jobs' => $jobs,
+            //         'jobsposted' => $jobsposted,
+            //         'users' => $users
+            //     ]);
+            // }
         }
-        $jobs = $jobs->orderBy('date_posted','ASC')->get();
-        return view('home', [
-            'jobs' => $jobs,
-            'jobsposted' => $jobsposted,
-            'users' => $users,
-            'apps' => $apps,
-        ]);
-        // if (Auth::user() && !Auth::user()->email_verified_at) {
-        //     return redirect()->route('otp');
-        // }
-        // else if(Auth::guest()) {
-        //     return view('home', [
-        //         'divisions' => $divisions,
-        //         'jobs' => $jobs,
-        //         'jobsposted' => $jobsposted,
-        //         'users' => $users
-        //     ]);
-        // }
-        // else if(Auth::user()->void==0) {
-        //     // return redirect()->route('otp');
-        //     return view('home', [
-        //         'divisions' => $divisions,
-        //         'jobs' => $jobs,
-        //         'jobsposted' => $jobsposted,
-        //         'users' => $users
-        //     ]);
-        // } else {
-        //     return view('home', [
-        //         'divisions' => $divisions,
-        //         'jobs' => $jobs,
-        //         'jobsposted' => $jobsposted,
-        //         'users' => $users
-        //     ]);
-        // }
    
     }
         

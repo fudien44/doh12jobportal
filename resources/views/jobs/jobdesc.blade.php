@@ -26,8 +26,14 @@
             <a href="{{ url()->previous() }}" class="btn btn-danger"><i class="fas fa-arrow-left"></i> BACK
             </a>
             @if($job->status=='0' || $job->status=='2')
+            @if(Auth::user() && Auth::user()->level == 0)
             <a href="{{asset('/jobs/apply')}}?job={{base64_encode($job->id)}}" class="btn btn-success">APPLY TO THIS JOB
             </a>
+            @elseif(Auth::user() && Auth::user()->level > 0)
+            @else
+            <a href="{{route('login')}}" class="btn btn-success">LOGIN TO APPLY
+            </a>
+            @endif
             @endif
           </div>
           <!-- /.card-tools -->

@@ -223,5 +223,11 @@ class ProfileController extends Controller
             $pds->delete();
         }
     }
+    public function users() {
+        $users = User::where('level','!=', '2')->get();
+        return view('auth.users', [
+            'users' => $users,
+        ]);
+    }
 }
 
