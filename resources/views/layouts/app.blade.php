@@ -61,9 +61,9 @@
             <a href="{{asset('/jobs/apply')}}" class="nav-link text-white font-weight-light"><b>MY APPLICATIONS</b></a>
           </li>
           @endif
-          @if(Auth::user() && (Auth::user()->level == 2 || Auth::user()->level == 1))
+          @if(Auth::user() && Auth::user()->level == 2)
           <li class="nav-item">
-            <a href="{{asset('/job-posting')}}" class="nav-link text-white font-weight-light"><b>JOB POSTING</b></a>
+            <a href="{{asset('/job-posting')}}" class="nav-link text-white font-weight-light"><b>JOB POST</b></a>
           </li>
           <li class="nav-item">
             <a href="{{asset('/applicants')}}" class="nav-link text-white font-weight-light"><b>APPLICANTS</b></a>
@@ -92,7 +92,12 @@
                 {{ Auth::user()->fname }} <span class="caret"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-            <a class="dropdown-item" href="{{ url('my-profile') }}"><i class="fas fa-user-circle"></i> My Profile</a>
+              @if(Auth::user()->level == 2)
+              <a class="dropdown-item" href="{{ url('users') }}"><i class="fas fa-user-circle"></i> Users</a>
+              @endif
+              @if(Auth::user()->level == 0)
+              <a class="dropdown-item" href="{{ url('my-profile') }}"><i class="fas fa-user-circle"></i> My Profile</a>
+              @endif
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                  document.getElementById('logout-form').submit();">

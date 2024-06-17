@@ -35,7 +35,7 @@
       <table id="applicants_tbl" class="table table-bordered table-hover">
         <thead>
           <tr>
-            <th></th>
+            <th>Action</th>
             <th>Surname</th>
             <th>First Name</th>
             <th>Middle Name</th>
@@ -55,7 +55,7 @@
           @foreach($apps as $a)
           <tr>
             <td>
-              <a class="btn btn-info href-app-profile" data-id="{{$a->id}}" href="#"><i class="fas fa-eye"></i></a>
+              <a class="btn btn-info href-app-profile" data-id="{{$a->id}}" href="{{('applicant/profile')}}?uid={{base64_encode($a->id)}}"><i class="fas fa-eye"></i></a>
             </td>
             <td>
               <a class="text-success font-weight-bold href-app-profile" data-id="{{$a->id}}" href="#">{{$a->lname}}</a>

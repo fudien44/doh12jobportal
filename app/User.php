@@ -69,6 +69,28 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function lvl() {
+        switch ($this->level) {
+            case '0':
+                return 'Applicant';
+                break;
+            case '1':
+                return 'Document Reviewer';
+                break;
+            case '2':
+                return 'Administrator';
+            default:
+                return 'Alien';
+                break;
+        }
+    }
+    public function is_verified() {
+        if(!$this->email) {
+            return '<small class="badge badge-danger" style="cursor: pointer;"><i class="far fa-times"></i> Not Verified</small>';
+        } else {
+            return '<small class="badge badge-success" style="cursor: pointer;"><i class="fas fa-check"></i> Verified</small>';
+        }
+    }
     public function myjobs() {
         return $this->hasMany(Application::class, 'user_id', 'id')->orderBy('id','desc');
     }

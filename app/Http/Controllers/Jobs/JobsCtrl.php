@@ -30,12 +30,15 @@ class JobsCtrl extends Controller
     public function jobposting(Request $req) {
     	$jobs = Jobs::orderBy('job_title','asc')->get();
     	$salary = SalGrade::all();
+        $us = User::where('level', 1)->get();
     	return view('jobs.jobspost',[
     		'jobs' => $jobs,
-    		'salary' => $salary
+    		'salary' => $salary,
+            'us' => $us,
     	]);
     }
     public function aeJobPost(Request $req) {
+        $drp = $req->drp != null ? implode(',', $req->drp) : '';
     	$jobs = array(
     		"division_id" => $req->division_id,
     		"section_id" => $req->section_id,
@@ -56,6 +59,7 @@ class JobsCtrl extends Controller
     		"date_closed" => date('Y-m-d',strtotime($req->date_closed)),
     		"status" => $req->status,
     		"instruction" => $req->instruction,
+            'drp' => $drp,
     	);
     	if($req->post_id) {
     		$job = Jobs::find($req->post_id);
@@ -238,6 +242,21 @@ class JobsCtrl extends Controller
         $pdf = PDF::loadView('print.attendance');
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream($filename.'.pdf');
+    }
+    public function AppProfilev2(Request $req) {
+        $user = User::find(base64_decode($req->uid));
+        if($user) {
+            if($user->profile) {
+                return view('jobs.applicants.profilev2', [
+                    'users' => $user,
+                    'profile' => $user->profile
+                ]);
+            } else {
+                return '<b>No profile found.</b>';
+            }
+        } else {
+            return '<b>No profile found.</b>';
+        }
     }
 
 }

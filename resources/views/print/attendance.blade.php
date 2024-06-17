@@ -75,8 +75,7 @@ $idnum = (int)1;
         <th width="13%" class="fs">REMARKS</th>
     </tr>
     @foreach($apps->applicants as $a)
-    @if($a->status != '0')
-        @if($a->status != '2')
+    @if($a->status == '1')
     <tr>
     	<td class="fs alc" style="padding-top: 30px;">{{$idnum}}</td>
     	<td class="ow fs" style="padding-top: 30px;">{{$a->applicant->lname}}</td>
@@ -88,8 +87,7 @@ $idnum = (int)1;
     	<td></td>
     	<td></td>
     </tr>
-    <?php $idnum += (int)1; ?>pa
-        @endif
+    <?php $idnum += (int)1; ?>
     @endif
     @endforeach
 </table>

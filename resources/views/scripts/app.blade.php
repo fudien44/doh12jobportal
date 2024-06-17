@@ -20,7 +20,6 @@
             e.preventDefault();
         }
     };
-    console.log('<h1>STOP!</h2>')
 	});
 	@if(Session::get('action_made'))
     $.toast({
@@ -73,7 +72,7 @@ if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
 } requestAnimationFrame(update); }; requestAnimationFrame(update);;
 @guest
 @else
-@if(!Auth::user()->profile && !Request::is('my-profile') && !Request::is('email/verify'))
+@if(!Auth::user()->profile && !Request::is('my-profile') && !Request::is('email/verify') && Auth::user()->level == 0)
   $('#modal-profile').modal('show');
 @endif
 @endguest

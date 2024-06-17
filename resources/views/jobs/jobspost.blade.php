@@ -155,6 +155,17 @@
             </div>
           </div>
           <div class="col-md-12">
+            <div class="form-group">
+              <label>Document Reviewer Personnel</label>
+              <select class="form-control-lg select2 drp" name="drp[]" multiple >
+                <option value="">Select Personnel</option>
+                @foreach($us as $u)
+                <option value="{{$u->id}}">{{$u->fname}} {{$u->lname}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="col-md-12">
               <h6 class="card-subtitle req-field">Attachment:</h6>
               <div class="form-group">
                   <div class="input-group">
@@ -252,9 +263,9 @@
             url:  url,
             type: "POST",
             success: function(data){
-              setTimeout(function(){
-                  window.location.reload(false);
-              },500);
+              // setTimeout(function(){
+              //     window.location.reload(false);
+              // },500);
             },
             error: function (data) {
                 $(".loading").hide();
@@ -279,6 +290,7 @@
               $(".loading").hide();
               if(data != 'none') {
                 var val = JSON.parse(data)
+                var drp = val.drp != null ? val.drp.split(',') : [];
                 $('#modal-job-post').modal('show')
                 $('input[type=hidden][name=post_id]').val(val.id)
                 $('input[type=text][name=education]').val(val.education)
@@ -299,6 +311,7 @@
                 $(".term_emp").val(val.term_emp).change()
                 $(".division_id").val(val.division_id).change()
                 $('.instruct').summernote("code",val.instruction)
+                $('.drp').val(drp).change()
 
               }
             },
