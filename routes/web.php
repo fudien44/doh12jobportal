@@ -39,6 +39,7 @@ Route::group(['middleware' => 'superadmin'], function(){
 	Route::get('/attendance', 'Jobs\JobsCtrl@attendance');
     Route::match(['GET','POST'],'/users', 'ProfileController@users');
     Route::get('/applicant/profile', 'Jobs\JobsCtrl@AppProfilev2');
+    Route::post('/save-update-user', 'FnctnCtrl@storeUser');
 });
 Route::resource('profile','ProfileController');
 Route::get('my-profile','ProfileController@myprofile')->middleware('verified');

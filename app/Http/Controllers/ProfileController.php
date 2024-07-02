@@ -224,7 +224,7 @@ class ProfileController extends Controller
         }
     }
     public function users() {
-        $users = User::where('level','!=', '2')->get();
+        $users = User::where('level','!=', '2')->orderBy('id','desc')->get();
         return view('auth.users', [
             'users' => $users,
         ]);

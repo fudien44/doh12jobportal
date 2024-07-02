@@ -263,9 +263,9 @@
             url:  url,
             type: "POST",
             success: function(data){
-              // setTimeout(function(){
-              //     window.location.reload(false);
-              // },500);
+              setTimeout(function(){
+                  window.location.reload(false);
+              },500);
             },
             error: function (data) {
                 $(".loading").hide();
