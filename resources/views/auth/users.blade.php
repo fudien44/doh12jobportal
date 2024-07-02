@@ -83,9 +83,44 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="post_form" method="POST">
+        <form id="user_form" method="POST">
           @csrf
-          <input type="hidden" name="post_id" value="">
+          <input type="hidden" name="user_id" value="">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control form-control-border" name="fname" placeholder="First Name" required>
+          </div>
+          <div class="form-group">
+            <label>Middle Name</label>
+            <input type="text" class="form-control form-control-border" name="mname" placeholder="Middle Name">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control form-control-border" name="lname" placeholder="Last Name" required>
+          </div>
+          <div class="form-group">
+              <label>User Level</label><br>
+              <select class="form-control" name="level" required>
+                <option selected value="">Select</option>
+                @if(Auth::user()->id == 1)
+                <option value="2">Administrator</option>
+                @endif
+                <option value="1">Document Reviewer</option>
+                <option value="0">Applicant</option>
+              </select>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control form-control-border" name="email" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="text" class="form-control form-control-border" name="password" placeholder="Password" min="8" required>
+          </div>
+          <div class="form-group">
+            <label>Email Verified</label>
+            <input type="date" class="form-control form-control-border" name="email_verified_at" placeholder="Email Verified" value="{{date('Y-m-d')}}" required>
+          </div>
         
       </div>
       <div class="modal-footer justify-content-right">
@@ -142,6 +177,29 @@
                     text: 'Something went wrong, Please contact administrator',
                     showHideTransition: 'fade',
                     position: 'top-center',
+                    icon: 'error'
+                })
+            },
+        });
+    });
+  $('#user_form').on('submit',function(e){
+        var url = "{{ secure_url('/save-update-user') }}";
+        e.preventDefault();
+        $(".loading").show();
+        $('#user_form').ajaxSubmit({
+            url:  url,
+            type: "POST",
+            success: function(data){
+              setTimeout(function(){
+                  window.location.reload(false);
+              },500);
+            },
+            error: function (data) {
+                $(".loading").hide();
+                $.toast({
+                    heading: 'Error',
+                    text: 'Something went wrong, Please contact administrator',
+                    showHideTransition: 'fade',
                     icon: 'error'
                 })
             },
