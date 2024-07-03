@@ -32,7 +32,16 @@
       <h3 class="card-title">APPLICANTS</h3><br>
       <h3 class="text-success">{{$apps->job_title}} - {{$apps->area_ass}}</h3>
       <div class="customize-input float-right">
-          <a href="{{asset('attendance')}}" class=" btn btn-secondary" target="_blank" role="button"><i class="fas fa-file-alt"></i>&nbsp;ATTENDANCE</a>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default"><i class="fas fa-file-alt"></i>&nbsp;ATTENDANCE</button>
+            <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu" role="menu">
+              <a class="dropdown-item" href="{{asset('attendance')}}">Examination</a>
+              <a class="dropdown-item" href="{{asset('attendance-interview')}}">Interview</a>
+            </div>
+          </div>
       </div>
     </div>
     <div class="card-body">

@@ -313,6 +313,15 @@
                 $('.instruct').summernote("code",val.instruction)
                 $('.drp').val(drp).change()
 
+              } else {
+                $(".loading").hide();
+                $.toast({
+                    heading: 'Error',
+                    text: 'No Data Found',
+                    showHideTransition: 'fade',
+                    position: 'top-center',
+                    icon: 'error'
+                })
               }
             },
             error: function (data) {

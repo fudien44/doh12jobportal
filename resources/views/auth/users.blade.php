@@ -100,7 +100,7 @@
           </div>
           <div class="form-group">
               <label>User Level</label><br>
-              <select class="form-control" name="level" required>
+              <select class="form-control level" name="level" required>
                 <option selected value="">Select</option>
                 @if(Auth::user()->id == 1)
                 <option value="2">Administrator</option>
@@ -168,6 +168,22 @@
               $(".loading").hide();
               if(data != 'none') {
                 var val = JSON.parse(data)
+                $('#modal-user-post').modal('show')
+                $('input[type=hidden][name=user_id]').val(val.id)
+                $('input[type=text][name=fname]').val(val.fname)
+                $('input[type=text][name=mname]').val(val.mname)
+                $('input[type=text][name=lname]').val(val.lname)
+                $('input[type=email][name=email]').val(val.email)
+                $(".level").val(val.level).change()
+              } else {
+                $(".loading").hide();
+                $.toast({
+                    heading: 'Error',
+                    text: 'No Data Found',
+                    showHideTransition: 'fade',
+                    position: 'top-center',
+                    icon: 'error'
+                })
               }
             },
             error: function (data) {

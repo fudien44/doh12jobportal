@@ -243,6 +243,12 @@ class JobsCtrl extends Controller
         $pdf->setPaper('a4', 'landscape');
         return $pdf->stream($filename.'.pdf');
     }
+    public function attInter(Request $req) {
+        $filename = 'attendance'.date('mdYHis');
+        $pdf = PDF::loadView('print.attinter');
+        $pdf->setPaper('a4', 'landscape');
+        return $pdf->stream($filename.'.pdf');
+    }
     public function AppProfilev2(Request $req) {
         $user = User::find(base64_decode($req->uid));
         if($user) {
