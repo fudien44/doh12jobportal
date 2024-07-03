@@ -30,9 +30,7 @@ class HomeController extends Controller
 
     public function index(Request $req)
     {
-        if(\Auth::user() && \Auth::user()->level == 2) {
-            return redirect()->to('job-posting');
-        } else if(\Auth::user() && \Auth::user()->level == 1) {
+        if(\Auth::user() && \Auth::user()->level == 1) {
             $jobs = Jobs::whereRaw('FIND_IN_SET(?, drp)', \Auth::user()->id)->orderBy('job_title','asc')->get();
             $salary = SalGrade::all();
             $us = User::where('level', 1)->get();

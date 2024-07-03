@@ -37,4 +37,12 @@ class FnctnCtrl extends Controller
             Session::put('action_made','Successfully added user.');
         }
     }
+    public function editUser(Request $req,$id) {
+        $us = User::find($id);
+        if($us) {
+            return json_encode($us);
+        } else {
+            return 'none';
+        }
+    }
 }

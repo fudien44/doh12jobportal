@@ -136,7 +136,7 @@
       Created By: DOH XII ICT-UNIT
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2024</strong> DOH XII JOB PORTAL All rights reserved.
+    <img src="{{ asset('public/img/doh.png') }}" class="brand-image img-circle" width="32">&nbsp;<img src="{{ asset('public/img/ro12.png') }}" class="brand-image img-circle" width="32">&nbsp;<strong>Copyright &copy; 2024</strong>DOH XII JOB PORTAL All rights reserved.
   </footer>
 </div>
 <div class="modal fade" id="modal-profile" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
