@@ -30,6 +30,7 @@ class HomeController extends Controller
 
     public function index(Request $req)
     {
+        $sjobtype = null;
         if(\Auth::user() && \Auth::user()->level == 1) {
             $jobs = Jobs::whereRaw('FIND_IN_SET(?, drp)', \Auth::user()->id)->orderBy('job_title','asc')->get();
             $salary = SalGrade::all();
@@ -41,6 +42,9 @@ class HomeController extends Controller
             ]);
         } else {
             $jobs = Jobs::where('status','0');
+            $jobs2type = Jobs::where('status','0')->where('term_emp', '2')->count();
+            $jobs0type = Jobs::where('status','0')->where('term_emp', '0')->count();
+            $jobs1type = Jobs::where('status','0')->where('term_emp', '1')->count();
             if($req->jobs_title) {
                 $job_title = $req->jobs_title;
                 $jobs = $jobs->where(function($q) use($job_title) {
@@ -49,6 +53,13 @@ class HomeController extends Controller
                 Session::put('sjob',$job_title);
             } else {
                 Session::forget('sjob');
+            }
+            if($req->type) {
+                $job_type = base64_decode($req->type);
+                $jobs = $jobs->where(function($q) use($job_type) {
+                    $q->where('term_emp', $job_type);
+                });
+                $sjobtype = $job_type;
             }
             $jobsposted = Jobs::all();
             $apps = Application::all();
@@ -68,6 +79,10 @@ class HomeController extends Controller
                 'jobsposted' => $jobsposted,
                 'users' => $users,
                 'apps' => $apps,
+                'jobs2type' => $jobs2type,
+                'jobs0type' => $jobs0type,
+                'jobs1type' => $jobs1type,
+                'sjobtype' => $sjobtype,
             ]);
             // if (Auth::user() && !Auth::user()->email_verified_at) {
             //     return redirect()->route('otp');

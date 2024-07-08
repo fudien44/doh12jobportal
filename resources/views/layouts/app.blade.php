@@ -45,7 +45,7 @@
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-green">
     <div class="container-fluid">
       <a href="{{asset('/')}}" class="navbar-brand">
-        <h4 class="brand-text text-warning font-weight-bold mt-2"><img src="{{ asset('public/img/ro12.png') }}" class="brand-image img-circle"> DOH XII JOB PORTAL</h4>
+        <h4 class="brand-text text-warning font-weight-bold mt-2">DOH XII JOB PORTAL</h4>
       </a>
 
       <div class="collapse navbar-collapse order-3" id="navbarCollapse">
