@@ -66,6 +66,7 @@ class ProfileController extends Controller
             $user->user_id = $user_id;
             $user->extension = $request->Input('extension');
             $user->dob = $request->Input('dob');
+            $user->sex = $request->Input('sex');
             $user->gender = $request->Input('gender');
             $user->religion = $request->Input('religion');
             $user->civilstat = $request->Input('civilstat');

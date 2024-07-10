@@ -34,6 +34,7 @@ class CreateJobsTable extends Migration
             $table->date('date_posted');
             $table->date('date_closed');
             $table->string('attach')->nullable();
+            $table->string('add_req')->nullable();
             $table->integer('status');
             $table->timestamps();
         });

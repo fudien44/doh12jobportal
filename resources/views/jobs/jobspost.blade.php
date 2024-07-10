@@ -44,6 +44,7 @@
             <th>ACTIONS</th>
             <th>JOB TITLE</th>
             <th>Place of Assignment</th>
+            <th>Status of Employment</th>
             <th>DATE POSTED</th>
             <th>DATE CLOSED</th>
             <th>TOTAL APPLICANTS</th>
@@ -66,6 +67,7 @@
               </td>
               <td>{{$j->job_title}}</td>
               <td>{{$j->area_ass}}</td>
+              <td>{{$j->term()}}</td>
               <td>{{date('m/d/Y',strtotime($j->date_posted))}}</td>
               <td>{{date('m/d/Y',strtotime($j->date_closed))}}</td>
               <td>{{$j->applicants->count()}}</td>
@@ -126,6 +128,41 @@
                 <option value="1">Contract of Service/ Job Order</option>
                 <option value="2">Plantilla/Permanent</option>
               </select>
+            </div>
+          </div>
+          <div class="if-permanent d-none row">
+            <div class="col-md-12"><hr>
+              <h5>Minimum Qualifications(Based on CSC Qualification Standards)</h5>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Education</label>
+                <input type="text" class="form-control form-control-border" name="education" placeholder="Education" >
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Experience</label>
+                <input type="text" class="form-control form-control-border" name="experience" placeholder="Experience" >
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Training</label>
+                <input type="text" class="form-control form-control-border" name="training" placeholder="Training" >
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Eligibility</label>
+                <input type="text" class="form-control form-control-border" name="eligibility" placeholder="Eligibility" >
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Additional Requirements(based on DOH-CHD Regional Memorandum No.: 142 s. 2018)</label>
+                <input type="text" class="form-control form-control-border" name="add_req" placeholder="Additional Requirements" >
+              </div>
             </div>
           </div>
           <div class="col-md-12"><hr></div>
@@ -294,6 +331,7 @@
                 $('#modal-job-post').modal('show')
                 $('input[type=hidden][name=post_id]').val(val.id)
                 $('input[type=text][name=education]').val(val.education)
+                $('input[type=text][name=area_ass]').val(val.area_ass)
                 $('input[type=text][name=job_title]').val(val.job_title)
                 $('.jobdesc').summernote("code",val.job_description)
                 $(".salary_grade").val(val.salary_grade).change()
@@ -335,6 +373,19 @@
                 })
             },
         });
+    });
+    $('.term_emp').on('select2:select', function (e) {
+        var data = e.params.data.id;
+        if(data == 2) {
+          $('.if-permanent').removeClass('d-none');
+        } else {
+          $('.if-permanent').addClass('d-none');
+          $('input[type=text][name=eligibility]').val('')
+          $('input[type=text][name=education]').val('')
+          $('input[type=text][name=training]').val('')
+          $('input[type=text][name=experience]').val('')
+          $('input[type=text][name=add_req]').val('')
+        }
     });
 </script>
 @endsection
