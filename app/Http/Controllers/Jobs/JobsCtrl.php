@@ -59,6 +59,7 @@ class JobsCtrl extends Controller
     		"date_closed" => date('Y-m-d',strtotime($req->date_closed)),
     		"status" => $req->status,
     		"instruction" => $req->instruction,
+            "add_req" => $req->add_req,
             'drp' => $drp,
     	);
     	if($req->post_id) {

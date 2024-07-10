@@ -65,6 +65,37 @@
               </tr>
             </tbody>
           </table>
+          @if($job->term_emp == '2')
+          <label>Minimum Qualifications(Based on CSC Qualification Standards)</label>
+          <table class="table table-bordered table-hover">
+            <tbody>
+              <tr data-widget="expandable-table" aria-expanded="false">
+                <td width="20%">Education: </td>
+                <td width="80%"><label>{{$job->education}}</label></td>
+              </tr>
+              <tr data-widget="expandable-table" aria-expanded="false">
+                <td width="20%">Experience:</td>
+                <td width="80%"><label>{{$job->experience}}</label></td>
+              </tr>
+              <tr data-widget="expandable-table" aria-expanded="false">
+                <td width="20%">Training: </td>
+                <td width="80%"><label>{{$job->training}}</label></td>
+              </tr>
+              <tr data-widget="expandable-table" aria-expanded="false">
+                <td width="20%">Eligibility: </td>
+                <td width="80%"><label>{{$job->eligibility}}</label></td>
+              </tr>
+            </tbody>
+          </table>
+          <label>Additional Requirements(based on DOH-CHD Regional Memorandum No.: 142 s. 2018)</label>
+          <table class="table table-bordered table-hover">
+            <tbody>
+              <tr data-widget="expandable-table" aria-expanded="false">
+                <td width="100%">{{$job->add_req}}</td>
+              </tr>
+            </tbody>
+          </table>
+          @endif
           <b>Attachment:</b><br>
           <object data="{{ asset('storage/app/public/jobs') }}/{{$job->attach}}" type="application/pdf" width="100%" height="800px">
             <p>Your web browser doesn't have a PDF plugin.

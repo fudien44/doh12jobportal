@@ -19,6 +19,7 @@ class CreateProfilesTable extends Migration
             $table->string('extension')->nullable();
             $table->date('dob')->nullable();
             $table->integer('gender')->nullable();
+            $table->integer('sex')->nullable();
             $table->string('religion',20)->nullable();
             $table->string('ethnicity',100)->nullable();
             $table->integer('civilstat')->nullable();

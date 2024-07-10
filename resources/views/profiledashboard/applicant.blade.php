@@ -15,33 +15,80 @@
   </div><!-- /.container-fluid -->
 </div>
 <section class="py-5">
-    <div class="container">
+    <div class="container-fluid">
         <div class="card">
-            <div class="card-header">
-                <h3 class="card-title text-gray text-xl">My Profile</h3>
-                <div class="card-tools">
-                    <button class="btn btn-sm btn-success btn-edit-profile d-none">Edit Profile
-                    </button>
-                </div>
-            </div>
             <div class="card-body">
+                <div class="card card-widget widget-user">
+                  <!-- Add the bg color to the header using any of the bg-* classes -->
+                  <div class="widget-user-header text-white"
+                       style="background: url('{{ asset("public/img/bg1.png") }}')center;">
+                    <h5 class="widget-user-desc text-left">My Profile</h5>
+                  </div>
+                  <div class="widget-user-image">
+                    @if($users->profile && $users->profile->picture_link)
+                    <img class="img-circle profile-picture" src="{{ asset('storage/app/public')}}/{{$users->id}}/{{$users->profile->picture_link}}" alt="User Avatar" width="120">
+                    @else
+                    <img class="img-circle" src="{{ asset('public/img/profile.png') }}" alt="User Avatar">
+                    @endif
+                  </div>
+                  <div class="card-footer">
+                    <div class="row">
+                      <div class="col-sm-12 text-center">
+                         <h3 class="text-success">{{$users->fname}} {{$users->lname}}</h3>
+                      </div>
+                      <div class="col-sm-12 text-center">
+                         <h5 class="text-success">Applicant</h5>
+                      </div>
+                      <div class="col-sm-12 text-right">
+                         <button class="btn btn-sm btn-success btn-edit-profile">Edit Profile
+                        </button>
+                      </div>
+                      <div class="col-sm-4 border-right">
+                        <div class="description-block">
+                          <h5 class="description-header">{{$users->myjobs->count()}}</h5>
+                          <span class="description-text">JOBS APPLIED</span>
+                        </div>
+                        <!-- /.description-block -->
+                      </div>
+                      <!-- /.col -->
+                      <div class="col-sm-4 border-right">
+                        <div class="description-block">
+                            @php
+                            $app = (int)0;
+                              foreach($users->myjobs as $j) {
+                                  $app += (int)$j->letters->count();
+                              }
+                            @endphp
+                          <h5 class="description-header">{{$app}}</h5>
+                          <span class="description-text">APPLICATION SUBMITTED</span>
+                        </div>
+                        <!-- /.description-block -->
+                      </div>
+                      <!-- /.col -->
+                      <div class="col-sm-4">
+                        <div class="description-block">
+                          <h5 class="description-header">
+                              @php
+                              $att = (int)$users->pds->count() + (int)$users->tor->count() + (int)$users->wes->count() + (int)$users->tc->count() + (int)$users->coe->count() + (int)$users->ipcr->count() + (int)$users->elig->count() + (int)$users->odoc->count()
+                              @endphp
+                              {{$att}}
+                          </h5>
+                          <span class="description-text">ATTACHMENTS</span>
+                        </div>
+                        <!-- /.description-block -->
+                      </div>
+                      <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                  </div>
+                </div>
                 <div class="row">
-                    <div class="col-md-12 text-center">
-                        @if($users->profile && $users->profile->picture_link)
-                        <img src="{{ asset('storage/app/public')}}/{{$users->id}}/{{$users->profile->picture_link}}" alt="photo will appear here" class="rounded-circle profile-picture" width="160" />
-                        @else
-                        <img src="{{ asset('public/img/profile.png') }}" alt="user" class="rounded-circle profile-picture" width="160">
-                        @endif
-                    </div>
-                    <div class="col-md-12 text-center">
-                         <h2 class="text-primary">{{$users->fname}} {{$users->lname}}</h2>
-                    </div>
                     <div class="col-md-12">
                         <form id="applicant-info-form" method="POST" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <input type="hidden" name="profile_id" value="{{$profile->id}}">
                             <table id="applicant-info-table" class="table table-bordered table-hover">
-                                <h3>Personal Information</h3>
+                                <h5 class="text-success">Personal Information</h5>
                                 <hr>
                                 <div class="col-md-4">
                                     <h6 class="card-subtitle req-field">Upload Photo:</h6>
@@ -85,26 +132,30 @@
                                             <input type="date"class="form-control form-control-border" id="dob" name="dob" value="{{$profile->dob}}" required>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-4">
                                         <h6 class="card-subtitle req-field">Age:</h6>
                                         <input type="text" class="form-control form-control-border required" disabled id="age" name="age">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                      <h6 class="card-subtitle req-field">Sex:</h6>
+                                      <select class="form-control form-control-border sex" name="sex">
+                                        <option selected value="">Select Sex</option>
+                                        <option value="0"@if($profile->sex == 0) selected @endif>Male</option>
+                                        <option value="1"@if($profile->sex == 1) selected @endif>Female</option>
+                                      </select>
                                     </div>
                                     <div class="col-md-4">
                                       <h6 class="card-subtitle req-field">Gender:</h6>
                                       <select class="form-control form-control-border gender" name="gender">
                                         <option selected value="">Select Gender</option>
-                                        <option value="0">Male</option>
-                                        <option value="1">Female</option>
-                                        <option value="2">Transgender</option>
-                                        <option value="3">Two-Spirit</option>
-                                        <option value="4">Cisgender</option>
-                                        <option value="5">Non-binary</option>
-                                        <option value="6">Genderqueer</option>
-                                        <option value="7">Gender expression</option>
-                                        <option value="8">Gender fluid</option>
-                                        <option value="9">Gender neutral</option>
+                                        <option value="1"@if($profile->gender == 1) selected @endif>Agender</option>
+                                        <option value="2" @if($profile->gender == 2) selected @endif>Cisgender</option>
+                                        <option value="3"@if($profile->gender == 3) selected @endif>Gender fluid</option>
+                                        <option value="4"@if($profile->gender == 4) selected @endif>Genderqueer</option>
+                                        <option value="5"@if($profile->gender == 5) selected @endif>Non-binary</option>
+                                        <option value="6"@if($profile->gender == 6) selected @endif>Transgender</option>
                                       </select>
                                     </div>
                                     <div class="col-md-4">
@@ -119,18 +170,40 @@
                                         <h6 class="card-subtitle req-field">Religion:</h6>
                                           <select class="form-control form-control-border religion" name="religion">
                                             <option selected value="">Select Religion</option>
-                                            <option value="AGLIP">AGLIPAY</option><option value="ALLY">ALLIANCE OF BIBLE CHRISTIAN COMMUNITIES</option><option value="ANGLI">ANGLICAN</option><option value="BAPTI">BAPTIST</option><option value="BRNAG">BORN AGAIN CHRISTIAN</option><option value="BUDDH">BUDDHISM</option><option value="CATHO">CATHOLIC</option><option value="XTIAN">CHRISTIAN</option><option value="CHOG">CHURCH OF GOD</option><option value="EVANG">EVANGELICAL</option><option value="IGNIK">IGLESIA NI CRISTO</option><option value="MUSLI">ISLAM</option><option value="JEWIT">JEHOVAHS WITNESS</option><option value="MORMO">LDS-MORMONS</option><option value="LRCM">LIFE RENEWAL CHRISTIAN MINISTRY</option><option value="LUTHR">LUTHERAN</option><option value="METOD">METHODIST</option><option value="PENTE">PENTECOSTAL</option><option value="PROTE">PROTESTANT</option><option value="SVDAY">SEVENTH DAY ADVENTIST</option><option value="UCCP">UCCP</option><option value="UNKNO">UNKNOWN</option><option value="WESLY">WESLEYAN</option>
+                                            <option value="AGLIP"@if($profile->religion == 'AGLIP') selected @endif>AGLIPAY</option>
+                                            <option value="ALLY"@if($profile->religion == 'ALLY') selected @endif>ALLIANCE OF BIBLE CHRISTIAN COMMUNITIES</option>
+                                            <option value="ANGLI"@if($profile->religion == 'ANGLI') selected @endif>ANGLICAN</option>
+                                            <option value="BAPTI"@if($profile->religion == 'BAPTI') selected @endif>BAPTIST</option>
+                                            <option value="BRNAG"@if($profile->religion == 'BRNAG') selected @endif>BORN AGAIN CHRISTIAN</option>
+                                            <option value="BUDDH"@if($profile->religion == 'BUDDH') selected @endif>BUDDHISM</option>
+                                            <option value="CATHO"@if($profile->religion == 'CATHO') selected @endif>CATHOLIC</option>
+                                            <option value="XTIAN"@if($profile->religion == 'XTIAN') selected @endif>CHRISTIAN</option>
+                                            <option value="CHOG"@if($profile->religion == 'CHOG') selected @endif>CHURCH OF GOD</option>
+                                            <option value="EVANG"@if($profile->religion == 'EVANG') selected @endif>EVANGELICAL</option>
+                                            <option value="IGNIK"@if($profile->religion == 'IGNIK') selected @endif>IGLESIA NI CRISTO</option>
+                                            <option value="MUSLI"@if($profile->religion == 'MUSLI') selected @endif>ISLAM</option>
+                                            <option value="JEWIT"@if($profile->religion == 'JEWIT') selected @endif>JEHOVAHS WITNESS</option>
+                                            <option value="MORMO"@if($profile->religion == 'MORMO') selected @endif>LDS-MORMONS</option>
+                                            <option value="LRCM"@if($profile->religion == 'LRCM') selected @endif>LIFE RENEWAL CHRISTIAN MINISTRY</option>
+                                            <option value="LUTHR"@if($profile->religion == 'LUTHR') selected @endif>LUTHERAN</option>
+                                            <option value="METOD"@if($profile->religion == 'METOD') selected @endif>METHODIST</option>
+                                            <option value="PENTE"@if($profile->religion == 'PENTE') selected @endif>PENTECOSTAL</option>
+                                            <option value="PROTE"@if($profile->religion == 'PROTE') selected @endif>PROTESTANT</option>
+                                            <option value="SVDAY"@if($profile->religion == 'SVDAY') selected @endif>SEVENTH DAY ADVENTIST</option>
+                                            <option value="UCCP"@if($profile->religion == 'UCCP') selected @endif>UCCP</option>
+                                            <option value="UNKNO"@if($profile->religion == 'UNKNO') selected @endif>UNKNOWN</option>
+                                            <option value="WESLY"@if($profile->religion == 'WESLY') selected @endif>WESLEYAN</option>
                                           </select>
                                     </div>
                                     <div class="col-sm-4">
                                         <h6 class="card-subtitle req-field">Civil Status:</h6>
                                           <select class="form-control form-control-border civilstat" name="civilstat">
                                             <option selected value="">Select Status</option>
-                                            <option value="0">Single</option>
-                                            <option value="1">Married</option>
-                                            <option value="2">Separated</option>
-                                            <option value="3">Widowed</option>
-                                            <option value="3">Other</option>
+                                            <option value="0"@if($profile->civilstat == '0') selected @endif>Single</option>
+                                            <option value="1"@if($profile->civilstat == '1') selected @endif>Married</option>
+                                            <option value="2"@if($profile->civilstat == '2') selected @endif>Separated</option>
+                                            <option value="3"@if($profile->civilstat == '3') selected @endif>Widowed</option>
+                                            <option value="4"@if($profile->civilstat == '4') selected @endif>Other</option>
                                           </select>
                                     </div>
                                 </div>
@@ -456,7 +529,7 @@
                                         @endforeach
                                         @endif
                                      </div>
-                                    <button type="submit" class="btn float btn-save-profile"><i class="fas fa-save"></i></button>
+                                    <button type="submit" class="btn float btn-save-profile d-none"><i class="fas fa-save"></i></button>
                                 </div>
                             </table>
                         </form>

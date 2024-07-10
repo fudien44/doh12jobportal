@@ -53,8 +53,9 @@ $idnum = (int)1;
                 DEPARTMENT OF HEALTH<br>
                 <strong>CENTER FOR HEALTH DEVELOPMENT <br> SOCCSKSARGEN Region</strong><br>
                 <h5>ATTENDANCE FOR THE VACANT POSITIONS OF</h5>
-                <h5>{{$apps->job_title}}({{$apps->term()}})</h5>
+                <h5>{{$apps->job_title}} ({{$apps->term()}})</h5>
                 <h5>{{$apps->area_ass}}</h5>
+                <h5>Date: ______________________</h5>
             </center>
         </td>
         <td width="20%" style="border: none;"><center><img src="{{ asset('public/img/ro12.png') }}" width="100"></center></td>
@@ -74,7 +75,7 @@ $idnum = (int)1;
         <th width="13%" class="fs">SIGNATURE</th>
         <th width="13%" class="fs">REMARKS</th>
     </tr>
-    @foreach($apps->applicants as $a)
+    @foreach($apps->applicants->orderBy('lname', 'asc') as $a)
     @if($a->status == '3')
     <tr>
     	<td class="fs alc" style="padding-top: 30px;">{{$idnum}}</td>
