@@ -219,7 +219,8 @@ class JobsCtrl extends Controller
         if($app) {
             Session::put('job', $app);
             return view('jobs.applicants.applicant', [
-                'apps' => $app
+                'apps' => $app,
+                'appid' => $appid
             ]);
         }
     }
