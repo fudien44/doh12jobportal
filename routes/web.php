@@ -43,6 +43,12 @@ Route::group(['middleware' => 'superadmin'], function(){
     Route::post('/save-update-user', 'FnctnCtrl@storeUser');
     Route::get('/users-edit/{id}', 'FnctnCtrl@editUser');
 });
+
+//Excel
+Route::get('/excel/rdr/{appid}', 'Excel\ExcelCtrl@rdr')->middleware('verified');
+
+
+
 Route::resource('profile','ProfileController');
 Route::get('my-profile','ProfileController@myprofile')->middleware('verified');
 //Route::get('my-profile-update','ProfileController@profileupdate');

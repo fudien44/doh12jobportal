@@ -33,6 +33,8 @@
       <h3 class="text-success">{{$apps->job_title}} - {{$apps->area_ass}}</h3>
       <div class="customize-input float-right">
           <div class="btn-group">
+             <a href="{{asset('excel/rdr/'.base64_encode($appid))}}" target="_blank" type="button" class="btn btn-default"><i class="fas fa-file-alt"></i>&nbsp;Excel</a>
+
             <button type="button" class="btn btn-default"><i class="fas fa-file-alt"></i>&nbsp;ATTENDANCE</button>
             <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
               <span class="sr-only">Toggle Dropdown</span>
@@ -41,6 +43,7 @@
               <a class="dropdown-item" href="{{asset('attendance')}}">Examination</a>
               <a class="dropdown-item" href="{{asset('attendance-interview')}}">Interview</a>
             </div>
+
           </div>
       </div>
     </div>
