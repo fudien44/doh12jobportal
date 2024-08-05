@@ -40,8 +40,10 @@
                          <h5 class="text-success">Applicant</h5>
                       </div>
                       <div class="col-sm-12 text-right">
-                         <button class="btn btn-sm btn-success btn-edit-profile">Edit Profile
+                         <button class="btn btn-sm btn-success btn-edit-profile">Edit Profile <i class="far fa-edit"></i>
                         </button>
+                        <a href="{{asset('/jobs/apply')}}" class="btn btn-sm btn-primary">My Applications <i class="far fa-paper-plane"></i>
+                        </a>
                       </div>
                       <div class="col-sm-4 border-right">
                         <div class="description-block">
@@ -1080,6 +1082,100 @@
             }
         });
     } );
+    
+    $( ".btn-delete-wes" ).on( "click", function() {
+        var id = $(this).attr('data-id');
+        var url = "{{ secure_url('/delete-wes') }}";
+        $.ajax({
+            async: true,
+            url: url,
+            type: 'GET',
+            data: {
+                id: id
+            },
+            success : function(data){
+                $.toast({
+                    heading: 'Deleted',
+                    text: 'Successfully Deleted',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                })
+                setTimeout(function(){
+                  window.location.reload(false);
+              },500);
+            }
+        });
+    } );
+    $( ".btn-delete-tc" ).on( "click", function() {
+        var id = $(this).attr('data-id');
+        var url = "{{ secure_url('/delete-tc') }}";
+        $.ajax({
+            async: true,
+            url: url,
+            type: 'GET',
+            data: {
+                id: id
+            },
+            success : function(data){
+                $.toast({
+                    heading: 'Deleted',
+                    text: 'Successfully Deleted',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                })
+                setTimeout(function(){
+                  window.location.reload(false);
+              },500);
+            }
+        });
+    } );
+    $( ".btn-delete-coe" ).on( "click", function() {
+        var id = $(this).attr('data-id');
+        var url = "{{ secure_url('/delete-coe') }}";
+        $.ajax({
+            async: true,
+            url: url,
+            type: 'GET',
+            data: {
+                id: id
+            },
+            success : function(data){
+                $.toast({
+                    heading: 'Deleted',
+                    text: 'Successfully Deleted',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                })
+                setTimeout(function(){
+                  window.location.reload(false);
+              },500);
+            }
+        });
+    } );
+    $( ".btn-delete-ipcr" ).on( "click", function() {
+        var id = $(this).attr('data-id');
+        var url = "{{ secure_url('/delete-ipcr') }}";
+        $.ajax({
+            async: true,
+            url: url,
+            type: 'GET',
+            data: {
+                id: id
+            },
+            success : function(data){
+                $.toast({
+                    heading: 'Deleted',
+                    text: 'Successfully Deleted',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                })
+                setTimeout(function(){
+                  window.location.reload(false);
+              },500);
+            }
+        });
+    } );
+
     $( ".btn-delete-tor" ).on( "click", function() {
         var id = $(this).attr('data-id');
         var url = "{{ secure_url('/delete-tor') }}";

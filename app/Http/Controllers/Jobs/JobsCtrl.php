@@ -28,7 +28,7 @@ class JobsCtrl extends Controller
     }
 
     public function jobposting(Request $req) {
-    	$jobs = Jobs::orderBy('job_title','asc')->get();
+    	$jobs = Jobs::orderBy('date_posted','desc')->get();
     	$salary = SalGrade::all();
         $us = User::where('level', 1)->get();
     	return view('jobs.jobspost',[

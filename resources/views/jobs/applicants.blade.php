@@ -39,7 +39,7 @@
             <th>Surname</th>
             <th>First Name</th>
             <th>Middle Name</th>
-            <th>Gender</th>
+            <th>Sex</th>
             <th>Civil Status</th>
             <th>Course/Graduate</th>
             <th>Contact No.</th>
@@ -55,18 +55,18 @@
           @foreach($apps as $a)
           <tr>
             <td>
-              <a class="btn btn-info href-app-profile" data-id="{{$a->id}}" href="{{('applicant/profile')}}?uid={{base64_encode($a->id)}}"><i class="fas fa-eye"></i></a>
+              <a class="btn btn-info" data-id="{{$a->id}}" href="{{('applicant/profile')}}?uid={{base64_encode($a->id)}}"><i class="fas fa-eye"></i></a>
             </td>
             <td>
-              <a class="text-success font-weight-bold href-app-profile" data-id="{{$a->id}}" href="#">{{$a->lname}}</a>
+              <a class="text-success font-weight-bold" data-id="{{$a->id}}" href="#">{{$a->lname}}</a>
             </td>
             <td>
-              <a class="text-success font-weight-bold href-app-profile" data-id="{{$a->id}}" href="#">{{$a->fname}}</a>
+              <a class="text-success font-weight-bold" data-id="{{$a->id}}" href="#">{{$a->fname}}</a>
             </td>
             <td>
-              <a class="text-success font-weight-bold href-app-profile" data-id="{{$a->id}}" href="#">{{$a->mname}}</a>
+              <a class="text-success font-weight-bold" data-id="{{$a->id}}" href="#">{{$a->mname}}</a>
             </td>
-            <td>{{$a->profile ? $a->profile->gnder() : ''}}</td>
+            <td>{{$a->profile ? $a->profile->sx() : ''}}</td>
             <td>{{$a->profile ? $a->profile->cs() : ''}}</td>
             <td>{{$a->profile ? $a->profile->course : ''}}</td>
             <td>{{$a->profile ? $a->profile->contactno: ''}}</td>

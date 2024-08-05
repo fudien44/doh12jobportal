@@ -110,42 +110,43 @@ class Profile extends Model
                 break;
         }
     }
-    public function gnder() {
-    	switch ($this->gender) {
-    		case '0':
-    			return 'Male';
-    			break;
-    		case '1':
-    			return 'Female';
-    			break;
-    		case '2':
-    			return 'Transgender';
-    			break;
-    		case '3':
-    			return 'Two-Spirit';
-    			break;
-    		case '4':
-    			return 'Cisgender';
-    			break;
-    		case '5':
-    			return 'Non-binary';
-    			break;
-    		case '6':
-    			return 'Genderqueer';
-    			break;
-    		case '7':
-    			return 'Gender expression';
-    			break;
-    		case '8':
-    			return 'Gender fluid';
-    			break;
-    		case '9':
-    			return 'Gender neutral';
-    			break;
-    		default:
-    			return 'N/A';
-    			break;
-    	}
+    public function gndr() {
+        switch ($this->gender) {
+            case '1':
+                return 'Agender';
+                break;
+            case '2':
+                return 'Cisgender';
+                break;
+            case '3':
+                return 'Gender fluid';
+                break;
+            case '4':
+                return 'Genderqueer';
+                break;
+            case '5':
+                return 'Non-binary';
+                break;
+            case '6':
+                return 'Transgender';
+                break;
+            default:
+                return 'N/A';
+                break;
+        }
+    }
+    public function sx() {
+        switch ($this->sex) {
+            case '0':
+                return 'Male';
+                break;
+            case '1':
+                return 'Female';
+                break;
+            default:
+                return 'N/A';
+                break;
+        }
     }
     public function cs() {
         switch ($this->civilstat) {

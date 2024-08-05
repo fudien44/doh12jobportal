@@ -75,7 +75,7 @@ $idnum = (int)1;
         <th width="13%" class="fs">SIGNATURE</th>
         <th width="13%" class="fs">REMARKS</th>
     </tr>
-    @foreach($apps->applicants->orderBy('lname', 'asc') as $a)
+    @foreach($apps->applicants->sortBy('lname') as $a)
     @if($a->status == '1' || $a->status == '3') 
     <tr>
     	<td class="fs alc" style="padding-top: 30px;">{{$idnum}}</td>

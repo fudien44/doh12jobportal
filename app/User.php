@@ -145,38 +145,36 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function gndr() {
         switch ($this->gender) {
-            case '0':
-                return 'Male';
-                break;
             case '1':
-                return 'Female';
+                return 'Agender';
                 break;
             case '2':
-                return 'Transgender';
+                return 'Cisgender';
                 break;
             case '3':
-                return 'Two-Spirit';
+                return 'Gender fluid';
                 break;
             case '4':
-                return 'Cisgender';
+                return 'Genderqueer';
                 break;
             case '5':
                 return 'Non-binary';
                 break;
             case '6':
-                return 'Genderqueer';
+                return 'Transgender';
                 break;
-            case '7':
-                return 'Gender expression';
+            default:
+                return 'N/A';
                 break;
-            case '8':
-                return 'Gender fluid';
+        }
+    }
+    public function sx() {
+        switch ($this->sex) {
+            case '0':
+                return 'Male';
                 break;
-            case '9':
-                return 'Gender neutral';
-                break;
-            case '10':
-                return 'Prefer Not to Say';
+            case '1':
+                return 'Female';
                 break;
             default:
                 return 'N/A';

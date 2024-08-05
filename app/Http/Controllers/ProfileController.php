@@ -224,6 +224,31 @@ class ProfileController extends Controller
             $pds->delete();
         }
     }
+
+    public function deleteWes(Request $req) {
+        $pds = Wes::find($req->id);
+        if($pds) {
+            $pds->delete();
+        }
+    }
+    public function deleteTc(Request $req) {
+        $pds = Tc::find($req->id);
+        if($pds) {
+            $pds->delete();
+        }
+    }
+    public function deleteCoe(Request $req) {
+        $pds = Coe::find($req->id);
+        if($pds) {
+            $pds->delete();
+        }
+    }
+    public function deleteIpcr(Request $req) {
+        $pds = Ipcr::find($req->id);
+        if($pds) {
+            $pds->delete();
+        }
+    }
     public function users() {
         $users = User::where('level','!=', '2')->orderBy('id','desc')->get();
         return view('auth.users', [

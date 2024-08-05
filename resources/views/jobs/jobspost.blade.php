@@ -48,6 +48,7 @@
             <th>DATE POSTED</th>
             <th>DATE CLOSED</th>
             <th>TOTAL APPLICANTS</th>
+            <th>STATUS</th>
           </tr>
           </thead>
           <tbody>
@@ -60,6 +61,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="{{asset('/list-applicants')}}?job={{base64_encode($j->id)}}" target="_blank"><i class="fas fa-users"></i>Applicants</a>
+                        <a class="dropdown-item" href="{{asset('jobs/description')}}?job={{base64_encode($j->id)}}" data-id="{{$j->id}}"><i class="far fa-eye"></i>View Details/Attachments</a>
                         <button class="btn-edit dropdown-item" data-id="{{$j->id}}"><i class="far fa-edit"></i>Edit</button>
                         <button class="dropdown-item" type="button"><i class="far fa-trash-alt"></i> Delete</button>
                     </div>
@@ -71,6 +73,7 @@
               <td>{{date('m/d/Y',strtotime($j->date_posted))}}</td>
               <td>{{date('m/d/Y',strtotime($j->date_closed))}}</td>
               <td>{{$j->applicants->count()}}</td>
+              <td>{{$j->stat()}}</td>
             </tr>
             @endforeach
           </tbody>

@@ -56,7 +56,7 @@
             <th>Surname</th>
             <th>First Name</th>
             <th>Middle Name</th>
-            <th>Gender</th>
+            <th>Sex</th>
             <th>Civil Status</th>
             <th>Course/Graduate</th>
             <th>Contact No.</th>
@@ -86,15 +86,15 @@
               </a>
             </td>
             <td>
-              <a class="text-success font-weight-bold href-app-profile" data-id="{{$a->id}}" href="#">{{$a->applicant->lname}}</a>
+              <a class="text-success font-weight-bold" data-id="{{$a->id}}" href="#">{{$a->applicant->lname}}</a>
             </td>
             <td>
-              <a class="text-success font-weight-bold href-app-profile" data-id="{{$a->id}}" href="#">{{$a->applicant->fname}}</a>
+              <a class="text-success font-weight-bold" data-id="{{$a->id}}" href="#">{{$a->applicant->fname}}</a>
             </td>
             <td>
-              <a class="text-success font-weight-bold href-app-profile" data-id="{{$a->id}}" href="#">{{$a->applicant->mname}}</a>
+              <a class="text-success font-weight-bold" data-id="{{$a->id}}" href="#">{{$a->applicant->mname}}</a>
             </td>
-            <td>{{$a->applicant->profile ? $a->applicant->profile->gnder() : $a->applicant->profile}}</td>
+            <td>{{$a->applicant->profile ? $a->applicant->profile->sx() : $a->applicant->profile}}</td>
             <td>{{$a->applicant->profile ? $a->applicant->profile->cs() : $a->applicant->profile}}</td>
             <td>{{$a->applicant->profile ? $a->applicant->profile->course : $a->applicant->profile}}</td>
             <td>{{$a->applicant->profile ? $a->applicant->profile->contactno : $a->applicant->profile}}</td>

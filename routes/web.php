@@ -59,6 +59,11 @@ Route::get('delete-pds','ProfileController@deletePds');
 Route::get('delete-tor','ProfileController@deleteTor');
 Route::get('delete-elig','ProfileController@deleteElig');
 Route::get('delete-doc','ProfileController@deleteDoc');
+
+Route::get('delete-wes','ProfileController@deleteWes');
+Route::get('delete-tc','ProfileController@deleteTc');
+Route::get('delete-coe','ProfileController@deleteCoe');
+Route::get('delete-ipcr','ProfileController@deleteIpcr');
 //Clear Cache facade value:
 Route::get('/clear-cache', function() {
     $exitCode = Artisan::call('cache:clear');
