@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+  .select2-container--default .select2-selection--multiple .select2-selection__rendered li {
+    color: #285c4d;
+  }
+</style>
 <span id="particles-js" ></span>
 <div class="content-header mt-3">
   <div class="container">

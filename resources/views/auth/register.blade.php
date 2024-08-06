@@ -89,7 +89,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}<span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror txt-pw" name="password" required autocomplete="new-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -103,7 +103,11 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}<span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control txt-pw" name="password_confirmation" required autocomplete="new-password">
+                                <div class="custom-control custom-checkbox">
+                                  <input class="custom-control-input show-pw" type="checkbox" id="customCheckbox1">
+                                  <label for="customCheckbox1" class="custom-control-label">Show Password</label>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row text-center">
@@ -151,6 +155,13 @@ $(".btn-refresh-captcha").click(function(){
         $(".captcha-code").html(data.captcha);
      }
   });
+});
+$(".show-pw").click(function(){
+  if($(this).is(':checked')) {
+    $('.txt-pw').attr('type','text');
+  } else {
+    $('.txt-pw').attr('type','password');
+  }
 });
 
 

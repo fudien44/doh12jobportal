@@ -52,7 +52,7 @@ $idnum = (int)1;
                 <strong>Republic of the Philippines</strong><br>
                 DEPARTMENT OF HEALTH<br>
                 <strong>CENTER FOR HEALTH DEVELOPMENT <br> SOCCSKSARGEN Region</strong><br>
-                <h5>ATTENDANCE FOR THE VACANT POSITIONS OF</h5>
+                <h5>ATTENDANCE FOR INTERVIEW OF QUALIFIED APPLICANT FOR THE VACANT POSITIONS OF</h5>
                 <h5>{{$apps->job_title}} ({{$apps->term()}})</h5>
                 <h5>{{$apps->area_ass}}</h5>
                 <h5>Date: ______________________</h5>
