@@ -54,11 +54,11 @@
                 </span>
             @enderror
             <div class="input-group mb-3">
-              <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
-              <div class="input-group-append">
-                <div class="input-group-text">
-                  <span class="fas fa-lock"></span>
-                </div>
+              <div class="input-group input-group">
+                <input type="password" class="form-control @error('password') is-invalid @enderror txt-pw" name="password" required autocomplete="current-password" placeholder="Password">
+                <span class="input-group-append">
+                  <button type="button" class="btn btn-outline-secondary icon-eye"><i class="fas fa-eye-slash"></i></button>
+                </span>
               </div>
               @error('password')
                 <span class="invalid-feedback" role="alert">
@@ -128,6 +128,16 @@ $(".btn-refresh-captcha").click(function(){
         $(".captcha-code").html(data.captcha);
      }
   });
+});
+
+$(".icon-eye").click(function(){
+  if($('.txt-pw').attr('type') == 'password') {
+    $('.txt-pw').attr('type','text');
+    $(this).html('<i class="fas fa-eye"></i>');
+  } else {
+    $('.txt-pw').attr('type','password');
+    $(this).html('<i class="fas fa-eye-slash"></i>');
+  }
 });
 
 

@@ -289,7 +289,7 @@
             <div class="active tab-pane" id="pds">
                 @if($users->pds)
                 @foreach($users->pds as $key => $pds)
-                <a href="#" data-toggle="modal" data-target="#pds-xl-{{$key}}">Personal Data Sheet(CS Form No. 212, Revised 2017) {{(int)$key + 1}} </a><br>
+                <a href="#=" data-toggle="modal" data-target="#pds-xl-{{$key}}">Personal Data Sheet(CS Form No. 212, Revised 2017) {{(int)$key + 1}} </a><br>
                 <div class="modal fade" id="pds-xl-{{$key}}">
                     <div class="modal-dialog modal-xl">
                       <div class="modal-content">

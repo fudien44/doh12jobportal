@@ -53,7 +53,7 @@ class ExcelCtrl extends Controller
                     Contact Number: ".$a->applicant->contactno."<br>
                     Email Address: ".$a->applicant->email ."<br>
                     Age: ".\Carbon\Carbon::parse($a->applicant->dob)->age."
-                    Gender: ".$a->applicant->profile->gnder() ."<br>
+                    Gender: ".$a->applicant->profile->gndr() ."<br>
                     Address: ".$a->applicant->profile->address ."<br>
                     Years of Experience: ".$a->applicant->profile->work_experience."
                 </td>
