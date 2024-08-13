@@ -289,7 +289,7 @@
             <div class="active tab-pane" id="pds">
                 @if($users->pds)
                 @foreach($users->pds as $key => $pds)
-                <a href="#=" data-toggle="modal" data-target="#pds-xl-{{$key}}">Personal Data Sheet(CS Form No. 212, Revised 2017) {{(int)$key + 1}} </a><br>
+                <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}" target="_blank">Personal Data Sheet(CS Form No. 212, Revised 2017) {{(int)$key + 1}} </a><br>
                 <div class="modal fade" id="pds-xl-{{$key}}">
                     <div class="modal-dialog modal-xl">
                       <div class="modal-content">
@@ -323,7 +323,7 @@
             <div class="tab-pane" id="wes">
               @if($users->wes)
               @foreach($users->wes as $key => $wes)
-              <a href="#" data-toggle="modal" data-target="#wes-xl-{{$key}}">CSC Work Experience Sheet {{(int)$key + 1}} </a><br>
+              <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$wes->filename}}" target="_blank">CSC Work Experience Sheet {{(int)$key + 1}} </a><br>
               <div class="modal fade" id="wes-xl-{{$key}}">
                   <div class="modal-dialog modal-xl">
                     <div class="modal-content">
@@ -358,7 +358,7 @@
             <div class="tab-pane" id="tc">
               @if($users->tc)
                 @foreach($users->tc as $key => $tc)
-                <a href="#" data-toggle="modal" data-target="#tc-xl-{{$key}}">Training Certificates {{(int)$key + 1}} </a><br>
+                <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tc->filename}}" target="_blank">Training Certificates {{(int)$key + 1}} </a><br>
                 <div class="modal fade" id="tc-xl-{{$key}}">
                     <div class="modal-dialog modal-xl">
                       <div class="modal-content">
@@ -391,7 +391,7 @@
             <div class="tab-pane" id="dtor">
               @if($users->tor)
               @foreach($users->tor as $key => $tor)
-              <a href="#" data-toggle="modal" data-target="#tor-xl-{{$key}}">Diploma & Transcript of Record {{(int)$key + 1}} </a><br>
+              <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}" target="_blank">Diploma & Transcript of Record {{(int)$key + 1}} </a><br>
               <div class="modal fade" id="tor-xl-{{$key}}">
                   <div class="modal-dialog modal-xl">
                     <div class="modal-content">
@@ -424,7 +424,7 @@
             <div class="tab-pane" id="coe">
               @if($users->coe)
               @foreach($users->coe as $key => $coe)
-              <a href="#" data-toggle="modal" data-target="#coe-xl-{{$key}}">Certificate of Employment {{(int)$key + 1}} </a><br>
+              <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$coe->filename}}" target="_blank">Certificate of Employment {{(int)$key + 1}} </a><br>
               <div class="modal fade" id="coe-xl-{{$key}}">
                   <div class="modal-dialog modal-xl">
                     <div class="modal-content">
@@ -457,7 +457,7 @@
             <div class="tab-pane" id="prcbr">
               @if($users->elig)
               @foreach($users->elig as $key => $elig)
-              <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility/PRC {{(int)$key + 1}} </a><br>
+              <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}" target="_blank">Eligibility/PRC {{(int)$key + 1}} </a><br>
               <div class="modal fade" id="elig-xl-{{$key}}">
                   <div class="modal-dialog modal-xl">
                     <div class="modal-content">
@@ -490,7 +490,7 @@
             <div class="tab-pane" id="ipcr">
               @if($users->ipcr)
               @foreach($users->ipcr as $key => $ipcr)
-              <a href="#" data-toggle="modal" data-target="#ipcr-xl-{{$key}}">IPCR/Performance Evaluation {{(int)$key + 1}} </a><br>
+              <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$ipcr->filename}}" target="_blank">IPCR/Performance Evaluation {{(int)$key + 1}} </a><br>
               <div class="modal fade" id="ipcr-xl-{{$key}}">
                   <div class="modal-dialog modal-xl">
                     <div class="modal-content">
@@ -523,7 +523,7 @@
             <div class="tab-pane" id="osd">
               @if($users->odoc)
               @foreach($users->odoc as $key => $odoc)
-              <a href="#" data-toggle="modal" data-target="#doc-xl-{{$key}}">Other Document {{(int)$key + 1}} </a><br>
+              <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$odoc->filename}}" target="_blank">Other Document {{(int)$key + 1}} </a><br>
               <div class="modal fade" id="doc-xl-{{$key}}">
                   <div class="modal-dialog modal-xl">
                     <div class="modal-content">
