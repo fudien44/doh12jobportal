@@ -74,6 +74,7 @@
             <option value="5">Missing Requirements</option>
             <option value="0">Not Qualified (Based on minimum QS)</option>
             <option value="1">Qualified for Written Examination</option>
+            <option value="6">Not Qualified for Interview</option>
             <option value="2">Not Accepted</option>
             <option value="3">For Panel Interview</option>
             <option value="4">Accepted</option>
