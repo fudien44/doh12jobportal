@@ -48,7 +48,7 @@
             <tr>
               <td class="text-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#modal_app_letter" data-id="{{$mj->id}}">Upload Application</button>
+                  <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#modal_app_letter" data-id="{{$mj->id}}">Upload Letter of Intent</button>
 
                   <div class="btn-group">
                     <button title="Application history" type="button" class="btn btn-default" data-toggle="dropdown">

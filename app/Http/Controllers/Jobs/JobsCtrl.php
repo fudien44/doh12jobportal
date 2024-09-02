@@ -266,5 +266,17 @@ class JobsCtrl extends Controller
             return '<b>No profile found.</b>';
         }
     }
+    public function jobsreview(Request $req) {
+        $jobid = base64_decode($req->job);
+        $ct = date('Y-m-d');
+        $user = Auth::user();
+        $j = Jobs::find($jobid);
+        if($user) {
+            return view('jobs.docrev', [
+               'users' => $user,
+               'job' => $j
+            ]);
+        }
+    }
 
 }

@@ -196,9 +196,13 @@
           <div class="row" style="pointer-events: none;">
             <div class="col-md-12">
                 <h6 class="card-subtitle req-field">Highest Educational Attainment:</h6>
-                <div class="form-group">
-                    <input type="text" class="form-control form-control-border required" name="highest_education" value="{{$profile->highest_education}}">
-                </div>
+                <select class="form-control form-control-border civilstat" name="highest_education">
+                  <option selected value="">Select</option>
+                  <option value="0">N/A</option>
+                  <option value="1">Vocational/Trade Course</option>
+                  <option value="2">College</option>
+                  <option value="3">Graduate Studies</option>
+                </select>
             </div>
             <div class="col-md-12">
                 <h6 class="card-subtitle req-field">Course Title:</h6>

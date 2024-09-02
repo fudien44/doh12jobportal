@@ -238,9 +238,13 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <h6 class="card-subtitle req-field">Highest Educational Attainment:</h6>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control form-control-border required" name="highest_education" value="{{$profile->highest_education}}">
-                                        </div>
+                                            <select class="form-control form-control-border civilstat" name="highest_education">
+                                              <option selected value="">Select</option>
+                                              <option value="0" @if($profile->highest_education == 0)selected @endif>N/A</option>
+                                              <option value="1"@if($profile->highest_education == 1)selected @endif>Vocational/Trade Course</option>
+                                              <option value="2"@if($profile->highest_education == 2)selected @endif>College</option>
+                                              <option value="3"@if($profile->highest_education == 3)selected @endif>Graduate Studies</option>
+                                            </select>
                                     </div>
                                     <div class="col-md-4">
                                         <h6 class="card-subtitle req-field">Course Title:</h6>
