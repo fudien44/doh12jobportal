@@ -69,7 +69,7 @@
             <td>{{$a->profile ? $a->profile->sx() : ''}}</td>
             <td>{{$a->profile ? $a->profile->cs() : ''}}</td>
             <td>{{$a->profile ? $a->profile->course : ''}}</td>
-            <td>{{$a->profile ? $a->profile->contactno: ''}}</td>
+            <td>{{$a->profile ? $a->contactno: ''}}</td>
             <td>{{$a->email}}</td>
             <td>{{$a->profile ? $a->profile->address : ''}}</td>
             <td>{{$a->profile ? $a->profile->ethnicity : ''}}</td>

@@ -33,7 +33,7 @@
       <h3 class="text-success">{{$apps->job_title}} - {{$apps->area_ass}}</h3>
       <div class="customize-input float-right">
           <div class="btn-group">
-             <a href="{{asset('excel/rdr/'.base64_encode($appid))}}" target="_blank" type="button" class="btn btn-default"><i class="fas fa-file-alt"></i>&nbsp;Excel</a>
+             <a href="{{asset('excel/rdr/'.base64_encode($appid))}}" target="_blank" type="button" class="btn btn-default"><i class="fas fa-file-alt"></i>&nbsp;RDR</a>
 
             <button type="button" class="btn btn-default"><i class="fas fa-file-alt"></i>&nbsp;ATTENDANCE</button>
             <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
@@ -97,7 +97,7 @@
             <td>{{$a->applicant->profile ? $a->applicant->profile->sx() : $a->applicant->profile}}</td>
             <td>{{$a->applicant->profile ? $a->applicant->profile->cs() : $a->applicant->profile}}</td>
             <td>{{$a->applicant->profile ? $a->applicant->profile->course : $a->applicant->profile}}</td>
-            <td>{{$a->applicant->profile ? $a->applicant->profile->contactno : $a->applicant->profile}}</td>
+            <td>{{$a->applicant->profile ? $a->applicant->contactno : $a->applicant->profile}}</td>
             <td>{{$a->applicant->profile ? $a->applicant->email : $a->applicant->profile}}</td>
             <td>{{$a->applicant->profile ? $a->applicant->profile->address : $a->applicant->profile}}</td>
             <td>{{$a->applicant->profile ? $a->applicant->profile->ethnicity : $a->applicant->profile}}</td>

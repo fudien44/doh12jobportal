@@ -15,7 +15,7 @@
                             <table border="0" cellpadding="30" cellspacing="0" width="100%">
                               <tr>
                                 <td align="center" valign="top" class="textContent">
-                                 <img style="margin-left: -80px;" src="https://ro12.doh.gov.ph/images/headers/ro12-header-newlogo6.png"/>
+                                 <img style="margin-left: -80px;" src="{{ asset('public/img/ro12.png') }}"/>
                                   <h1 style="text-align:center;font-weight:normal;font-family:Helvetica,Arial,sans-serif;font-size:23px;margin-bottom:10px;color:#C9BC20;line-height:135%;">DOH XII JOB PORTAL</h1>
                                 </td>
                               </tr>
@@ -43,7 +43,7 @@
                                   <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                     <tr>
                                       <td valign="top" class="textContent">
-                                        <h3 style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Hi, {{$name}}!</h3>
+                                        <h3 style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Dear Mr./Ms. {{$name}}</h3>
                                         <div>
                                           <div>{!!nl2br($msg)!!}</div>
                                         </div>

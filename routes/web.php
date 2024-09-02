@@ -22,6 +22,7 @@ Route::get('/jobs', 'HomeController@jobs')->name('jobs');
 Route::get('/fetch-jobs', 'HomeController@fetchjobs');
 Route::get('/jobs/description', 'HomeController@jobsdescription');
 Route::get('/jobs/apply', 'Jobs\JobsCtrl@jobsapply')->middleware('verified');
+Route::get('/jobs/apply/review', 'Jobs\JobsCtrl@jobsreview')->middleware('verified');
 Route::get('/refresh_captcha', 'Auth\LoginController@refreshCaptcha');
 Route::get('/select-section', 'FnctnCtrl@selectSection');
 Route::get('/otp', 'HomeController@otp')->name('otp')->middleware('verified');

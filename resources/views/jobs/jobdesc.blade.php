@@ -27,7 +27,7 @@
             </a>
             @if($job->status=='0' || $job->status=='2')
             @if(Auth::user() && Auth::user()->level == 0)
-            <a href="{{asset('/jobs/apply')}}?job={{base64_encode($job->id)}}" class="btn btn-success">APPLY TO THIS JOB
+            <a href="{{asset('/jobs/apply/review')}}?job={{base64_encode($job->id)}}" class="btn btn-success">APPLY TO THIS JOB
             </a>
             @elseif(Auth::user() && Auth::user()->level > 0)
             @else

@@ -34,7 +34,7 @@ class ProfileController extends Controller
         } else {
             $profile = $user->profile;
         }
-        return view('profiledashboard.applicant', [
+        return view('profiledashboard.applicantv2', [
             'users' => $user,
             'profile' => $profile
         ]);
