@@ -83,7 +83,7 @@
           @endif
           @if($users->tor->count() == 0)
           <br>
-          <small class="badge badge-danger" style="cursor: pointer;"><i class="fas fa-exclamation-circle"></i> Missing: Diploma & Transcript of Record(Optional)</small>
+          <small class="badge badge-danger" style="cursor: pointer;"><i class="fas fa-exclamation-circle"></i> Missing: Diploma & Transcript of Record or Certification from school(Applicable to newly graduates without credential)</small>
           @endif
           @if($users->coe->count() == 0)
           <br>
@@ -91,11 +91,11 @@
           @endif
           @if($users->elig->count() == 0)
           <br>
-          <small class="badge badge-danger" style="cursor: pointer;"><i class="fas fa-exclamation-circle"></i> Missing: Eligibility/PRC/Board Rating(Optional)</small>
+          <small class="badge badge-danger" style="cursor: pointer;"><i class="fas fa-exclamation-circle"></i> Missing: Eligibility(Optional to positions that requires CS Eligibility/RA 1080)</small>
           @endif
           @if($users->ipcr->count() == 0)
           <br>
-          <small class="badge badge-danger" style="cursor: pointer;"><i class="fas fa-exclamation-circle"></i> Missing: IPCR/Performance Evaluation(Optional)</small>
+          <small class="badge badge-danger" style="cursor: pointer;"><i class="fas fa-exclamation-circle"></i> Missing: IPCR(Optional for promotions positions only)</small>
           @endif
           @if($users->odoc->count() == 0)
           <br>
