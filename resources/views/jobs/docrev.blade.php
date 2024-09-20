@@ -25,7 +25,7 @@
               @if($users->profile && $users->profile->picture_link)
                 <img class="img-circle profile-picture" src="{{ asset('storage/app/public')}}/{{$users->id}}/{{$users->profile->picture_link}}" alt="User Avatar" width="120">
                 @else
-                <img class="img-circle" src="{{ asset('public/img/profile.png') }}" alt="User Avatar">
+                <img class="img-circle" src="{{ asset('public/img/profile.png') }}" alt="User Avatar" width="120">
                 @endif
             </div>
 
