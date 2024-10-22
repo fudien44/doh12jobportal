@@ -38,5 +38,8 @@ class Message extends Model
                 break;
         }
     }
+    public function attch() {
+        return $this->hasMany(MessageAttach::class, 'message_id', 'id')->orderBy('id','desc');
+    }
 
 }

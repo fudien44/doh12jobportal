@@ -43,10 +43,24 @@
                                   <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                     <tr>
                                       <td valign="top" class="textContent">
-                                        <h3 style="color:#5F5F5F;line-height:125%;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:normal;margin-top:0;margin-bottom:3px;text-align:left;">Dear Mr./Ms. {{$name}}</h3>
+                                        @php
+                                        $lname = explode(' ', $name);
+                                        $lword = end($lname);
+                                        $fword = ucfirst(strtolower($lword));
+                                        @endphp
+                                        <p>Dear Mr./Ms. {{$fword}},</p>
+                                        <p></p>
+                                        <p></p>
+                                        <p>Greetings!</p>
+                                        <br>
+                                        <br>
                                         <div>
-                                          <div>{!!nl2br($msg)!!}</div>
+                                          <div>{!! $msg !!}</div>
                                         </div>
+                                        <br>
+                                        <br>                                        <div><small>HUMAN RESOURCES MERIT PROMOTION AND SELECTION BOARD</small></div>
+                                        <div><small>Department of Health - CHD SOCCSKSARGEN Region</small></div>
+                                        <div><small>Prk. San Miguel, Brgy. Paraiso, Koronadal City, South Cotabato</small></div>
                                       </td>
                                     </tr>
                                   </table>
@@ -80,7 +94,7 @@
                                 <td valign="top" bgcolor="#E1E1E1">
 
                                   <div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;color:#828282;text-align:center;line-height:120%;">
-                                    <div>Copyright &#169; {{ date("Y") }}. All rights reserved.</div>
+                                    <div>Copyright &#169; 2024. All rights reserved.</div>
                                     <label>------------PLEASE DO NOT REPLY------------</label>
                                   </div>
 
