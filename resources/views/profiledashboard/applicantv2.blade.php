@@ -112,7 +112,7 @@
                         <div class="form-group row">
                             <label for="inputName" class="col-sm-2 col-form-label">Age</label>
                             <div class="col-sm-10">
-                              <input type="text" class="form-control form-control-border required" disabled id="age" name="age">
+                              <input type="text" class="form-control form-control-border required age" disabled id="age" name="age">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -215,12 +215,11 @@
                         <div class="form-group row">
                             <label for="inputName" class="col-sm-2 col-form-label">Highest Educational Attainment</label>
                             <div class="col-sm-10">
-                              <select class="form-control form-control-border civilstat" name="highest_education" disabled>
-                                  <option selected value="">Select</option>
-                                  <option value="0" @if($profile->highest_education == 0)selected @endif>N/A</option>
-                                  <option value="1"@if($profile->highest_education == 1)selected @endif>Vocational/Trade Course</option>
-                                  <option value="2"@if($profile->highest_education == 2)selected @endif>College</option>
-                                  <option value="3"@if($profile->highest_education == 3)selected @endif>Graduate Studies</option>
+                              <select class="form-control form-control-border" name="highest_education" disabled>
+                                  <option value="0" @if($profile->highest_education === '0')selected @endif>N/A</option>
+                                  <option value="1"@if($profile->highest_education === '1')selected @endif>Vocational/Trade Course</option>
+                                  <option value="2"@if($profile->highest_education === '2')selected @endif>College</option>
+                                  <option value="3"@if($profile->highest_education === '3')selected @endif>Graduate Studies</option>
                                 </select>
                             </div>
                         </div>
@@ -585,7 +584,7 @@
                             </div>
                             <div class="col-md-4">
                                 <h6 class="card-subtitle req-field">Age:</h6>
-                                <input type="text" class="form-control form-control-border required" disabled id="age" name="age">
+                                <input type="text" class="form-control form-control-border required age" disabled id="age" name="age">
                             </div>
                         </div>
                         <div class="row">
@@ -687,7 +686,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <h6 class="card-subtitle req-field">Highest Educational Attainment:</h6>
-                                    <select class="form-control form-control-border civilstat" name="highest_education">
+                                    <select class="form-control form-control-border" name="highest_education">
                                       <option selected value="">Select</option>
                                       <option value="0" @if($profile->highest_education == 0)selected @endif>N/A</option>
                                       <option value="1"@if($profile->highest_education == 1)selected @endif>Vocational/Trade Course</option>
@@ -1481,7 +1480,7 @@
             dob = new Date(dob);
             var today = new Date();
             var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
-            $('#age').val(age+' year(s) old');
+            $('.age').val(age+' year(s) old');
         }
     }
     $(document).ready(function () {

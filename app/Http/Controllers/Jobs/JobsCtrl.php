@@ -14,12 +14,14 @@ use App\Section;
 use App\SalGrade;
 use App\Application;
 use App\AppLetter;
+use App\MessageAttach;
 use Auth;
 use Storage;
 use App\User;
 use App\Profile;
 use PDF;
 use Carbon\Carbon;
+use App\Mail\StatusMail;
 class JobsCtrl extends Controller
 {
 	public function __construct()
@@ -186,7 +188,7 @@ class JobsCtrl extends Controller
             $app->update([
                 'status' => $req->type_message,
             ]);
-            Message::create($data);
+            $msg = Message::create($data);
             $message = $req->message;
             $em = array(
                 'name'=> $name,
@@ -194,11 +196,21 @@ class JobsCtrl extends Controller
             );
             $email = $app->applicant->email;
             $subject = $req->subject;
-            Mail::send('emails.message', $em, function($message) use ($name, $email,$subject) {
-            $message->to($email, $name)
-            ->subject($subject);
-            $message->from('doh12personnel@gmail.com','DOH XII JOB PORTAL');
-            });
+            $attch = [];
+            if($req->hasFile('fileupload')) {
+                foreach ($req->file('fileupload') as $file) {
+                    $filename = str_random(5).'.'.$file->getClientOriginalExtension();
+                    $path = "public/attach/".$filename;
+                    Storage::disk('local')->put($path, file_get_contents($file));
+                    MessageAttach::create([
+                        'message_id' => $msg->id,
+                        'file_name' => $filename,
+                    ]);
+                    $attch[] = $filename;
+                }
+            }
+
+            Mail::to($email)->send(new StatusMail($subject, $message, $name, $attch));
             Session::put('action_made', 'Successfully send message to applicant email.');
         }
     }

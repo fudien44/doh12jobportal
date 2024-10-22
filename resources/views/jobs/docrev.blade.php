@@ -87,7 +87,7 @@
           @endif
           @if($users->coe->count() == 0)
           <br>
-          <small class="badge badge-danger" style="cursor: pointer;"><i class="fas fa-exclamation-circle"></i> Missing: Certificate of Employment(Optional)</small>
+          <small class="badge badge-danger" style="cursor: pointer;"><i class="fas fa-exclamation-circle"></i> Missing: Certificate of Employment(Optional to applicants without work experience)</small>
           @endif
           @if($users->elig->count() == 0)
           <br>

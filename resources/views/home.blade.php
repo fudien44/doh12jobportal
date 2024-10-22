@@ -1,15 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card card-widget widget-user">
-              <!-- Add the bg color to the header using any of the bg-* classes -->
-  <div class="widget-user-header text-white">
-  </div>
-  <div class="widget-user-image">
-    <img class="img-circle" src="{{ asset('public/img/ro12.png') }}" alt="User Avatar">
-  </div>
-</div>
 <span id="particles-js" ></span>
+<div class="content-header mt-3">
+  <div class="container">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<div class="content-header mt-3">
+  <div class="container">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
 <div class="container">
     <div class="content-header">
       <div class="container-fluid">
@@ -95,6 +111,14 @@
     </div>
     <div class="row">
       <div class="col-md-3">
+        <div class="info-box">
+
+          <div class="info-box-content">
+            <span class="info-box-text">Sample Attachments</span>
+            <small><a href="{{ asset('public/uploads/pds.xlsx') }}" download="CSC Form 212(Revised 2017) Personal Data Sheet.xlsx">CSC Form 212(Revised 2017) Personal Data Sheet</a></small>
+            <small><a href="{{ asset('public/uploads/wes.docx') }}" download="CSC Form 212 Work Experience Sheet">CSC Form 212 Work Experience Sheet</a></small>
+          </div>
+        </div>
         <a class="info-box @if($sjobtype == '2') bg-success @endif" href="{{asset('/home')}}?type={{base64_encode('2')}}">
           <span class="info-box-icon"><i class="fas fa-user-lock"></i></span>
 

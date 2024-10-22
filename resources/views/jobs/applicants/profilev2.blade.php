@@ -97,7 +97,7 @@
           <div class="row" style="pointer-events: none;">
             <div class="col-md-12">
                 <h6 class="card-subtitle req-field">Age:</h6>
-                <input type="text" class="form-control form-control-border required" disabled id="age" name="age">
+                <input type="text" class="form-control form-control-border required age" disabled id="age" name="age">
             </div>
             <div class="col-md-12">
               <h6 class="card-subtitle req-field">Gender:</h6>
@@ -566,6 +566,18 @@
 @endsection
 @section('js')
 <script>
+  function age(dob) {
+        if(dob) {
+            dob = new Date(dob);
+            var today = new Date();
+            var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
+            $('.age').val(age+' year(s) old');
+        }
+    }
+    var dobs = $('#dob').val();
+  $(document).ready(function () {
+        age(dobs)
+    });
   $( ".btn-delete-pds" ).on( "click", function() {
         var id = $(this).attr('data-id');
         var url = "{{ secure_url('/delete-pds') }}";

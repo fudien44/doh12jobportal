@@ -59,7 +59,7 @@
         <h4 class="modal-title job-title-modal">Message</h4>
       </div>
       <div class="modal-body">
-        <form id="message_accept_form" method="POST">
+        <form id="message_accept_form" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="app_id" value="{{$apps->id}}">
         <input type="hidden" name="to_name" value="{{$apps->applicant->fname}} {{mb_substr($apps->applicant->mname, 0, 1)}}. {{$apps->applicant->lname}}">
@@ -89,8 +89,12 @@
           <textarea class="summernote message" name="message" required>
           </textarea>
         </div>
+        <div class="form-group">
+            <label>Attachments</label><br>
+            <input type="file" name="fileupload[]" id="attach-input" multiple accept=".pdf,.docx,.jpeg,.jpg,.png,.xlsx">
+        </div>
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-success"><i class="fas fa-paper-plane"></i> Send</button>
+        <button type="submit" class="btn btn-success btn-send"><i class="fas fa-paper-plane"></i> Send</button>
         </form>
       </div>
     </div>
@@ -106,7 +110,10 @@
         height: 300,
         codemirror: {
           theme: 'paper'
-        }
+        },
+        toolbar: [
+            ['style', ['bold','italic','underline']],
+        ],
     })
     $( ".btn-accept" ).on( "click", function() {
         $('#modal-accept-app').modal('show')
