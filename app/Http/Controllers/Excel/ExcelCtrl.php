@@ -151,7 +151,7 @@ class ExcelCtrl extends Controller
         ";
 
         $display = "
-            <h1>{$title}</h1>
+            <h2 style='text-align: center;'>{$title}</h2>
             <h3>Minimum Qualifications (based on CSC Qualification Standards)</h3>
             <ul>
                 <li>Education: {$apps->education}</li>
