@@ -73,6 +73,7 @@ class ExcelCtrl extends Controller
             <br><br>
             <table border='0' width='100%'>
                 <tr>
+                    <td></td>
                     <td>Review and Validated by:</td>
                 </tr>
                 <tr>
@@ -82,6 +83,7 @@ class ExcelCtrl extends Controller
                  <tr>
                 </tr>
                 <tr>
+                    <td></td>
                     <td colspan='1'><b>AMEBELLA G. TARUC, MD, MPM</b></td>
                     <td></td>
                     <td colspan='1'><b>GODWIN LORD Y. GALLO, RN, MPH</b></td>
@@ -89,6 +91,7 @@ class ExcelCtrl extends Controller
                     <td><b>JOEL E. GENZON, EdD, MAEd. LPT</b></td>
                 </tr>
                 <tr>
+                    <td></td>
                     <td colspan='1'>Medical Officer V/Member HRMPSB</td>
                     <td></td>
                     <td colspan='1'>Chief Administrative Officer/Member HRMPSB</td>
@@ -104,6 +107,7 @@ class ExcelCtrl extends Controller
                 <tr>
                 </tr>
                 <tr>
+                    <td></td>
                     <td colspan='1'><b>CHERRY G. YEE, MPA</b></td>
                     <td ></td>
                     <td colspan='1'></td>
@@ -111,6 +115,7 @@ class ExcelCtrl extends Controller
                     <td><b>DIMELCA C. GANGOSO, MD, MPH</b></td>
                 </tr>
                 <tr>
+                    <td></td>
                     <td colspan='1'>Administrative Officer V/Member HRMPSB</td>
                     <td></td>
                     <td colspan='1'></td>
@@ -120,11 +125,15 @@ class ExcelCtrl extends Controller
                  <tr>
                 </tr>
                 <tr>
-                     <td colspan='1'></td>
-                    <td>Approved by:</td>
+                    <td></td>
+                    <td colspan='1'></td>
+                    <td style='text-align: right'>Approved by:</td>
+                </tr>
+                <tr>
                 </tr>
                 <tr>
                     <td colspan='1'></td>
+                    <td></td>
                     <td></td>
                     <td colspan='1'><b>FATIMA A. EMBAN, MD, MPH</b></td>
                     <td></td>
@@ -132,6 +141,7 @@ class ExcelCtrl extends Controller
                 </tr>
                 <tr>
                     <td colspan='1'></td>
+                    <td></td>
                     <td></td>
                     <td colspan='1'> OIC - Director III/Chairperson HRMPSB </td>
                     <td></td>
