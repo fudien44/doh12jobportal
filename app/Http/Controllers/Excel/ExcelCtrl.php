@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Excel;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use App\Jobs;
 
 class ExcelCtrl extends Controller
@@ -63,9 +64,11 @@ class ExcelCtrl extends Controller
                     ".$a->applicant->fname." ".$a->applicant->mname." ".$a->applicant->lname."<br>
                     Contact Number: ".$a->applicant->contactno."<br>
                     Email Address: ".$a->applicant->email ."<br>
-                    Age: ".\Carbon\Carbon::parse($a->applicant->dob)->age."<br>
-                    Gender: ".$a->applicant->profile->gndr() ."<br>
-                    Address: ".$a->applicant->profile->address ."<br>
+                    Age: ".\Carbon\Carbon::parse($a->applicant->profile->dob)->age."<br>
+                    Gender: ".$a->applicant->profile->gndr()."<br>
+                    Religion: ".$a->applicant->profile->relgion()."<br>
+                    Status: ".$a->applicant->profile->cs()."<br>
+                    Address: ".$a->applicant->profile->address."<br>
                     Years of Experience: ".$a->applicant->profile->work_experience."<br>
                 </td>
                 <td>
@@ -187,7 +190,7 @@ class ExcelCtrl extends Controller
             {$table_body}
             </table>
             {$footer}
-               </body></html> 
+            </body></html> 
         ";
 
         return $display;
