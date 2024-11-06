@@ -128,9 +128,14 @@ return [
     |
     */
 
-    'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+    // 'custom' => [
+    //     'attribute-name' => [
+    //         'rule-name' => 'custom-message',
+    //     ],
+
+        'custom' => [
+        'captcha' => [
+            'captcha' => 'The CAPTCHA you entered is incorrect. Please try again.',
         ],
     ],
 
