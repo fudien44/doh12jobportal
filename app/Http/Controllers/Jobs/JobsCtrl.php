@@ -113,11 +113,12 @@ class JobsCtrl extends Controller
                         'job_id' => $jobid,
                     );
                     $app = Application::where('job_id',$jobid)->where('user_id', $user->id)->first();
-                    if($app) {
-                        Session::put('is_applied', 'You already applied to this job.');
-                    } else if($jobid) {
-                        $jobs = Application::create($data);
+                   if ($app->is_deleted == 1) {
+                        $app->is_deleted = 0;
+                        $app->save();
                         Session::put('is_applied', 'Successfully applied to this job.');
+                    } else {
+                        Session::put('is_applied', 'You already applied to this job.');
                     }
                 }
             } else {
@@ -290,5 +291,24 @@ class JobsCtrl extends Controller
             ]);
         }
     }
+
+   public function cancelApplication(Request $req){
+        $app = Application::find($req->id);
+        if ($app) {
+            $app->is_deleted = 1;
+            $app->save();
+            // $app->delete(); 
+            return response()->json([
+                'success' => true,
+                'message' => 'Application cancelled successfully!'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Application not found or already cancelled.'
+            ]);
+        }
+    }
+
 
 }

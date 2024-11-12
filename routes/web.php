@@ -45,6 +45,10 @@ Route::group(['middleware' => 'superadmin'], function(){
     Route::get('/users-edit/{id}', 'FnctnCtrl@editUser');
 });
 
+// Cancel Application
+Route::post('/cancel-application', 'Jobs\JobsCtrl@cancelApplication');
+
+
 //Excel
 Route::get('/excel/rdr/{appid}', 'Excel\ExcelCtrl@rdr')->middleware('verified');
 

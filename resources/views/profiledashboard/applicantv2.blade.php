@@ -130,12 +130,17 @@
                             <div class="col-sm-10">
                               <select class="form-control form-control-border gender" name="gender" disabled>
                                 <option selected value="">Select Gender</option>
-                                <option value="1"@if($profile->gender == 1) selected @endif>Agender</option>
-                                <option value="2" @if($profile->gender == 2) selected @endif>Cisgender</option>
-                                <option value="3"@if($profile->gender == 3) selected @endif>Gender fluid</option>
-                                <option value="4"@if($profile->gender == 4) selected @endif>Genderqueer</option>
-                                <option value="5"@if($profile->gender == 5) selected @endif>Non-binary</option>
-                                <option value="6"@if($profile->gender == 6) selected @endif>Transgender</option>
+                                <option value="0" @if($profile->gender == 0) selected @endif>Male</option>
+                                <option value="1" @if($profile->gender == 1) selected @endif>Female</option>
+                                <option value="2" @if($profile->gender == 2) selected @endif>Transgender</option>
+                                <option value="3" @if($profile->gender == 3) selected @endif>Two-Spirit</option>
+                                <option value="4" @if($profile->gender == 4) selected @endif>Cisgender</option>
+                                <option value="5" @if($profile->gender == 5) selected @endif>Non-binary</option>
+                                <option value="6" @if($profile->gender == 6) selected @endif>Genderqueer</option>
+                                <option value="7" @if($profile->gender == 7) selected @endif>Gender expression</option>
+                                <option value="8" @if($profile->gender == 8) selected @endif>Gender fluid</option>
+                                <option value="9" @if($profile->gender == 9) selected @endif>Gender neutral</option>
+                                <option value="10" @if($profile->gender == 10) selected @endif>Prefer Not to Say</option>
                               </select>
                             </div>
                         </div>
@@ -600,12 +605,17 @@
                               <h6 class="card-subtitle req-field">Gender:</h6>
                               <select class="form-control form-control-border gender" name="gender">
                                 <option selected value="">Select Gender</option>
-                                <option value="1"@if($profile->gender == 1) selected @endif>Agender</option>
-                                <option value="2" @if($profile->gender == 2) selected @endif>Cisgender</option>
-                                <option value="3"@if($profile->gender == 3) selected @endif>Gender fluid</option>
-                                <option value="4"@if($profile->gender == 4) selected @endif>Genderqueer</option>
-                                <option value="5"@if($profile->gender == 5) selected @endif>Non-binary</option>
-                                <option value="6"@if($profile->gender == 6) selected @endif>Transgender</option>
+                                <option value="0" @if($profile->gender == 0) selected @endif>Male</option>
+                                <option value="1" @if($profile->gender == 1) selected @endif>Female</option>
+                                <option value="2" @if($profile->gender == 2) selected @endif>Transgender</option>
+                                <option value="3" @if($profile->gender == 3) selected @endif>Two-Spirit</option>
+                                <option value="4" @if($profile->gender == 4) selected @endif>Cisgender</option>
+                                <option value="5" @if($profile->gender == 5) selected @endif>Non-binary</option>
+                                <option value="6" @if($profile->gender == 6) selected @endif>Genderqueer</option>
+                                <option value="7" @if($profile->gender == 7) selected @endif>Gender expression</option>
+                                <option value="8" @if($profile->gender == 8) selected @endif>Gender fluid</option>
+                                <option value="9" @if($profile->gender == 9) selected @endif>Gender neutral</option>
+                                <option value="10" @if($profile->gender == 10) selected @endif>Prefer Not to Say</option>
                               </select>
                             </div>
                             <div class="col-md-4">
@@ -641,8 +651,8 @@
                                     <option value="PROTE"@if($profile->religion == 'PROTE') selected @endif>PROTESTANT</option>
                                     <option value="SVDAY"@if($profile->religion == 'SVDAY') selected @endif>SEVENTH DAY ADVENTIST</option>
                                     <option value="UCCP"@if($profile->religion == 'UCCP') selected @endif>UCCP</option>
-                                    <option value="UNKNO"@if($profile->religion == 'UNKNO') selected @endif>UNKNOWN</option>
                                     <option value="WESLY"@if($profile->religion == 'WESLY') selected @endif>WESLEYAN</option>
+                                     <option value="UNKNO"@if($profile->religion == 'UNKNO') selected @endif>UNKNOWN</option>
                                   </select>
                             </div>
                             <div class="col-sm-4">

@@ -80,7 +80,7 @@ class Profile extends Model
             case 'WESLY' :
             return 'WESLEYAN';
             default:
-                return 'UNKNOWN';
+                return ' ';
                 break;
         }
     }
@@ -110,29 +110,44 @@ class Profile extends Model
                 break;
         }
     }
-    public function gndr() {
+   public function gndr() {
         switch ($this->gender) {
+            case '0':
+                return 'Male';
+                break;
             case '1':
-                return 'Agender';
+                return 'Female';
                 break;
             case '2':
-                return 'Cisgender';
+                return 'Transgender';
                 break;
             case '3':
-                return 'Gender fluid';
+                return 'Two-Spirit';
                 break;
             case '4':
-                return 'Genderqueer';
+                return 'Cisgender';
                 break;
             case '5':
                 return 'Non-binary';
                 break;
             case '6':
-                return 'Transgender';
+                return 'Genderqueer';
+                break;
+            case '7':
+                return 'Gender expression';
+                break;
+            case '8':
+                return 'Gender fluid';
+                break;
+            case '9':
+                return 'Gender neutral';
+                break;
+            case '10':
+                return 'Prefer Not to Say';
                 break;
             default:
-                return 'N/A';
-                break;
+                 return '';
+                 break;
         }
     }
     public function sx() {
@@ -166,7 +181,7 @@ class Profile extends Model
                 return 'Other';
                 break;
             default:
-                return 'N/A';
+                return ' ';
                 break;
         }
     }
