@@ -41,41 +41,59 @@
             <th>APPLIED ON</th>
             <th>DATE CLOSED</th>
             <th>STATUS</th>
+            <th>ACTION</th>
           </tr>
           </thead>
           <tbody>
-            @foreach($user->myjobs as $mj)
-            <tr>
-              <td class="text-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#modal_app_letter" data-id="{{$mj->id}}">Upload Letter of Intent</button>
-
-                  <div class="btn-group">
-                    <button title="Application history" type="button" class="btn btn-default" data-toggle="dropdown">
-                      <i class="fas fa-history"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                      @if(count($mj->letters) > 0)
-                      @foreach($mj->letters as $l)
-                        <a class="dropdown-item btn-view-app" href="#" data-id="{{$mj->id}}" data-file="{{$l->file_upload}}" data-user="{{Auth::user()->id}}" data-title="{{$mj->job->job_title}}"><i class="fas fa-file-pdf"></i> {{$l->file_name}}</a>
-                      @endforeach
-                      @endif
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td>{{$mj->job->job_title}}</td>
-              <td>{{date('F d,Y',strtotime($mj->created_at))}}</td>
-              <td>{{date('F d,Y',strtotime($mj->job->date_closed))}}</td>
-              <td class="text-center">
-                @if(count($mj->msg) > 0)
-                {!! $mj->latst->tp() !!}
-                @else
-                <small class="badge badge-danger" style="cursor: pointer;"><i class="far fa-clock"></i> In review</small>
-                @endif
-              </td>
-            </tr>
-            @endforeach
+            @if($user->myjobs->where('is_deleted', 0)->isEmpty())
+                <tr>
+                    <td colspan="6" class="text-center">
+                        <em>You have not applied to any jobs.</em>
+                    </td>
+                </tr>
+            @else
+                @foreach($user->myjobs->where('is_deleted', 0) as $mj)
+                    <tr>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-upload" data-toggle="modal" data-target="#modal_app_letter" data-id="{{$mj->id}}">Upload Letter of Intent</button>
+                                <div class="btn-group mr-2">
+                                    <button title="Application history" type="button" class="btn btn-light" data-toggle="dropdown">
+                                        <i class="fas fa-history"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        @if($mj->letters->isNotEmpty())
+                                            @foreach($mj->letters as $l)
+                                                <a class="dropdown-item btn-view-app" href="#" data-id="{{$mj->id}}" data-file="{{$l->file_upload}}" data-user="{{Auth::user()->id}}" data-title="{{$mj->job->job_title}}">
+                                                    <i class="fas fa-file-pdf"></i> {{$l->file_name}}
+                                                </a>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{$mj->job->job_title}}</td>
+                        <td>{{date('F d,Y', strtotime($mj->created_at))}}</td>
+                        <td>{{date('F d,Y', strtotime($mj->job->date_closed))}}</td>
+                        <td class="text-center">
+                            @if($mj->msg->isNotEmpty())
+                                {!! $mj->latst->tp() !!}
+                            @else
+                                <small class="badge badge-danger" style="cursor: pointer;"><i class="far fa-clock"></i> In review</small>
+                            @endif
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <!-- Add Cancel Button -->
+                                <button title="Cancel Application" type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancelModal" data-id="{{$mj->id}}">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
           </tbody>
         </table>
       </div>
@@ -153,6 +171,26 @@
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
+</div>
+<!-- Cancel Application Modal -->
+<div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cancelModalLabel">Confirm Cancellation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: left;">
+        Are you sure you want to cancel the application? This action cannot be undone.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="confirmCancel">Cancel Application</button>
+      </div>
+    </div>
+  </div>
 </div>
 @endsection
 @section('js')
@@ -246,5 +284,47 @@
   function getAppID(id) {
     appid = id;
   }
+  $('button[data-target="#cancelModal"]').on('click', function () {
+      var jobId = $(this).data('id'); 
+      $('#confirmCancel').data('id', jobId);  
+  });
+  $(document).ready(function() {
+      $('#confirmCancel').on('click', function(e) {
+          var id = $(this).data('id');
+          var url = "{{ secure_url('/cancel-application') }}";  
+          e.preventDefault();  
+          $.ajax({
+              url: url,
+              method: 'POST',
+              data: {
+                  id: id,  
+                  _token: '{{ csrf_token() }}'  
+              },
+              success: function(response) {
+                  $(".loading").hide();  
+                  if (response.success) {
+                      $.toast({
+                          heading: 'Success',
+                          text: response.message,  
+                          showHideTransition: 'fade',
+                          position: 'top-center',  
+                          icon: 'success'
+                      });
+                      setTimeout(function(){
+                          window.location.reload(false);  
+                      }, 2000);  
+                  } else {
+                      $.toast({
+                          heading: 'Error',
+                          text: response.message || 'Something went wrong, Please contact administrator',
+                          showHideTransition: 'fade',
+                          position: 'top-center',  
+                          icon: 'error'
+                      });
+                  }
+              },
+          });
+      });
+  });
 </script>
 @endsection

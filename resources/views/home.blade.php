@@ -74,7 +74,7 @@
 
           <div class="info-box-content">
             <span class="info-box-text">Application Submitted</span>
-            <span class="info-box-number">{{$apps->count()}}</span>
+            <span class="info-box-number">{{ $apps->where('is_deleted', 0)->count() }}</span>
           </div>
           <!-- /.info-box-content -->
         </div>
@@ -160,7 +160,7 @@
                   <div class="info-box-content">
                     <span class="info-box-text">Salary Grade: {{$j->sg->salary_grade}}</span>
                     <span class="info-box-number">Monthly Salary: {{$j->monthly_salary}}</span>
-                    <span class="info-box-number text-danger">Total Applicants: {{$j->applicants->count()}}</span>
+                    <span class="info-box-number text-danger">Total Applicants: {{$j->applicants->where('is_deleted', 0)->count()}}</span>
                   </div>
                 </div>
               </div>
