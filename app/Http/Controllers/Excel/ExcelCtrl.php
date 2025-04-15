@@ -42,7 +42,7 @@ class ExcelCtrl extends Controller
             $dateOutput = date('F j, Y', $datePosted) . ' - ' . date('F j, Y', $dateClosed);
         }
 
-        $title = 'REPORT ON THE DOCUMENTARY REVIEW (RDR) ' . $apps->job_title . ' - ' . $apps->area_ass . '
+        $title = 'REPORT ON THE DOCUMENTARY REVIEW (RDR) <br>' . $apps->job_title . ' - ' . $apps->area_ass . '
         <br>DEPARTMENT OF HEALTH - CENTER FOR HEALTH DEVELOPMENT SOCCSKSARGEN Region 
         <br>Date: ' . $dateOutput;
 
@@ -59,9 +59,9 @@ class ExcelCtrl extends Controller
         $remarks = $j->latst ? $j->latst->tp() : '';
 
             $table_body .= "<tr>
-                <td style='text-align: center;'>" . ($index + 1) . "</td>
-               <td>
-                    ".$a->applicant->fname." ".$a->applicant->mname." ".$a->applicant->lname."<br>
+                <td style='vertical-align: middle; text-align: center;'>" . ($index + 1) . "</td>
+               <td style='vertical-align:top;'>
+                    <b>".$a->applicant->fname." ".$a->applicant->mname." ".$a->applicant->lname."</b><br><br>
                     Contact Number: ".$a->applicant->contactno."<br>
                     Email Address: ".$a->applicant->email ."<br>
                     Age: ".\Carbon\Carbon::parse($a->applicant->profile->dob)->age."<br>
@@ -69,17 +69,23 @@ class ExcelCtrl extends Controller
                     Religion: ".$a->applicant->profile->relgion()."<br>
                     Status: ".$a->applicant->profile->cs()."<br>
                     Address: ".$a->applicant->profile->address."<br>
-                    Years of Experience: ".$a->applicant->profile->work_experience."<br>
+                    <div style='margin-bottom: 40px; vertical-align: top;'>Years of Experience: ".$a->applicant->profile->work_experience."<br><br></div>
                 </td>
-                <td>
+                <td style='vertical-align: top;'>
+                    <br>
+                    <br>
+                    <br>
                     Course Title:".$a->applicant->profile->course."<br>
                     Name of School/University:".$a->applicant->profile->school."<br>
                     Eligibility/License/Honor Graduate: ".$a->applicant->profile->eligibity."
+                    <br>
+                    <br>'
+                    <br>
                 </td>
-                <td style='text-align: center;'>{$ethnicity_pwd_solopar}</td>
-                <td>{$a->relevant_work_experience}</td>
-                <td>{$a->relevant_training}</td>
-                <td style='text-align: center;'>$remarks</td>
+                <td style='text-align: center; vertical-align: middle;'>{$ethnicity_pwd_solopar}</td>
+                <td></td>
+                <td></td>
+                <td style='text-align: center;'></td>
             </tr>";
         }
 
@@ -106,11 +112,11 @@ class ExcelCtrl extends Controller
                 </tr>
                 <tr>
                     <td></td>
-                    <td style='text-align: center;' colspan='1'>Medical Officer V/Member HRMPSB</td>
+                    <td style='text-align: center; vertical-align: top;' colspan='1'>Medical Officer V/Member HRMPSB</td>
                     <td></td>
-                    <td style='text-align: center;'colspan='1'>Chief Administrative Officer/Member HRMPSB</td>
+                    <td style='text-align: center; vertical-align: top;'colspan='1'>Chief Administrative Officer/Member HRMPSB</td>
                     <td></td>
-                    <td style='text-align: center;'>DMO III, 2nd level Representative</td>
+                    <td style='text-align: center; vertical-align: top;'>DMO III, 2nd level Representative</td>
                 </tr>
                  <tr>
                 </tr> 
@@ -124,17 +130,17 @@ class ExcelCtrl extends Controller
                     <td></td>
                     <td style='text-align: center;' colspan='1'><b>CHERRY G. YEE, MPA</b></td>
                     <td ></td>
-                    <td colspan='1'></td>
+                    <td style='text-align: center;' colspan='1'><b>CHESNA L. CAÑOSO, RN, MD</b></td>
                     <td></td>
                     <td style='text-align: center;'><b>DIMELCA C. GANGOSO, MD, MPH</b></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td style='text-align: center;' colspan='1'>Administrative Officer V/Member HRMPSB</td>
+                    <td style='text-align: center; vertical-align: top;' colspan='1'>Administrative Officer V/Member HRMPSB</td>
                     <td></td>
-                    <td colspan='1'></td>
+                    <td style='text-align: center; vertical-align: top;' colspan='1'>Medical Officer IV/OIC RLED Chief</td>
                     <td></td>
-                    <td style='text-align: center;'>Medical Specialist III/NADEA 12 Representative</td>
+                    <td style='text-align: center; vertical-align: top;'>Medical Specialist III/NADEA 12 Representative</td>
                 </tr>
                  <tr>
                 </tr>
