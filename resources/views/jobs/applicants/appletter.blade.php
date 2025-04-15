@@ -6,8 +6,10 @@
     <a class="d-block w-100" data-toggle="collapse" href="#collapse{{$a->id}}">
         <div class="card-header">
             <h4 class="card-title w-100">
-                {{$a->file_name}}
+                {{$a->file_name }} 
             </h4>
+            <br>
+            Uploaded: {{\Carbon\Carbon::parse($a->created_at)->format('F d, Y h:i A')}}
         </div>
     </a>
     <div id="collapse{{$a->id}}" class="collapse" data-parent="#application-viewer">
@@ -29,11 +31,16 @@
             <h4 class="card-title w-100">
                 {{$msg->subject}}
             </h4>
+            <br>
+            Date Sent: {{\Carbon\Carbon::parse($msg->created_at)->format('F d, Y h:i A')}}
         </div>
     </a>
     <div id="collapsemsg{{$msg->id}}" class="collapse" data-parent="#application-viewer">
         <div class="card-body">
             {!! $msg->message !!}
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-delete-msg" data-id="{{$msg->id}}">Delete</button>
         </div>
     </div>
 </div>
@@ -107,13 +114,24 @@
         $('.select2').select2()
     });
     $('.summernote').summernote({
+        stylewithSpan: true,
         height: 300,
         codemirror: {
           theme: 'paper'
         },
         toolbar: [
             ['style', ['bold','italic','underline']],
+            ['fontsize', ['fontsize']],
         ],
+        fontsize: ['8','10','12','14','16','18','24','36'],
+        callbacks: {
+            onInit: function() {
+                $('.summernote').summernote('formatPara',{
+                    fontSize: 12
+                });
+            }
+
+        }
     })
     $( ".btn-accept" ).on( "click", function() {
         $('#modal-accept-app').modal('show')
@@ -121,6 +139,51 @@
     $( ".btn-disqualify" ).on( "click", function() {
         $('#modal-decline-app').modal('show')
     });
+    $('.btn-delete-msg').on('click', function(e) {
+        var id = $(this).data('id');
+        var url = "{{ secure_url('/delete-message') }}";
+        
+        // Show confirmation dialog before proceeding with AJAX
+        var confirmation = confirm('Are you sure you want to delete this message?');
+        if (!confirmation) {
+            return; // Exit if user cancels
+        }
+        
+        e.preventDefault();
+        
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: {
+                id: id,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                $(".loading").hide();
+                if (response.success) {
+                    $.toast({
+                        heading: 'Success',
+                        text: response.message,
+                        showHideTransition: 'fade',
+                        position: 'top-center',
+                        icon: 'success'
+                    });
+                    setTimeout(function(){
+                        window.location.reload(false);
+                    }, 2000);
+                } else {
+                    $.toast({
+                        heading: 'Error',
+                        text: response.message || 'Something went wrong, Please contact administrator',
+                        showHideTransition: 'fade',
+                        position: 'top-center',
+                        icon: 'error'
+                    });
+                }
+            },
+        });
+    });
+
     $('#message_accept_form').on('submit',function(e){
       var url = "{{ secure_url('/message-applicant') }}";
       e.preventDefault();

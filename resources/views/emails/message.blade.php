@@ -1,3 +1,8 @@
+<style>
+  .text-justify {
+    text-align: justify;
+  }
+</style>
 <center style="background-color:#E1E1E1;">
     <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTbl" style="table-layout: fixed;max-width:100% !important;width: 100% !important;min-width: 100% !important;">
       <tr>
@@ -50,15 +55,9 @@
                                         @endphp
                                         <p>Dear Mr./Ms. {{$fword}},</p>
                                         <p></p>
-                                        <p></p>
-                                        <p>Greetings!</p>
-                                        <br>
-                                        <br>
                                         <div>
                                           <div>{!! $msg !!}</div>
-                                        </div>
-                                        <br>
-                                        <br>                                        <div><small>HUMAN RESOURCES MERIT PROMOTION AND SELECTION BOARD</small></div>
+                                        </div>                                       <div><small>HUMAN RESOURCES MERIT PROMOTION AND SELECTION BOARD</small></div>
                                         <div><small>Department of Health - CHD SOCCSKSARGEN Region</small></div>
                                         <div><small>Prk. San Miguel, Brgy. Paraiso, Koronadal City, South Cotabato</small></div>
                                       </td>

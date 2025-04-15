@@ -46,7 +46,7 @@ $idnum = (int)1;
 <p style="direction: rtl;">{{ date("F d,Y") }}</p>
 <table class="upper" cellpadding="0" cellspacing="0">
     <tr>
-        <td width="20%" style="border: none;"><center><img src="{{ asset('public/img/doh.png') }}" width="100"></center></td>
+        <td width="20%" style="border: none;"><center><img src="{{ public_path('img/doh.png') }}" width="100"></center></td>
         <td width="60%" style="font-size: 11pt; border: none;">
             <center>
                 <strong>Republic of the Philippines</strong><br>
@@ -58,7 +58,7 @@ $idnum = (int)1;
                 <h5>Date: ______________________</h5>
             </center>
         </td>
-        <td width="20%" style="border: none;"><center><img src="{{ asset('public/img/ro12.png') }}" width="100"></center></td>
+        <td width="20%" style="border: none;"><center><img src="{{ public_path('img/ro12.png') }}" width="100"></center></td>
     </tr>
 
 </table>

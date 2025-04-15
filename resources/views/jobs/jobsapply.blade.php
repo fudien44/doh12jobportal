@@ -41,7 +41,7 @@
             <th>APPLIED ON</th>
             <th>DATE CLOSED</th>
             <th>STATUS</th>
-            <th>ACTION</th>
+            <!-- <th>ACTION</th> -->
           </tr>
           </thead>
           <tbody>
@@ -83,14 +83,13 @@
                                 <small class="badge badge-danger" style="cursor: pointer;"><i class="far fa-clock"></i> In review</small>
                             @endif
                         </td>
-                        <td class="text-center">
+                        <!-- <td class="text-center">
                             <div class="btn-group">
-                                <!-- Add Cancel Button -->
                                 <button title="Cancel Application" type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancelModal" data-id="{{$mj->id}}">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </button>
                             </div>
-                        </td>
+                        </td> -->
                     </tr>
                 @endforeach
             @endif

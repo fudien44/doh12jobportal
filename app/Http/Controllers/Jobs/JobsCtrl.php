@@ -113,12 +113,16 @@ class JobsCtrl extends Controller
                         'job_id' => $jobid,
                     );
                     $app = Application::where('job_id',$jobid)->where('user_id', $user->id)->first();
-                   if ($app->is_deleted == 1) {
+                    if($app) {
+                         if($app->is_deleted == '1') {
                         $app->is_deleted = 0;
                         $app->save();
                         Session::put('is_applied', 'Successfully applied to this job.');
                     } else {
-                        Session::put('is_applied', 'You already applied to this job.');
+                        Session::put('is_applied', 'You already applied to this job.');        }
+                    } else if($jobid) {
+                        $jobs = Application::create($data);
+                        Session::put('is_applied', 'Successfully applied to this job.');
                     }
                 }
             } else {
@@ -128,7 +132,7 @@ class JobsCtrl extends Controller
                 );
                 $app = Application::where('job_id',$jobid)->where('user_id', $user->id)->first();
                 if($app) {
-                    Session::put('is_applied', 'You already applied to this job.');
+                        Session::put('is_applied', 'You already applied to this job.');
                 } else if($jobid) {
                     $jobs = Application::create($data);
                     Session::put('is_applied', 'Successfully applied to this job.');
@@ -306,6 +310,22 @@ class JobsCtrl extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Application not found or already cancelled.'
+            ]);
+        }
+    }
+    public function deletemessage(Request $req) {
+        $id = $req->id;
+        $msg = Message::find($id);
+        if($msg) {
+            $msg->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Message deleted successfully!'
+            ]);
+        }else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Message not found or already deleted.'
             ]);
         }
     }

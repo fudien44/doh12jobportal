@@ -35,6 +35,7 @@ Route::group(['middleware' => 'superadmin'], function(){
 	Route::get('/applicants', 'Jobs\JobsCtrl@applicants')->name('applicants');
 	Route::get('/get-application-letter', 'Jobs\JobsCtrl@getAppLetter');
 	Route::post('/message-applicant', 'Jobs\JobsCtrl@message');
+    Route::post('/delete-message', 'Jobs\JobsCtrl@deletemessage');
 	Route::get('/get-app-profile', 'Jobs\JobsCtrl@getAppProfile');
 	Route::get('/list-applicants', 'Jobs\JobsCtrl@listApps');
 	Route::get('/attendance', 'Jobs\JobsCtrl@attendance');

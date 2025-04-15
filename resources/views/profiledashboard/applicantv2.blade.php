@@ -372,7 +372,7 @@
                         <hr>
                      </div>
                      <div class="col-sm-12">
-                        <label>Diploma & Transcript of Record</label><br>
+                        <label>Diploma & Transcript of Record or Certification from School(Applicable to newly graduates without credential)</label><br>
                         @if($users->tor)
                         @foreach($users->tor as $key => $tor)
                         <a href="#" data-toggle="modal" data-target="#tor-xl-{{$key}}">Diploma & Transcript of Record {{(int)$key + 1}} </a><br>
@@ -430,7 +430,7 @@
                         <br>
                      </div>
                      <div class="col-sm-12">
-                        <label>Eligibility/PRC/Board Rating</label><br>
+                        <label>Eligibility(Optional to positions that requires CS Eligibility/RA 1080)</label><br>
                         @if($users->elig)
                         @foreach($users->elig as $key => $elig)
                         <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility/PRC {{(int)$key + 1}} </a><br>
@@ -459,7 +459,7 @@
                         <hr>
                      </div>
                      <div class="col-sm-12">
-                        <label>IPCR/Performance Evaluation</label><br>
+                        <label>IPCR(Optional for promotions positions only)</label><br>
                         @if($users->ipcr)
                         @foreach($users->ipcr as $key => $ipcr)
                         <a href="#" data-toggle="modal" data-target="#ipcr-xl-{{$key}}">IPCR/Performance Evaluation {{(int)$key + 1}} </a><br>
@@ -848,7 +848,7 @@
                                 <div class="dropzone" id="tcFile" name="tc_file"></div>
                              </div>
                              <div class="col-sm-12">
-                                <h5>Diploma & Transcript of Record</h5><hr>
+                                <h5>Diploma & Transcript of Record or Certification from School(Applicable to newly graduates without credential)</h5><hr>
                                 @if($users->tor)
                                 @foreach($users->tor as $key => $tor)
                                 <a href="#" data-toggle="modal" data-target="#tor-xl-{{$key}}">Diploma & Transcript of Record {{(int)$key + 1}} </a><br>
@@ -906,7 +906,7 @@
                                 <div class="dropzone" id="coeFile" name="coe_file"></div>
                              </div>
                              <div class="col-sm-12">
-                                <h5>Eligibility/PRC/Board Rating</h5><hr>
+                                <h5>Eligibility(Optional to positions that requires CS Eligibility/RA 1080)</h5><hr>
                                 @if($users->elig)
                                 @foreach($users->elig as $key => $elig)
                                 <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility/PRC {{(int)$key + 1}} </a><br>
@@ -935,7 +935,7 @@
                                 <div class="dropzone" id="eligFile"></div>
                              </div>
                              <div class="col-sm-12">
-                                <h5>IPCR/Performance Evaluation</h5><hr>
+                                <h5>IPCR(Optional for promotions positions only)</h5><hr>
                                 @if($users->ipcr)
                                 @foreach($users->ipcr as $key => $ipcr)
                                 <a href="#" data-toggle="modal" data-target="#ipcr-xl-{{$key}}">IPCR/Performance Evaluation {{(int)$key + 1}} </a><br>
@@ -1464,13 +1464,14 @@
             } else {
                 $.toast({
                     heading: 'Success',
-                    text: 'Successfully Updated Profile',
+                    text: 'Successfully Updated Profile, Please refresh page to retrieve changes',
                     showHideTransition: 'fade',
                     icon: 'success'
                 })
-                setTimeout(function(){
-                  window.location.reload(false);
-              },500);
+                $(".loading").hide();
+              //   setTimeout(function(){
+              //     window.location.reload(false);
+              // },500);
             }
             },
             error: function (data) {

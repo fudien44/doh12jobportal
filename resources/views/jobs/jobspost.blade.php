@@ -77,7 +77,8 @@
               <td>{{$j->term()}}</td>
               <td>{{date('m/d/Y',strtotime($j->date_posted))}}</td>
               <td>{{date('m/d/Y',strtotime($j->date_closed))}}</td>
-              <td>{{ $j->applicants->where('is_deleted', 0)->count() }}</td>
+              <td>{{ $j->applicants->count() }}</td>
+              <!-- <td>{{ $j->applicants->where('is_deleted', 0)->count() }}</td> -->
               <td>{{$j->stat()}}</td>
             </tr>
             @endforeach
