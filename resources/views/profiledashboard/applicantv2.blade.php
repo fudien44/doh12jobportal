@@ -906,10 +906,10 @@
                                 <div class="dropzone" id="coeFile" name="coe_file"></div>
                              </div>
                              <div class="col-sm-12">
-                                <h5>Eligibility(Optional to positions that requires CS Eligibility/RA 1080)</h5><hr>
+                                <h5>Eligibility(Optional to positions that requires CS Eligibility/RA 1080/Driver's License)</h5><hr>
                                 @if($users->elig)
                                 @foreach($users->elig as $key => $elig)
-                                <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility/PRC {{(int)$key + 1}} </a><br>
+                                <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility/PRC/Driver's License {{(int)$key + 1}} </a><br>
                                 <div class="modal fade" id="elig-xl-{{$key}}">
                                     <div class="modal-dialog modal-xl">
                                       <div class="modal-content">

@@ -274,7 +274,8 @@ class JobsCtrl extends Controller
             if($user->profile) {
                 return view('jobs.applicants.profilev2', [
                     'users' => $user,
-                    'profile' => $user->profile
+                    'profile' => $user->profile,
+                    'applications' => $user->myjobs,
                 ]);
             } else {
                 return '<b>No profile found.</b>';

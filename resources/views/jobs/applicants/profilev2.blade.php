@@ -275,292 +275,344 @@
     </div>
     <!-- /.col -->
     <div class="col-md-8">
-      <div class="card">
-        <div class="card-header p-2">
-          <ul class="nav nav-pills">
-            <li class="nav-item"><a class="nav-link active" href="#pds" data-toggle="tab">PDS</a></li>
-            <li class="nav-item"><a class="nav-link" href="#wes" data-toggle="tab">WES</a></li>
-            <li class="nav-item"><a class="nav-link" href="#tc" data-toggle="tab">TC</a></li>
-            <li class="nav-item"><a class="nav-link" href="#dtor" data-toggle="tab">DTOR</a></li>
-            <li class="nav-item"><a class="nav-link" href="#coe" data-toggle="tab">COE</a></li>
-            <li class="nav-item"><a class="nav-link" href="#prcbr" data-toggle="tab">PRC/BR</a></li>
-            <li class="nav-item"><a class="nav-link" href="#ipcr" data-toggle="tab">IPCR</a></li>
-            <li class="nav-item"><a class="nav-link" href="#osd" data-toggle="tab">OSD</a></li>
-          </ul>
-        </div><!-- /.card-header -->
-        <div class="card-body">
-          <div class="tab-content">
-            <div class="active tab-pane" id="pds">
-                @if($users->pds)
-                @foreach($users->pds as $key => $pds)
-                <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}" target="_blank">Personal Data Sheet(CS Form No. 212, Revised 2017) {{(int)$key + 1}} - <code>DATE UPLOADED: {{\Carbon\Carbon::parse($pds->created_at)->format('F d, Y h:i A')}}</code></a><br>
-                <div class="modal fade" id="pds-xl-{{$key}}">
-                    <div class="modal-dialog modal-xl">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 class="modal-title">Personal Data Sheet(CS Form No. 212, Revised 2017)</h4>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header p-2">
+              <ul class="nav nav-pills">
+                <li class="nav-item"><a class="nav-link active" href="#pds" data-toggle="tab">PDS</a></li>
+                <li class="nav-item"><a class="nav-link" href="#wes" data-toggle="tab">WES</a></li>
+                <li class="nav-item"><a class="nav-link" href="#tc" data-toggle="tab">TC</a></li>
+                <li class="nav-item"><a class="nav-link" href="#dtor" data-toggle="tab">DTOR</a></li>
+                <li class="nav-item"><a class="nav-link" href="#coe" data-toggle="tab">COE</a></li>
+                <li class="nav-item"><a class="nav-link" href="#prcbr" data-toggle="tab">PRC/BR/DRIVER'S LICENSE</a></li>
+                <li class="nav-item"><a class="nav-link" href="#ipcr" data-toggle="tab">IPCR</a></li>
+                <li class="nav-item"><a class="nav-link" href="#osd" data-toggle="tab">OSD</a></li>
+              </ul>
+            </div><!-- /.card-header -->
+            <div class="card-body">
+              <div class="tab-content">
+                <div class="active tab-pane" id="pds">
+                    @if($users->pds)
+                    @foreach($users->pds as $key => $pds)
+                    <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}" target="_blank">Personal Data Sheet(CS Form No. 212, Revised 2017) {{(int)$key + 1}} - <code>DATE UPLOADED: {{\Carbon\Carbon::parse($pds->created_at)->format('F d, Y h:i A')}}</code></a><br>
+                    <div class="modal fade" id="pds-xl-{{$key}}">
+                        <div class="modal-dialog modal-xl">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 class="modal-title">Personal Data Sheet(CS Form No. 212, Revised 2017)</h4>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                @if(Auth::user()->level == 2 || Auth::user()->id == $pds->user_id)
+                                <a class="btn btn-app bg-danger btn-delete-pds" data-id="{{$pds->id}}">
+                                  <i class="fas fa-trash"></i> Delete
+                                </a>
+                                @endif
+                                <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}" type="application/pdf" width="100%" height="800px">
+                                    <p>Your web browser doesn't have a PDF plugin.
+                                    Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}">click here to
+                                    download the PDF file.</a></p>
+                                </object>
+                            </div>
+                          </div>
+                          <!-- /.modal-content -->
                         </div>
-                        <div class="modal-body">
-                            @if(Auth::user()->level == 2 || Auth::user()->id == $pds->user_id)
-                            <a class="btn btn-app bg-danger btn-delete-pds" data-id="{{$pds->id}}">
-                              <i class="fas fa-trash"></i> Delete
-                            </a>
-                            @endif
-                            <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}" type="application/pdf" width="100%" height="800px">
+                        <!-- /.modal-dialog -->
+                    </div>
+                    @endforeach
+                    @endif
+                </div>
+                <!-- /.tab-pane -->
+                <div class="tab-pane" id="wes">
+                  @if($users->wes)
+                  @foreach($users->wes as $key => $wes)
+                  <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$wes->filename}}" target="_blank">CSC Work Experience Sheet {{(int)$key + 1}} <code>DATE UPLOADED: {{\Carbon\Carbon::parse($wes->created_at)->format('F d, Y h:i A')}}</code></a><br>
+                  <div class="modal fade" id="wes-xl-{{$key}}">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">CSC Work Experience Sheet</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                              @if(Auth::user()->level == 2 || Auth::user()->id == $wes->user_id)
+                              <a class="btn btn-app bg-danger btn-delete-wes" data-id="{{$wes->id}}">
+                                <i class="fas fa-trash"></i> Delete
+                              </a>
+                              @endif
+                              <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$wes->filename}}" type="application/pdf" width="100%" height="800px">
+                                  <p>Your web browser doesn't have a PDF plugin.
+                                  Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$wes->filename}}">click here to
+                                  download the PDF file.</a></p>
+                              </object>
+                          </div>
+                        </div>
+                        <!-- /.modal-content -->
+                      </div>
+                      <!-- /.modal-dialog -->
+                  </div>
+                  @endforeach
+                  @endif
+                </div>
+                <!-- /.tab-pane -->
+
+                <div class="tab-pane" id="tc">
+                  @if($users->tc)
+                    @foreach($users->tc as $key => $tc)
+                    <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tc->filename}}" target="_blank">Training Certificates {{(int)$key + 1}} <code>DATE UPLOADED: {{\Carbon\Carbon::parse($tc->created_at)->format('F d, Y h:i A')}}</code></a><br>
+                    <div class="modal fade" id="tc-xl-{{$key}}">
+                        <div class="modal-dialog modal-xl">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 class="modal-title">Training Certificates</h4>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                @if(Auth::user()->level == 2 || Auth::user()->id == $tc->user_id)
+                                <a class="btn btn-app bg-danger btn-delete-tc" data-id="{{$tc->id}}">
+                                  <i class="fas fa-trash"></i> Delete
+                                </a>
+                                @endif
+                                <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tc->filename}}" type="application/pdf" width="100%" height="800px">
+                                  <p>Your web browser doesn't have a PDF plugin.
+                                  Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tc->filename}}">click here to
+                                  download the PDF file.</a></p>
+                                </object>
+                            </div>
+                          </div>
+                          <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    @endforeach
+                    @endif
+                </div>
+                <div class="tab-pane" id="dtor">
+                  @if($users->tor)
+                  @foreach($users->tor as $key => $tor)
+                  <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}" target="_blank">Diploma & Transcript of Record {{(int)$key + 1}} <code>DATE UPLOADED: {{\Carbon\Carbon::parse($tor->created_at)->format('F d, Y h:i A')}}</code></a><br>
+                  <div class="modal fade" id="tor-xl-{{$key}}">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Diploma & Transcript of Record </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                              @if(Auth::user()->level == 2 || Auth::user()->id == $tor->user_id)
+                              <a class="btn btn-app bg-danger btn-delete-tor" data-id="{{$tor->id}}">
+                                <i class="fas fa-trash"></i> Delete
+                              </a>
+                              @endif
+                              <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}" type="application/pdf" width="100%" height="800px">
                                 <p>Your web browser doesn't have a PDF plugin.
-                                Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}">click here to
+                                Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}">click here to
+                                download the PDF file.</a></p>
+                              </object>
+                          </div>
+                        </div>
+                        <!-- /.modal-content -->
+                      </div>
+                      <!-- /.modal-dialog -->
+                  </div>
+                  @endforeach
+                  @endif
+                </div>
+                <div class="tab-pane" id="coe">
+                  @if($users->coe)
+                  @foreach($users->coe as $key => $coe)
+                  <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$coe->filename}}" target="_blank">Certificate of Employment {{(int)$key + 1}} <code>DATE UPLOADED: {{\Carbon\Carbon::parse($coe->created_at)->format('F d, Y h:i A')}}</code></a><br>
+                  <div class="modal fade" id="coe-xl-{{$key}}">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Certificate of Employment</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                              @if(Auth::user()->level == 2 || Auth::user()->id == $coe->user_id)
+                              <a class="btn btn-app bg-danger btn-delete-coe" data-id="{{$coe->id}}">
+                                <i class="fas fa-trash"></i> Delete
+                              </a>
+                              @endif
+                              <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$coe->filename}}" type="application/pdf" width="100%" height="800px">
+                                <p>Your web browser doesn't have a PDF plugin.
+                                Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$coe->filename}}">click here to
+                                download the PDF file.</a></p>
+                              </object>
+                          </div>
+                        </div>
+                        <!-- /.modal-content -->
+                      </div>
+                      <!-- /.modal-dialog -->
+                  </div>
+                  @endforeach
+                  @endif
+                </div>
+                <div class="tab-pane" id="prcbr">
+                  @if($users->elig)
+                  @foreach($users->elig as $key => $elig)
+                  <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}" target="_blank">Eligibility/PRC/Driver's License {{(int)$key + 1}} <code>DATE UPLOADED: {{\Carbon\Carbon::parse($elig->created_at)->format('F d, Y h:i A')}}</code></a><br>
+                  <div class="modal fade" id="elig-xl-{{$key}}">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Eligibility/PRC</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                              @if(Auth::user()->level == 2 || Auth::user()->id == $elig->user_id)
+                              <a class="btn btn-app bg-danger btn-delete-elig" data-id="{{$elig->id}}">
+                                <i class="fas fa-trash"></i> Delete
+                              </a>
+                              @endif
+                              <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}" type="application/pdf" width="100%" height="800px">
+                                <p>Your web browser doesn't have a PDF plugin.
+                                Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}">click here to
+                                download the PDF file.</a></p>
+                              </object>
+                          </div>
+                        </div>
+                        <!-- /.modal-content -->
+                      </div>
+                      <!-- /.modal-dialog -->
+                  </div>
+                  @endforeach
+                  @endif
+                </div>
+                <div class="tab-pane" id="ipcr">
+                  @if($users->ipcr)
+                  @foreach($users->ipcr as $key => $ipcr)
+                  <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$ipcr->filename}}" target="_blank">IPCR/Performance Evaluation {{(int)$key + 1}} <code>DATE UPLOADED: {{\Carbon\Carbon::parse($ipcr->created_at)->format('F d, Y h:i A')}}</code></a><br>
+                  <div class="modal fade" id="ipcr-xl-{{$key}}">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">IPCR/Performance Evaluation</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                              @if(Auth::user()->level == 2 || Auth::user()->id == $ipcr->user_id)
+                              <a class="btn btn-app bg-danger btn-delete-ipcr" data-id="{{$ipcr->id}}">
+                                <i class="fas fa-trash"></i> Delete
+                              </a>
+                              @endif
+                              <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$ipcr->filename}}" type="application/pdf" width="100%" height="800px">
+                                <p>Your web browser doesn't have a PDF plugin.
+                                Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$ipcr->filename}}">click here to
                                 download the PDF file.</a></p>
                             </object>
+                          </div>
                         </div>
+                        <!-- /.modal-content -->
                       </div>
-                      <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
+                      <!-- /.modal-dialog -->
+                  </div>
+                  @endforeach
+                  @endif
                 </div>
-                @endforeach
-                @endif
-            </div>
-            <!-- /.tab-pane -->
-            <div class="tab-pane" id="wes">
-              @if($users->wes)
-              @foreach($users->wes as $key => $wes)
-              <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$wes->filename}}" target="_blank">CSC Work Experience Sheet {{(int)$key + 1}} <code>DATE UPLOADED: {{\Carbon\Carbon::parse($wes->created_at)->format('F d, Y h:i A')}}</code></a><br>
-              <div class="modal fade" id="wes-xl-{{$key}}">
-                  <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4 class="modal-title">CSC Work Experience Sheet</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
+                <div class="tab-pane" id="osd">
+                  @if($users->odoc)
+                  @foreach($users->odoc as $key => $odoc)
+                  <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$odoc->filename}}" target="_blank">Other Document {{(int)$key + 1}} <code>DATE UPLOADED: {{\Carbon\Carbon::parse($odoc->created_at)->format('F d, Y h:i A')}}</code></a><br>
+                  <div class="modal fade" id="doc-xl-{{$key}}">
+                      <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Other Document</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                              @if(Auth::user()->level == 2 || Auth::user()->id == $odoc->user_id)
+                              <a class="btn btn-app bg-danger btn-delete-doc" data-id="{{$odoc->id}}">
+                                <i class="fas fa-trash"></i> Delete
+                              </a>
+                              @endif
+                              <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$odoc->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                          </div>
+                        </div>
+                        <!-- /.modal-content -->
                       </div>
-                      <div class="modal-body">
-                          @if(Auth::user()->level == 2 || Auth::user()->id == $wes->user_id)
-                          <a class="btn btn-app bg-danger btn-delete-wes" data-id="{{$wes->id}}">
-                            <i class="fas fa-trash"></i> Delete
-                          </a>
-                          @endif
-                          <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$wes->filename}}" type="application/pdf" width="100%" height="800px">
-                              <p>Your web browser doesn't have a PDF plugin.
-                              Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$wes->filename}}">click here to
-                              download the PDF file.</a></p>
-                          </object>
-                      </div>
-                    </div>
-                    <!-- /.modal-content -->
+                      <!-- /.modal-dialog -->
                   </div>
-                  <!-- /.modal-dialog -->
-              </div>
-              @endforeach
-              @endif
-            </div>
-            <!-- /.tab-pane -->
-
-            <div class="tab-pane" id="tc">
-              @if($users->tc)
-                @foreach($users->tc as $key => $tc)
-                <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tc->filename}}" target="_blank">Training Certificates {{(int)$key + 1}} <code>DATE UPLOADED: {{\Carbon\Carbon::parse($tc->created_at)->format('F d, Y h:i A')}}</code></a><br>
-                <div class="modal fade" id="tc-xl-{{$key}}">
-                    <div class="modal-dialog modal-xl">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h4 class="modal-title">Training Certificates</h4>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                            @if(Auth::user()->level == 2 || Auth::user()->id == $tc->user_id)
-                            <a class="btn btn-app bg-danger btn-delete-tc" data-id="{{$tc->id}}">
-                              <i class="fas fa-trash"></i> Delete
-                            </a>
-                            @endif
-                            <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tc->filename}}" type="application/pdf" width="100%" height="800px">
-                              <p>Your web browser doesn't have a PDF plugin.
-                              Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tc->filename}}">click here to
-                              download the PDF file.</a></p>
-                            </object>
-                        </div>
-                      </div>
-                      <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
+                  @endforeach
+                  @endif
                 </div>
-                @endforeach
-                @endif
-            </div>
-            <div class="tab-pane" id="dtor">
-              @if($users->tor)
-              @foreach($users->tor as $key => $tor)
-              <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}" target="_blank">Diploma & Transcript of Record {{(int)$key + 1}} <code>DATE UPLOADED: {{\Carbon\Carbon::parse($tor->created_at)->format('F d, Y h:i A')}}</code></a><br>
-              <div class="modal fade" id="tor-xl-{{$key}}">
-                  <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4 class="modal-title">Diploma & Transcript of Record </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                          @if(Auth::user()->level == 2 || Auth::user()->id == $tor->user_id)
-                          <a class="btn btn-app bg-danger btn-delete-tor" data-id="{{$tor->id}}">
-                            <i class="fas fa-trash"></i> Delete
-                          </a>
-                          @endif
-                          <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}" type="application/pdf" width="100%" height="800px">
-                            <p>Your web browser doesn't have a PDF plugin.
-                            Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}">click here to
-                            download the PDF file.</a></p>
-                          </object>
-                      </div>
-                    </div>
-                    <!-- /.modal-content -->
-                  </div>
-                  <!-- /.modal-dialog -->
+                <!-- /.tab-pane -->
               </div>
-              @endforeach
-              @endif
-            </div>
-            <div class="tab-pane" id="coe">
-              @if($users->coe)
-              @foreach($users->coe as $key => $coe)
-              <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$coe->filename}}" target="_blank">Certificate of Employment {{(int)$key + 1}} <code>DATE UPLOADED: {{\Carbon\Carbon::parse($coe->created_at)->format('F d, Y h:i A')}}</code></a><br>
-              <div class="modal fade" id="coe-xl-{{$key}}">
-                  <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4 class="modal-title">Certificate of Employment</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                          @if(Auth::user()->level == 2 || Auth::user()->id == $coe->user_id)
-                          <a class="btn btn-app bg-danger btn-delete-coe" data-id="{{$coe->id}}">
-                            <i class="fas fa-trash"></i> Delete
-                          </a>
-                          @endif
-                          <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$coe->filename}}" type="application/pdf" width="100%" height="800px">
-                            <p>Your web browser doesn't have a PDF plugin.
-                            Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$coe->filename}}">click here to
-                            download the PDF file.</a></p>
-                          </object>
-                      </div>
-                    </div>
-                    <!-- /.modal-content -->
-                  </div>
-                  <!-- /.modal-dialog -->
-              </div>
-              @endforeach
-              @endif
-            </div>
-            <div class="tab-pane" id="prcbr">
-              @if($users->elig)
-              @foreach($users->elig as $key => $elig)
-              <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}" target="_blank">Eligibility/PRC {{(int)$key + 1}} <code>DATE UPLOADED: {{\Carbon\Carbon::parse($elig->created_at)->format('F d, Y h:i A')}}</code></a><br>
-              <div class="modal fade" id="elig-xl-{{$key}}">
-                  <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4 class="modal-title">Eligibility/PRC</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                          @if(Auth::user()->level == 2 || Auth::user()->id == $elig->user_id)
-                          <a class="btn btn-app bg-danger btn-delete-elig" data-id="{{$elig->id}}">
-                            <i class="fas fa-trash"></i> Delete
-                          </a>
-                          @endif
-                          <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}" type="application/pdf" width="100%" height="800px">
-                            <p>Your web browser doesn't have a PDF plugin.
-                            Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}">click here to
-                            download the PDF file.</a></p>
-                          </object>
-                      </div>
-                    </div>
-                    <!-- /.modal-content -->
-                  </div>
-                  <!-- /.modal-dialog -->
-              </div>
-              @endforeach
-              @endif
-            </div>
-            <div class="tab-pane" id="ipcr">
-              @if($users->ipcr)
-              @foreach($users->ipcr as $key => $ipcr)
-              <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$ipcr->filename}}" target="_blank">IPCR/Performance Evaluation {{(int)$key + 1}} <code>DATE UPLOADED: {{\Carbon\Carbon::parse($ipcr->created_at)->format('F d, Y h:i A')}}</code></a><br>
-              <div class="modal fade" id="ipcr-xl-{{$key}}">
-                  <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4 class="modal-title">IPCR/Performance Evaluation</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                          @if(Auth::user()->level == 2 || Auth::user()->id == $ipcr->user_id)
-                          <a class="btn btn-app bg-danger btn-delete-ipcr" data-id="{{$ipcr->id}}">
-                            <i class="fas fa-trash"></i> Delete
-                          </a>
-                          @endif
-                          <object data="{{ asset('storage/app/public') }}/{{$users->id}}/{{$ipcr->filename}}" type="application/pdf" width="100%" height="800px">
-                            <p>Your web browser doesn't have a PDF plugin.
-                            Instead you can <a download href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$ipcr->filename}}">click here to
-                            download the PDF file.</a></p>
-                        </object>
-                      </div>
-                    </div>
-                    <!-- /.modal-content -->
-                  </div>
-                  <!-- /.modal-dialog -->
-              </div>
-              @endforeach
-              @endif
-            </div>
-            <div class="tab-pane" id="osd">
-              @if($users->odoc)
-              @foreach($users->odoc as $key => $odoc)
-              <a href="{{ asset('storage/app/public') }}/{{$users->id}}/{{$odoc->filename}}" target="_blank">Other Document {{(int)$key + 1}} <code>DATE UPLOADED: {{\Carbon\Carbon::parse($odoc->created_at)->format('F d, Y h:i A')}}</code></a><br>
-              <div class="modal fade" id="doc-xl-{{$key}}">
-                  <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4 class="modal-title">Other Document</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                          @if(Auth::user()->level == 2 || Auth::user()->id == $odoc->user_id)
-                          <a class="btn btn-app bg-danger btn-delete-doc" data-id="{{$odoc->id}}">
-                            <i class="fas fa-trash"></i> Delete
-                          </a>
-                          @endif
-                          <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$odoc->filename}}" frameborder="0" width="100%" height="800px"></embed>
-                      </div>
-                    </div>
-                    <!-- /.modal-content -->
-                  </div>
-                  <!-- /.modal-dialog -->
-              </div>
-              @endforeach
-              @endif
-            </div>
-            <!-- /.tab-pane -->
+              <!-- /.tab-content -->
+            </div><!-- /.card-body -->
           </div>
-          <!-- /.tab-content -->
-        </div><!-- /.card-body -->
+          <!-- /.card -->
+        </div>
+
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header p-2">
+              <div class="card-title text-primary m-1">Application History (Under Development)</div>
+            </div>
+            <div class="card-body">
+              @if($applications->isEmpty())
+                <p>No applications found for this user.</p>
+              @else
+              <table class="table table-hover">
+                  <thead>
+                      <tr class="text-primary">
+                          <th>Position Applied</th>
+                          <th>Area of Assignment</th>
+                          <th>Remarks</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      @foreach($applications as $application)
+                          <tr class="text-secondary">
+                              <!-- Job Title -->
+                              <td>{{ $application->job->job_title }}</td>
+                              <!-- Area of Assignment -->
+                              <td>{{ $application->job->area_ass }}</td>
+                              <!-- Remarks -->
+                              <td>
+                                  @if($application->msg->isNotEmpty())
+                                      {!! $application->latst->tp() !!}
+                                  @else
+                                      <small class="badge badge-danger" style="cursor: pointer;">
+                                          <i class="far fa-clock"></i> In review
+                                      </small>
+                                  @endif
+                              </td>
+                          </tr>
+                      @endforeach
+                  </tbody>
+              </table>
+
+              @endif
+            </div>
+          </div>
+        </div>
+
+        
       </div>
-      <!-- /.card -->
     </div>
     <!-- /.col -->
+    
   </div>
 </div>
 @endsection
