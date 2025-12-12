@@ -643,12 +643,78 @@
                                 <option value="10" @if($profile->gender == 10) selected @endif>Prefer Not to Say</option>
                               </select>
                             </div>
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <h6 class="card-subtitle req-field">Ethnicity: <span style="color:red;">*</span></h6>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-border required" name="ethnicity" value="{{$profile->ethnicity}}" required>
                                 </div>
+                            </div> -->
+
+                             <div class="col-md-4">
+                                <h6 class="card-subtitle req-field">Ethnicity:</h6>
+                                <div class="form-group">
+                                    <select class="form-control form-control-border ethnicity" name="ethnicity">
+                                      <option selected value="">Select Ethnicity</option>
+                                      <option value="Filipino" @if($profile->ethnicity == 'Filipino') selected @endif>Filipino</option>
+                                      <option value="Negrito" @if($profile->ethnicity == 'Negrito') selected @endif>Negrito</option>
+                                      <option value="Moro" @if($profile->ethnicity == 'Moro') selected @endif>Moro</option>
+                                      <option value="Indigenouss of the Philippines" @if($profile->ethnicity == 'Indigenouss of the Philippines') selected @endif>Indigenouss of the Philippines</option>
+                                      <option value="Ilocano" @if($profile->ethnicity == 'Ilocano') selected @endif>Ilocano</option>
+                                      <option value="Tagalog" @if($profile->ethnicity == 'Tagalog') selected @endif>Tagalog</option>
+                                      <option value="Austronesians" @if($profile->ethnicity == 'Austronesians') selected @endif>Austronesians</option>
+                                      <option value="Igorot" @if($profile->ethnicity == 'Igorot') selected @endif>Igorot</option>
+                                      <option value="Mangyan" @if($profile->ethnicity == 'Mangyan') selected @endif>Mangyan</option>
+                                      <option value="Visayans" @if($profile->ethnicity == 'Visayans') selected @endif>Visayans</option>
+                                      <option value="Pangasinan" @if($profile->ethnicity == 'Pangasinan') selected @endif>Pangasinan</option>
+                                      <option value="Kalinga" @if($profile->ethnicity == 'Kalinga') selected @endif>Kalinga</option>
+                                      <option value="Filipino Mestizos" @if($profile->ethnicity == 'Filipino Mestizos') selected @endif>Filipino Mestizos</option>
+                                      <option value="Cebuano" @if($profile->ethnicity == 'Cebuano') selected @endif>Cebuano</option>
+                                      <option value="Aeta" @if($profile->ethnicity == 'Aeta') selected @endif>Aeta</option>
+                                      <option value="Itawes" @if($profile->ethnicity == 'Itawes') selected @endif>Itawes</option>
+                                      <option value="Bontoc" @if($profile->ethnicity == 'Bontoc') selected @endif>Bontoc</option>
+                                      <option value="Ivatan" @if($profile->ethnicity == 'Ivatan') selected @endif>Ivatan</option>
+                                      <option value="Butuanon" @if($profile->ethnicity == 'Butuanon') selected @endif>Butuanon</option>
+                                      <option value="Batak" @if($profile->ethnicity == 'Batak') selected @endif>Batak</option>
+                                      <option value="Iranun" @if($profile->ethnicity == 'Iranun') selected @endif>Iranun</option>
+                                      <option value="Balabak" @if($profile->ethnicity == 'Balabak') selected @endif>Balabak</option>
+                                      <option value="Ratagnon" @if($profile->ethnicity == 'Ratagnon') selected @endif>Ratagnon</option>
+                                      <option value="Bicolano" @if($profile->ethnicity == 'Bicolano') selected @endif>Bicolano</option>
+                                      <option value="Lumad" @if($profile->ethnicity == 'Lumad') selected @endif>Lumad</option>
+                                      <option value="Hiligaynon" @if($profile->ethnicity == 'Hiligaynon') selected @endif>Hiligaynon</option>
+                                      <option value="Mestizo" @if($profile->ethnicity == 'Mestizo') selected @endif>Mestizo</option>
+                                      <option value="Sangley" @if($profile->ethnicity == 'Sangley') selected @endif>Sangley</option>
+                                      <option value="Chinese Filipinos" @if($profile->ethnicity == 'Chinese Filipinos') selected @endif>Chinese Filipinos</option>
+                                      <option value="Waray" @if($profile->ethnicity == 'Waray') selected @endif>Waray</option>
+                                      <option value="Kapampangan" @if($profile->ethnicity == 'Kapampangan') selected @endif>Kapampangan</option>
+                                      <option value="Peninsulares" @if($profile->ethnicity == 'Peninsulares') selected @endif>Peninsulares</option>
+                                      <option value="Tausūg" @if($profile->ethnicity == 'Tausūg') selected @endif>Tausūg</option>
+                                      <option value="Sambal" @if($profile->ethnicity == 'Sambal') selected @endif>Sambal</option>
+                                      <option value="Yakan" @if($profile->ethnicity == 'Yakan') selected @endif>Yakan</option>
+                                      <option value="Ibaloi" @if($profile->ethnicity == 'Ibaloi') selected @endif>Ibaloi</option>
+                                      <option value="Bugkalot" @if($profile->ethnicity == 'Bugkalot') selected @endif>Bugkalot</option>
+                                      <option value="Bagobo" @if($profile->ethnicity == 'Bagobo') selected @endif>Bagobo</option>
+                                      <option value="Zamboangueño" @if($profile->ethnicity == 'Zamboangueño') selected @endif>Zamboangueño</option>
+                                      <option value="Tboli" @if($profile->ethnicity == 'Tboli') selected @endif>Tboli</option>
+                                      <option value="Blaan" @if($profile->ethnicity == 'Blaan') selected @endif>Blaan</option>
+                                      <option value="Eskaya" @if($profile->ethnicity == 'Eskaya') selected @endif>Eskaya</option>
+                                      <option value="Maguindanao" @if($profile->ethnicity == 'Maguindanao') selected @endif>Maguindanao</option>
+                                      <option value="Tagbanwa" @if($profile->ethnicity == 'Tagbanwa') selected @endif>Tagbanwa</option>
+                                      <option value="Sama-Bajau" @if($profile->ethnicity == 'Sama-Bajau') selected @endif>Sama-Bajau</option>
+                                      <option value="Aboriginal Australians" @if($profile->ethnicity == 'Aboriginal Australians') selected @endif>Aboriginal Australians</option>
+                                      <option value="Ibanag" @if($profile->ethnicity == 'Ibanag') selected @endif>Ibanag</option>
+                                      <option value="Suludnon" @if($profile->ethnicity == 'Suludnon') selected @endif>Suludnon</option>
+                                      <option value="Ati" @if($profile->ethnicity == 'Ati') selected @endif>Ati</option>
+                                      <option value="Maranao" @if($profile->ethnicity == 'Maranao') selected @endif>Maranao</option>
+                                      <option value="Ifugao" @if($profile->ethnicity == 'Ifugao') selected @endif>Ifugao</option>
+                                  </select>
+                                </div>
                             </div>
+
+
+
+
+
+
                         </div>
                         <div class="row">
                             <div class="col-md-4">
