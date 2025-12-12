@@ -178,7 +178,7 @@
                         <div class="form-group row">
                             <label for="inputName" class="col-sm-2 col-form-label">Civil Status</label>
                             <div class="col-sm-10">
-                              <select class="form-control form-control-border civilstat" name="civilstat" disabled>
+                              <select class="form-control form-control-border civilstat" name="civilstat" disabled required>
                                 <option selected value="">Select Status</option>
                                 <option value="0"@if($profile->civilstat == '0') selected @endif>Single</option>
                                 <option value="1"@if($profile->civilstat == '1') selected @endif>Married</option>
@@ -544,35 +544,60 @@
                     <input type="hidden" name="profile_id" value="{{$profile->id}}">
                     <table id="applicant-info-table" class="table table-bordered table-hover">
                         <h5 class="text-success">Personal Information</h5>
+                        <p class="text-danger">NOTE: Please make sure to fill in the required fields and attachments.</p>
                         <hr>
-                        <div class="col-md-4">
-                            <h6 class="card-subtitle req-field">Upload Photo:</h6>
+                        <div class="col-md-4 my-4">
+                            <h6 class="card-subtitle req-field mb-1">Upload Photo: <span style="color:red;">*</span></h6>
+
+                            <!-- Show current picture if exists -->
+                            @if($users->profile && $users->profile->picture_link)
+                                <div class="mb-2">
+                                    <img src="{{ asset('storage/' . $users->profile->picture_link) }}" alt="Profile Picture" class="img-thumbnail" width="150">
+                                </div>
+                            @endif
+
                             <div class="form-group">
                                 <div class="input-group">
-                                  <div class="custom-file">
-                                    <input type="file" name="picture_link" class="custom-file-input" id="upProfile" accept="image/jpeg, image/png">
-                                    <label class="custom-file-label" for="upProfile">Choose photo</label>
-                                  </div>
+                                    <div class="custom-file">
+                                        <input
+                                            type="file"
+                                            name="picture_link"
+                                            class="custom-file-input"
+                                            id="upProfile"
+                                            accept="image/jpeg, image/png"
+                                            @if(!($users->profile && $users->profile->picture_link)) required @endif
+                                        >
+                                        <label class="custom-file-label" for="upProfile">Choose photo</label>
+                                    </div>
                                 </div>
+                                <small class="form-text text-muted">
+                                    @if($users->profile && $users->profile->picture_link)
+                                        Leave blank to keep the current picture.
+                                    @else
+                                        Upload a profile picture.
+                                    @endif
+                                </small>
                             </div>
                         </div>
+
+
                         <div class="row">
                             <div class="col-sm-4">
-                                <h6 class="card-subtitle req-field">First name:</h6>
+                                <h6 class="card-subtitle req-field">First name: <span style="color:red;">*</span></h6>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-border required" name="fname" value="{{$users->fname}}">
+                                    <input type="text" class="form-control form-control-border required" name="fname" value="{{$users->fname}}" required>
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <h6 class="card-subtitle req-field">Middle name:</h6>
+                                <h6 class="card-subtitle req-field">Middle name: </h6>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-border required" name="mname" value="{{$users->mname}}">
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <h6 class="card-subtitle req-field">Last name:</h6>
+                                <h6 class="card-subtitle req-field">Last name: <span style="color:red;">*</span></h6>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-border required" name="lname" value="{{$users->lname}}">
+                                    <input type="text" class="form-control form-control-border required" name="lname" value="{{$users->lname}}" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -582,28 +607,28 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <h6 class="card-subtitle req-field">Date of Birth:</h6>
+                                <h6 class="card-subtitle req-field">Date of Birth: <span style="color:red;">*</span></h6>
                                 <div class="form-group">
                                     <input type="date"class="form-control form-control-border" id="dob" name="dob" value="{{$profile->dob}}" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <h6 class="card-subtitle req-field">Age:</h6>
+                                <h6 class="card-subtitle req-field">Age: </h6>
                                 <input type="text" class="form-control form-control-border required age" disabled id="age" name="age">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                              <h6 class="card-subtitle req-field">Sex:</h6>
-                              <select class="form-control form-control-border sex" name="sex">
+                              <h6 class="card-subtitle req-field">Sex: <span style="color:red;">*</span></h6>
+                              <select class="form-control form-control-border sex" name="sex" required>
                                 <option selected value="">Select Sex</option>
                                 <option value="0"@if($profile->sex == 0) selected @endif>Male</option>
                                 <option value="1"@if($profile->sex == 1) selected @endif>Female</option>
                               </select>
                             </div>
                             <div class="col-md-4">
-                              <h6 class="card-subtitle req-field">Gender:</h6>
-                              <select class="form-control form-control-border gender" name="gender">
+                              <h6 class="card-subtitle req-field">Gender: <span style="color:red;">*</span></h6>
+                              <select class="form-control form-control-border gender" name="gender" required>
                                 <option selected value="">Select Gender</option>
                                 <option value="0" @if($profile->gender == 0) selected @endif>Male</option>
                                 <option value="1" @if($profile->gender == 1) selected @endif>Female</option>
@@ -619,16 +644,16 @@
                               </select>
                             </div>
                             <div class="col-md-4">
-                                <h6 class="card-subtitle req-field">Ethnicity:</h6>
+                                <h6 class="card-subtitle req-field">Ethnicity: <span style="color:red;">*</span></h6>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-border required" name="ethnicity" value="{{$profile->ethnicity}}">
+                                    <input type="text" class="form-control form-control-border required" name="ethnicity" value="{{$profile->ethnicity}}" required>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <h6 class="card-subtitle req-field">Religion:</h6>
-                                  <select class="form-control form-control-border religion" name="religion">
+                                <h6 class="card-subtitle req-field">Religion: <span style="color:red;">*</span></h6>
+                                  <select class="form-control form-control-border religion" name="religion" required>
                                     <option selected value="">Select Religion</option>
                                     <option value="AGLIP"@if($profile->religion == 'AGLIP') selected @endif>AGLIPAY</option>
                                     <option value="ALLY"@if($profile->religion == 'ALLY') selected @endif>ALLIANCE OF BIBLE CHRISTIAN COMMUNITIES</option>
@@ -656,8 +681,8 @@
                                   </select>
                             </div>
                             <div class="col-sm-4">
-                                <h6 class="card-subtitle req-field">Civil Status:</h6>
-                                  <select class="form-control form-control-border civilstat" name="civilstat">
+                                <h6 class="card-subtitle req-field">Civil Status: <span style="color:red;">*</span></h6>
+                                  <select class="form-control form-control-border civilstat" name="civilstat" required>
                                     <option selected value="">Select Status</option>
                                     <option value="0"@if($profile->civilstat == '0') selected @endif>Single</option>
                                     <option value="1"@if($profile->civilstat == '1') selected @endif>Married</option>
@@ -672,21 +697,21 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-4">
-                                <h6 class="card-subtitle req-field">Address:</h6>
+                                <h6 class="card-subtitle req-field">Address: <span style="color:red;">*</span></h6>
                                 <div class="form-group">
-                                    <textarea class="form-control form-control-border required" name="address" rows="2">{{$profile->address}}</textarea>
+                                    <textarea class="form-control form-control-border required" name="address" rows="2" required>{{$profile->address}}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <h6 class="card-subtitle req-field">Contact Number:</h6>
+                                <h6 class="card-subtitle req-field">Contact Number: <span style="color:red;">*</span></h6>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-border required" name="contactno" value="{{$users->contactno}}">
+                                    <input type="text" class="form-control form-control-border required" name="contactno" value="{{$users->contactno}}" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <h6 class="card-subtitle req-field">Email Address:</h6>
+                                <h6 class="card-subtitle req-field">Email Address: <span style="color:red;">*</span></h6>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-border required" name="email" value="{{$users->email}}">
+                                    <input type="email" class="form-control form-control-border required" name="email" value="{{$users->email}}" required>
                                 </div>
                             </div>
                         </div>
@@ -695,8 +720,8 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-4">
-                                <h6 class="card-subtitle req-field">Highest Educational Attainment:</h6>
-                                    <select class="form-control form-control-border" name="highest_education">
+                                <h6 class="card-subtitle req-field">Highest Educational Attainment: <span style="color:red;">*</span></h6>
+                                    <select class="form-control form-control-border" name="highest_education" required>
                                       <option selected value="">Select</option>
                                       <option value="0" @if($profile->highest_education == 0)selected @endif>N/A</option>
                                       <option value="1"@if($profile->highest_education == 1)selected @endif>Vocational/Trade Course</option>
@@ -705,15 +730,15 @@
                                     </select>
                             </div>
                             <div class="col-md-4">
-                                <h6 class="card-subtitle req-field">Course Title:</h6>
+                                <h6 class="card-subtitle req-field">Course Title: <span style="color:red;">*</span></h6>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-border required" name="course" value="{{$profile->course}}">
+                                    <input type="text" class="form-control form-control-border required" name="course" value="{{$profile->course}}" required>
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <h6 class="card-subtitle req-field">Name Of School/University:</h6>
+                                <h6 class="card-subtitle req-field">Name Of School/University: <span style="color:red;">*</span></h6>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-border required" name="school" value="{{$profile->school}}">
+                                    <input type="text" class="form-control form-control-border required" name="school" value="{{$profile->school}}" required>
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -761,237 +786,284 @@
                                 <hr>
                              </div>
                              <div class="col-sm-12">
-                                <h5>Personal Data Sheet(CS Form No. 212, Revised 2017)</h5><hr>
-                                @if($users->pds)
-                                @foreach($users->pds as $key => $pds)
-                                <a href="#" data-toggle="modal" data-target="#pds-xl-{{$key}}">Personal Data Sheet(CS Form No. 212, Revised 2017) {{(int)$key + 1}} </a><br>
-                                <div class="modal fade" id="pds-xl-{{$key}}">
-                                    <div class="modal-dialog modal-xl">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h4 class="modal-title">Personal Data Sheet(CS Form No. 212, Revised 2017)</h4>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                          </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <a class="btn btn-app bg-danger btn-delete-pds" data-id="{{$pds->id}}">
-                                              <i class="fas fa-trash"></i> Delete
-                                            </a>
-                                            <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}" frameborder="0" width="100%" height="800px"></embed>
-                                        </div>
-                                      </div>
-                                      <!-- /.modal-content -->
+                                <div class="card border border-primary card-primary">
+                                    <div class="card-header">
+                                        <h5>Personal Data Sheet (CS Form No. 212, Revised 2017) <span style="color:red;">*</span></h5>
                                     </div>
-                                    <!-- /.modal-dialog -->
+                                    <div class="card-body">
+                                        @if($users->pds)
+                                        @foreach($users->pds as $key => $pds)
+                                        <a href="#" data-toggle="modal" data-target="#pds-xl-{{$key}}">Personal Data Sheet(CS Form No. 212, Revised 2017) {{(int)$key + 1}} </a><br>
+                                        <div class="modal fade" id="pds-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h4 class="modal-title">Personal Data Sheet(CS Form No. 212, Revised 2017)</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-pds" data-id="{{$pds->id}}">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$pds->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                        <div class="dropzone" id="pdsFile" name="pds_file"></div>
+                                    </div>
                                 </div>
-                                @endforeach
-                                @endif
-                                <div class="dropzone" id="pdsFile" name="pds_file"></div>
                              </div>
                              <div class="col-sm-12">
-                                <h5>CSC Work Experience Sheet</h5><hr>
-                                @if($users->wes)
-                                @foreach($users->wes as $key => $wes)
-                                <a href="#" data-toggle="modal" data-target="#wes-xl-{{$key}}">CSC Work Experience Sheet {{(int)$key + 1}} </a><br>
-                                <div class="modal fade" id="wes-xl-{{$key}}">
-                                    <div class="modal-dialog modal-xl">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h4 class="modal-title">CSC Work Experience Sheet</h4>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                          </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <a class="btn btn-app bg-danger btn-delete-wes" data-id="{{$wes->id}}">
-                                              <i class="fas fa-trash"></i> Delete
-                                            </a>
-                                            <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$wes->filename}}" frameborder="0" width="100%" height="800px"></embed>
-                                        </div>
-                                      </div>
-                                      <!-- /.modal-content -->
+                                <div class="card border border-primary card-primary">
+                                    <div class="card-header">
+                                        <h5>CSC Work Experience Sheet <span style="color:red;">*</span></h5>
                                     </div>
-                                    <!-- /.modal-dialog -->
+                                    <div class="card-body">
+                                        @if($users->wes)
+                                        @foreach($users->wes as $key => $wes)
+                                        <a href="#" data-toggle="modal" data-target="#wes-xl-{{$key}}">CSC Work Experience Sheet {{(int)$key + 1}} </a><br>
+                                        <div class="modal fade" id="wes-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h4 class="modal-title">CSC Work Experience Sheet</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-wes" data-id="{{$wes->id}}">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$wes->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                        <div class="dropzone" id="wesFile" name="wes_file"></div>
+                                    </div>
                                 </div>
-                                @endforeach
-                                @endif
-                                <div class="dropzone" id="wesFile" name="wes_file"></div>
                              </div>
                              <div class="col-sm-12">
-                                <h5>Training Certificates</h5><hr>
-                                @if($users->tc)
-                                @foreach($users->tc as $key => $tc)
-                                <a href="#" data-toggle="modal" data-target="#tc-xl-{{$key}}">Training Certificates {{(int)$key + 1}} </a><br>
-                                <div class="modal fade" id="tc-xl-{{$key}}">
-                                    <div class="modal-dialog modal-xl">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h4 class="modal-title">Training Certificates</h4>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                          </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <a class="btn btn-app bg-danger btn-delete-tc" data-id="{{$tc->id}}">
-                                              <i class="fas fa-trash"></i> Delete
-                                            </a>
-                                            <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tc->filename}}" frameborder="0" width="100%" height="800px"></embed>
-                                        </div>
-                                      </div>
-                                      <!-- /.modal-content -->
+                                <div class="card border border-primary card-primary">
+                                    <div class="card-header">
+                                        <h5>Training Certificates <span style="color:red;">*</span></h5>
                                     </div>
-                                    <!-- /.modal-dialog -->
+                                    <div class="card-body">
+                                        @if($users->tc)
+                                        @foreach($users->tc as $key => $tc)
+                                        <a href="#" data-toggle="modal" data-target="#tc-xl-{{$key}}">Training Certificates {{(int)$key + 1}} </a><br>
+                                        <div class="modal fade" id="tc-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h4 class="modal-title">Training Certificates</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-tc" data-id="{{$tc->id}}">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tc->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                        <div class="dropzone" id="tcFile" name="tc_file"></div>
+                                    </div>
                                 </div>
-                                @endforeach
-                                @endif
-                                <div class="dropzone" id="tcFile" name="tc_file"></div>
                              </div>
                              <div class="col-sm-12">
-                                <h5>Diploma & Transcript of Record or Certification from School(Applicable to newly graduates without credential)</h5><hr>
-                                @if($users->tor)
-                                @foreach($users->tor as $key => $tor)
-                                <a href="#" data-toggle="modal" data-target="#tor-xl-{{$key}}">Diploma & Transcript of Record {{(int)$key + 1}} </a><br>
-                                <div class="modal fade" id="tor-xl-{{$key}}">
-                                    <div class="modal-dialog modal-xl">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h4 class="modal-title">Diploma & Transcript of Record </h4>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                          </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <a class="btn btn-app bg-danger btn-delete-tor" data-id="{{$tor->id}}">
-                                              <i class="fas fa-trash"></i> Delete
-                                            </a>
-                                            <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}" frameborder="0" width="100%" height="800px"></embed>
-                                        </div>
-                                      </div>
-                                      <!-- /.modal-content -->
+                                <div class="card border border-primary card-primary">
+                                    <div class="card-header">
+                                        <h5>Diploma & Transcript of Record or Certification from School (Applicable to newly graduates without credential)</h5>
                                     </div>
-                                    <!-- /.modal-dialog -->
+                                    <div class="card-body">
+                                        @if($users->tor)
+                                        @foreach($users->tor as $key => $tor)
+                                        <a href="#" data-toggle="modal" data-target="#tor-xl-{{$key}}">Diploma & Transcript of Record {{(int)$key + 1}} </a><br>
+                                        <div class="modal fade" id="tor-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h4 class="modal-title">Diploma & Transcript of Record </h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-tor" data-id="{{$tor->id}}">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$tor->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                        <div class="dropzone" id="torFile"></div>
+                                    </div>
                                 </div>
-                                @endforeach
-                                @endif
-                                <div class="dropzone" id="torFile"></div>
                              </div>
                              <div class="col-sm-12">
-                                <h5>Certificate of Employment</h5><hr>
-                                @if($users->coe)
-                                @foreach($users->coe as $key => $coe)
-                                <a href="#" data-toggle="modal" data-target="#coe-xl-{{$key}}">Certificate of Employment {{(int)$key + 1}} </a><br>
-                                <div class="modal fade" id="coe-xl-{{$key}}">
-                                    <div class="modal-dialog modal-xl">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h4 class="modal-title">Certificate of Employment</h4>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                          </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <a class="btn btn-app bg-danger btn-delete-coe" data-id="{{$coe->id}}">
-                                              <i class="fas fa-trash"></i> Delete
-                                            </a>
-                                            <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$coe->filename}}" frameborder="0" width="100%" height="800px"></embed>
-                                        </div>
-                                      </div>
-                                      <!-- /.modal-content -->
+                                <div class="card border border-primary card-primary">
+                                    <div class="card-header">
+                                        <h5>Certificate of Employment </h5>
                                     </div>
-                                    <!-- /.modal-dialog -->
+                                    <div class="card-body">
+                                        @if($users->coe)
+                                        @foreach($users->coe as $key => $coe)
+                                        <a href="#" data-toggle="modal" data-target="#coe-xl-{{$key}}">Certificate of Employment {{(int)$key + 1}} </a><br>
+                                        <div class="modal fade" id="coe-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h4 class="modal-title">Certificate of Employment</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-coe" data-id="{{$coe->id}}">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$coe->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                        <div class="dropzone" id="coeFile" name="coe_file"></div>
+                                    </div>
                                 </div>
-                                @endforeach
-                                @endif
-                                <div class="dropzone" id="coeFile" name="coe_file"></div>
                              </div>
                              <div class="col-sm-12">
-                                <h5>Eligibility(Optional to positions that requires CS Eligibility/RA 1080/Driver's License)</h5><hr>
-                                @if($users->elig)
-                                @foreach($users->elig as $key => $elig)
-                                <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility/PRC/Driver's License {{(int)$key + 1}} </a><br>
-                                <div class="modal fade" id="elig-xl-{{$key}}">
-                                    <div class="modal-dialog modal-xl">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h4 class="modal-title">Eligibility/PRC</h4>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                          </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <a class="btn btn-app bg-danger btn-delete-elig" data-id="{{$elig->id}}">
-                                              <i class="fas fa-trash"></i> Delete
-                                            </a>
-                                            <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}" frameborder="0" width="100%" height="800px"></embed>
-                                        </div>
-                                      </div>
-                                      <!-- /.modal-content -->
+                                <div class="card border border-primary card-primary">
+                                    <div class="card-header">
+                                        <h5>Eligibility (Optional to positions that requires CS Eligibility/RA 1080/Driver's License)</h5>
                                     </div>
-                                    <!-- /.modal-dialog -->
+                                    <div class="card-body">
+                                        @if($users->elig)
+                                        @foreach($users->elig as $key => $elig)
+                                        <a href="#" data-toggle="modal" data-target="#elig-xl-{{$key}}">Eligibility/PRC/Driver's License {{(int)$key + 1}} </a><br>
+                                        <div class="modal fade" id="elig-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h4 class="modal-title">Eligibility/PRC</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-elig" data-id="{{$elig->id}}">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$elig->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                        <div class="dropzone" id="eligFile"></div>
+                                    </div>
                                 </div>
-                                @endforeach
-                                @endif
-                                <div class="dropzone" id="eligFile"></div>
                              </div>
                              <div class="col-sm-12">
-                                <h5>IPCR(Optional for promotions positions only)</h5><hr>
-                                @if($users->ipcr)
-                                @foreach($users->ipcr as $key => $ipcr)
-                                <a href="#" data-toggle="modal" data-target="#ipcr-xl-{{$key}}">IPCR/Performance Evaluation {{(int)$key + 1}} </a><br>
-                                <div class="modal fade" id="ipcr-xl-{{$key}}">
-                                    <div class="modal-dialog modal-xl">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h4 class="modal-title">IPCR/Performance Evaluation</h4>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                          </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <a class="btn btn-app bg-danger btn-delete-ipcr" data-id="{{$ipcr->id}}">
-                                              <i class="fas fa-trash"></i> Delete
-                                            </a>
-                                            <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$ipcr->filename}}" frameborder="0" width="100%" height="800px"></embed>
-                                        </div>
-                                      </div>
-                                      <!-- /.modal-content -->
+                                <div class="card border border-primary card-primary">
+                                    <div class="card-header">
+                                        <h5>IPCR (Optional for promotions positions only)</h5>
                                     </div>
-                                    <!-- /.modal-dialog -->
+                                    <div class="card-body">
+                                        @if($users->ipcr)
+                                        @foreach($users->ipcr as $key => $ipcr)
+                                        <a href="#" data-toggle="modal" data-target="#ipcr-xl-{{$key}}">IPCR/Performance Evaluation {{(int)$key + 1}} </a><br>
+                                        <div class="modal fade" id="ipcr-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h4 class="modal-title">IPCR/Performance Evaluation</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-ipcr" data-id="{{$ipcr->id}}">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$ipcr->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                        <div class="dropzone" id="ipcrFile" name="ipcr_file"></div>
+                                    </div>
                                 </div>
-                                @endforeach
-                                @endif
-                                <div class="dropzone" id="ipcrFile" name="ipcr_file"></div>
                              </div>
                              <div class="col-sm-12">
-                                <h5>Other Supporting Documents</h5>
-                                <hr>
-                                <div class="dropzone" id="otherFile"></div>
-                                @if($users->odoc)
-                                @foreach($users->odoc as $key => $odoc)
-                                <a href="#" data-toggle="modal" data-target="#doc-xl-{{$key}}">Other Document {{(int)$key + 1}} </a><br>
-                                <div class="modal fade" id="doc-xl-{{$key}}">
-                                    <div class="modal-dialog modal-xl">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h4 class="modal-title">Other Document</h4>
-                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                          </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <a class="btn btn-app bg-danger btn-delete-doc" data-id="{{$odoc->id}}">
-                                              <i class="fas fa-trash"></i> Delete
-                                            </a>
-                                            <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$odoc->filename}}" frameborder="0" width="100%" height="800px"></embed>
-                                        </div>
-                                      </div>
-                                      <!-- /.modal-content -->
+                                <div class="card border border-primary card-primary">
+                                    <div class="card-header">
+                                        <h5>Other Supporting Documents </h5>
                                     </div>
-                                    <!-- /.modal-dialog -->
+                                    <div class="card-body">
+                                        <div class="dropzone" id="otherFile"></div>
+                                        @if($users->odoc)
+                                        @foreach($users->odoc as $key => $odoc)
+                                        <a href="#" data-toggle="modal" data-target="#doc-xl-{{$key}}">Other Document {{(int)$key + 1}} </a><br>
+                                        <div class="modal fade" id="doc-xl-{{$key}}">
+                                            <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h4 class="modal-title">Other Document</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <a class="btn btn-app bg-danger btn-delete-doc" data-id="{{$odoc->id}}">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                    <embed id="view-app" src="{{ asset('storage/app/public') }}/{{$users->id}}/{{$odoc->filename}}" frameborder="0" width="100%" height="800px"></embed>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        @endforeach
+                                        @endif
+                                    </div>
                                 </div>
-                                @endforeach
-                                @endif
                              </div>
                             <button type="submit" class="btn float btn-save-profile d-none"><i class="fas fa-save"></i></button>
                         </div>
@@ -1029,7 +1101,7 @@
       parallelUploads: 10000,
       acceptedFiles: ".pdf",
       paramName: "mywes[]",
-      url: "{{secure_url('/save-application-update')}}",
+      url: "{{url('/save-application-update')}}",
       dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       init: function() {
         var myDropzone = this;
@@ -1069,7 +1141,7 @@
             })
             this.removeFile(file);
         });
-      }   
+      }
     });
     $("#tcFile").dropzone({
       addRemoveLinks: true,
@@ -1078,7 +1150,7 @@
       parallelUploads: 10000,
       acceptedFiles: ".pdf",
       paramName: "mytc[]",
-      url: "{{secure_url('/save-application-update')}}",
+      url: "{{url('/save-application-update')}}",
       dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       init: function() {
         var myDropzone = this;
@@ -1118,7 +1190,7 @@
             })
             this.removeFile(file);
         });
-      }   
+      }
     });
     $("#coeFile").dropzone({
       addRemoveLinks: true,
@@ -1127,7 +1199,7 @@
       parallelUploads: 10000,
       acceptedFiles: ".pdf",
       paramName: "mycoe[]",
-      url: "{{secure_url('/save-application-update')}}",
+      url: "{{url('/save-application-update')}}",
       dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       init: function() {
         var myDropzone = this;
@@ -1167,7 +1239,7 @@
             })
             this.removeFile(file);
         });
-      }   
+      }
     });
     $("#ipcrFile").dropzone({
       addRemoveLinks: true,
@@ -1176,7 +1248,7 @@
       parallelUploads: 10000,
       acceptedFiles: ".pdf",
       paramName: "myipcr[]",
-      url: "{{secure_url('/save-application-update')}}",
+      url: "{{url('/save-application-update')}}",
       dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       init: function() {
         var myDropzone = this;
@@ -1216,7 +1288,7 @@
             })
             this.removeFile(file);
         });
-      }   
+      }
     });
     $("#pdsFile").dropzone({
       addRemoveLinks: true,
@@ -1225,7 +1297,7 @@
       parallelUploads: 10000,
       acceptedFiles: ".pdf",
       paramName: "mypds[]",
-      url: "{{secure_url('/save-application-update')}}",
+      url: "{{url('/save-application-update')}}",
       dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       init: function() {
         var myDropzone = this;
@@ -1265,7 +1337,7 @@
             })
             this.removeFile(file);
         });
-      }   
+      }
     });
     $("#torFile").dropzone({
       addRemoveLinks: true,
@@ -1273,7 +1345,7 @@
       maxFiles: 2000,
       parallelUploads: 10000,
       acceptedFiles: ".pdf",
-      url: "{{secure_url('/save-application-update')}}",
+      url: "{{url('/save-application-update')}}",
       dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       paramName: "mytor[]",
       init: function() {
@@ -1314,7 +1386,7 @@
             })
             this.removeFile(file);
         });
-      }   
+      }
     });
     $("#eligFile").dropzone({
       addRemoveLinks: true,
@@ -1322,7 +1394,7 @@
       maxFiles: 2000,
       parallelUploads: 10000,
       acceptedFiles: ".pdf",
-      url: "{{secure_url('/save-application-update')}}",
+      url: "{{url('/save-application-update')}}",
       dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       paramName: "myelig[]",
       init: function() {
@@ -1363,7 +1435,7 @@
             })
             this.removeFile(file);
         });
-      }   
+      }
     });
     $("#otherFile").dropzone({
       addRemoveLinks: true,
@@ -1371,7 +1443,7 @@
       maxFiles: 2000,
       parallelUploads: 10000,
       acceptedFiles: ".pdf",
-      url: "{{secure_url('/save-application-update')}}",
+      url: "{{url('/save-application-update')}}",
       dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
       paramName: "myother[]",
       init: function() {
@@ -1412,7 +1484,7 @@
             })
             this.removeFile(file);
         });
-      }   
+      }
     });
     $("#upProfile").change(function () {
         const file = this.files[0];
@@ -1445,7 +1517,7 @@
         }
     });
     $('#applicant-info-form').on('submit',function(e){
-        var url = "{{ secure_url('save-application-update') }}";
+        var url = "{{ url('save-application-update') }}";
         e.preventDefault();
         $(".loading").show();
         $('#applicant-info-form').ajaxSubmit({
@@ -1523,7 +1595,7 @@
     } );
     $( ".btn-delete-pds" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-pds') }}";
+        var url = "{{ url('/delete-pds') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1544,10 +1616,10 @@
             }
         });
     } );
-    
+
     $( ".btn-delete-wes" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-wes') }}";
+        var url = "{{ url('/delete-wes') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1570,7 +1642,7 @@
     } );
     $( ".btn-delete-tc" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-tc') }}";
+        var url = "{{ url('/delete-tc') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1593,7 +1665,7 @@
     } );
     $( ".btn-delete-coe" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-coe') }}";
+        var url = "{{ url('/delete-coe') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1616,7 +1688,7 @@
     } );
     $( ".btn-delete-ipcr" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-ipcr') }}";
+        var url = "{{ url('/delete-ipcr') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1640,7 +1712,7 @@
 
     $( ".btn-delete-tor" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-tor') }}";
+        var url = "{{ url('/delete-tor') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1663,7 +1735,7 @@
     } );
     $( ".btn-delete-elig" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-elig') }}";
+        var url = "{{ url('/delete-elig') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1686,7 +1758,7 @@
     } );
     $( ".btn-delete-doc" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-doc') }}";
+        var url = "{{ url('/delete-doc') }}";
         $.ajax({
             async: true,
             url: url,
