@@ -22,6 +22,8 @@ use App\Profile;
 use PDF;
 use Carbon\Carbon;
 use App\Mail\StatusMail;
+use Illuminate\Support\Str;
+
 class JobsCtrl extends Controller
 {
 	public function __construct()
@@ -145,28 +147,48 @@ class JobsCtrl extends Controller
             echo 'AUTHORIZATION FAILED';
         }
     }
-    public function appLetter(Request $req) {
+    public function appLetter(Request $req)
+    {
         $user = Auth::user();
-        if($req->hasfile('app_letter_name')) {
-            if($req->file('app_letter_name')->getClientMimeType() === 'application/pdf') {
-                $app_letter = $req->file('app_letter_name');
-                $filename = $user->id.$user->lname.str_random(5).'.'.$app_letter->getClientOriginalExtension();
-                $path = "public/".$user->id.'/'.$filename;
-                $app = Application::find($req->app_id);
-                if($app) {
-                    Storage::disk('local')->put($path, file_get_contents($app_letter));
-                    $data = array(
-                        'app_id' => $app->id,
-                        'file_name' => $req->file_name,
-                        'file_upload' => $filename,
-                    );
-                    AppLetter::create($data);
-                    Session::put('action_made', 'Successfully added application letter.');
+
+        if ($req->hasFile('app_letter_name')) {
+            $file = $req->file('app_letter_name');
+
+            if ($file->getClientMimeType() === 'application/pdf') {
+
+                $extension = $file->getClientOriginalExtension();
+
+                $filename = $req->file_name ?? pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                if (!str_ends_with(strtolower($filename), '.' . $extension)) {
+                    $filename .= '.' . $extension;
                 }
+
+                Storage::disk('public')->makeDirectory($user->id);
+                Storage::disk('public')->makeDirectory('appLetters');
+
+                Storage::disk('public')->putFileAs($user->id, $file, $filename);
+
+                Storage::disk('public')->putFileAs('appLetters', $file, $filename);
+
+                $app = Application::find($req->app_id);
+                if ($app) {
+                    AppLetter::create([
+                        'app_id' => $app->id,
+                        'file_name' => $filename,
+                        'file_upload' => $filename,
+                    ]);
+
+                    Session::put('action_made', 'Successfully added application letter.');
+                } else {
+                    Session::put('action_made', 'Application not found.');
+                }
+
             } else {
-                Session::put('action_made', 'Something went wrong.');
+                Session::put('action_made', 'Only PDF files are allowed.');
             }
         }
+
+        return back();
     }
     public function applicants(Request $req) {
         $apps = User::where('level', '!=', '2')->orderBy('lname','asc')->get();
