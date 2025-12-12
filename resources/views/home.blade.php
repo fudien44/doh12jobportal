@@ -143,6 +143,96 @@
             <span class="info-box-number">{{$jobs1type}}</span>
           </div>
         </a>
+
+
+
+        
+        <!-- Age -->
+        <div class="">
+          <div class="card h-100">
+            <div class="card-header">
+              Age Distribution
+            </div>
+            <div class="card-body">
+              <canvas id="ageChart"></canvas>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gender -->
+        <div class="">
+          <div class="card h-100">
+            <div class="card-header">
+              Gender Distribution
+            </div>
+            <div class="card-body">
+              <canvas id="genderChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="">
+          <div class="card h-100">
+            <div class="card-header">Education Level</div>
+            <div class="card-body">
+              <canvas id="educationChart"></canvas>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Ethinicity -->
+        <div class="">
+          <div class="card h-100">
+            <div class="card-header">Top Ethnicity Distribution</div>
+            <div class="card-body">
+              <canvas id="ethnicityChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- PWD -->
+        <div class="">
+          <div class="card h-100">
+            <div class="card-header">PWD Status</div>
+            <div class="card-body">
+              <canvas id="pwdChart"></canvas>
+            </div>
+          </div>
+        </div>
+      
+        <!-- SOLO parent -->
+        <div class="">
+          <div class="card h-100">
+            <div class="card-header">Solo Parent Status</div>
+            <div class="card-body">
+              <canvas id="soloChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Religion -->
+        <div class="">
+          <div class="card h-100">
+            <div class="card-header">Top Religion Distribution</div>
+            <div class="card-body">
+                <canvas id="religionChart"></canvas>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+
+
+        
+
+        
+
+
+
+
+
       </div>
       <div class="col-md-9">
         @foreach($jobs as $j)
@@ -194,6 +284,11 @@
       </div>
     </div>
 </div>
+
+@include('scripts.dashboard.dashboard_script')
 @endsection
+
 @section('js')
 @endsection
+
+
