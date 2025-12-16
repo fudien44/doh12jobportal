@@ -80,7 +80,7 @@
                             @if($mj->msg->isNotEmpty())
                                 {!! $mj->latst->tp() !!}
                             @else
-                                <small class="badge badge-danger" style="cursor: pointer;"><i class="far fa-clock"></i> In review</small>
+                                <!-- <small class="badge badge-danger" style="cursor: pointer;"><i class="far fa-clock"></i> In review</small> -->
                             @endif
                         </td>
                         <!-- <td class="text-center">

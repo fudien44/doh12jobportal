@@ -215,7 +215,7 @@ class JobsCtrl extends Controller
                 }
             }
 
-            Mail::to($email)->send(new StatusMail($subject, $message, $name, $attch));
+            // Mail::to($email)->send(new StatusMail($subject, $message, $name, $attch));
             Session::put('action_made', 'Successfully send message to applicant email.');
         }
     }

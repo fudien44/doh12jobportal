@@ -30,11 +30,11 @@ class Message extends Model
             case '5':
                 return '<small class="badge badge-danger" data-toggle="modal" data-target="#modal-track-app" style="cursor: pointer;" onclick="getAppID('.$this->app_id.')"><i class="far fa-clock"></i> Missing Requirements</small>';
                 break;
-            case '5':
+            case '6':
                 return '<small class="badge badge-danger" data-toggle="modal" data-target="#modal-track-app" style="cursor: pointer;" onclick="getAppID('.$this->app_id.')"><i class="far fa-clock"></i> Not Qualified for Interview</small>';
                 break;
             default:
-                return '<small class="badge badge-danger"><i class="far fa-clock"></i> In review</small>';
+                return '<small class="badge badge-danger"><i class="far fa-clock"></i> In Review</small>';
                 break;
         }
     }

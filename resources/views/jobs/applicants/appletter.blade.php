@@ -41,7 +41,7 @@
         </div>
          @if($msg->attch->count() > 0)
                     <div class="card-body">
-                        <b>Attachments:</b><br/>
+                        <i>Attachments:</i><br/>
                         @foreach($msg->attch as $attachment)
                         <a href="{{ asset('public/storage/attach/'.$attachment->file_name) }}" target="_blank">
                             {{ $attachment->file_name }}
