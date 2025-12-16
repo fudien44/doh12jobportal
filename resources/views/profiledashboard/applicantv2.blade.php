@@ -590,7 +590,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <h6 class="card-subtitle req-field">Middle name: </h6>
+                                <h6 class="card-subtitle req-field">Middle name: <span style="color:red;">*</span></h6>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-border required" name="mname" value="{{$users->mname}}">
                                 </div>
@@ -604,24 +604,24 @@
                             <div class="col-md-4">
                                 <h6 class="card-subtitle req-field">Extension:</h6>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-border required" name="extension" value="{{$profile->extension}}">
+                                    <input type="text" class="form-control form-control-border" name="extension" value="{{$profile->extension}}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <h6 class="card-subtitle req-field">Date of Birth: <span style="color:red;">*</span></h6>
                                 <div class="form-group">
-                                    <input type="date"class="form-control form-control-border" id="dob" name="dob" value="{{$profile->dob}}" required>
+                                    <input type="date"class="form-control form-control-border required" id="dob" name="dob" value="{{$profile->dob}}" required>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <h6 class="card-subtitle req-field">Age: </h6>
-                                <input type="text" class="form-control form-control-border required age" disabled id="age" name="age">
+                                <input type="text" class="form-control form-control-border age" disabled id="age" name="age">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                               <h6 class="card-subtitle req-field">Sex: <span style="color:red;">*</span></h6>
-                              <select class="form-control form-control-border sex" name="sex" required>
+                              <select class="form-control form-control-border sex required" name="sex" required>
                                 <option selected value="">Select Sex</option>
                                 <option value="0"@if($profile->sex == 0) selected @endif>Male</option>
                                 <option value="1"@if($profile->sex == 1) selected @endif>Female</option>
@@ -629,7 +629,7 @@
                             </div>
                             <div class="col-md-4">
                               <h6 class="card-subtitle req-field">Gender: <span style="color:red;">*</span></h6>
-                              <select class="form-control form-control-border gender" name="gender" required>
+                              <select class="form-control form-control-border gender required" name="gender" required>
                                 <option selected value="">Select Gender</option>
                                 <option value="0" @if($profile->gender == 0) selected @endif>Male</option>
                                 <option value="1" @if($profile->gender == 1) selected @endif>Female</option>
@@ -654,7 +654,7 @@
                              <div class="col-md-4">
                                 <h6 class="card-subtitle req-field">Ethnicity:</h6>
                                 <div class="form-group">
-                                    <select class="form-control form-control-border ethnicity" name="ethnicity" required>
+                                    <select class="form-control form-control-border ethnicity required" name="ethnicity" required>
                                       <option selected value="">Select Ethnicity</option>
                                       <option value="Filipino" @if($profile->ethnicity == 'Filipino') selected @endif>Filipino</option>
                                       <option value="Negrito" @if($profile->ethnicity == 'Negrito') selected @endif>Negrito</option>
@@ -720,7 +720,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <h6 class="card-subtitle req-field">Religion: <span style="color:red;">*</span></h6>
-                                  <select class="form-control form-control-border religion" name="religion" required>
+                                  <select class="form-control form-control-border religion required" name="religion" required>
                                     <option selected value="">Select Religion</option>
                                     <option value="AGLIP"@if($profile->religion == 'AGLIP') selected @endif>AGLIPAY</option>
                                     <option value="ALLY"@if($profile->religion == 'ALLY') selected @endif>ALLIANCE OF BIBLE CHRISTIAN COMMUNITIES</option>
@@ -749,7 +749,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <h6 class="card-subtitle req-field">Civil Status: <span style="color:red;">*</span></h6>
-                                  <select class="form-control form-control-border civilstat" name="civilstat" required>
+                                  <select class="form-control form-control-border civilstat required" name="civilstat" required>
                                     <option selected value="">Select Status</option>
                                     <option value="0"@if($profile->civilstat == '0') selected @endif>Single</option>
                                     <option value="1"@if($profile->civilstat == '1') selected @endif>Married</option>
@@ -830,7 +830,7 @@
                                         <label class="form-check-label">Yes</label>
                                     </div>
                                     <div class="form-group" id="status">
-                                    <input type="text" class="form-control form-control-border required" name="pwd_no" placeholder="Please Specify I.D. No." value="{{$profile->pwd_no}}">
+                                    <input type="text" class="form-control form-control-border" name="pwd_no" placeholder="Please Specify I.D. No." value="{{$profile->pwd_no}}">
                                 </div>
                              </div>
                              <div class="col-md-4">
@@ -844,7 +844,7 @@
                                     <label class="form-check-label">Yes</label>
                                 </div>
                                 <div class="form-group" id="solopar">
-                                    <input type="text" class="form-control form-control-border required" name="soloparent_no" placeholder="Please Specify I.D. No." value="{{$profile->soloparent_no}}">
+                                    <input type="text" class="form-control form-control-border" name="soloparent_no" placeholder="Please Specify I.D. No." value="{{$profile->soloparent_no}}">
                                 </div>
                              </div>
                              <div class="col-sm-12">
@@ -1657,47 +1657,134 @@
             }
         }
     });
-    $('#applicant-info-form').on('submit',function(e){
-        var url = "{{ secure_url('save-application-update') }}";
-        e.preventDefault();
+    // $('#applicant-info-form').on('submit',function(e){
+    //     var url = "{{ url('save-application-update') }}";
+    //     e.preventDefault();
+    //     $(".loading").show();
+    //     $('#applicant-info-form').ajaxSubmit({
+    //         url:  url,
+    //         type: "post",
+    //         success: function(data){
+    //         if(data == 'email') {
+    //             $(".loading").hide();
+    //             $.toast({
+    //                 heading: 'Error',
+    //                 text: 'Email already exist',
+    //                 showHideTransition: 'fade',
+    //                 position: 'top-center',
+    //                 icon: 'error'
+    //             })
+    //         } else {
+    //             $.toast({
+    //                 heading: 'Success',
+    //                 text: 'Successfully Updated Profile, Please refresh page to retrieve changes',
+    //                 showHideTransition: 'fade',
+    //                 icon: 'success'
+    //             })
+    //             $(".loading").hide();
+    //           //   setTimeout(function(){
+    //           //     window.location.reload(false);
+    //           // },500);
+    //         }
+    //         },
+    //         error: function (data) {
+    //             $(".loading").hide();
+    //             $.toast({
+    //                 heading: 'Error',
+    //                 text: 'Something went wrong, Please finish profiling',
+    //                 showHideTransition: 'fade',
+    //                 icon: 'error'
+    //             })
+    //         },
+    //     });
+    // });
+    //Newly added code for form validation
+    $('#applicant-info-form').on('submit', function(e){
+        e.preventDefault(); // stop default submission
+
+        var isValid = true;
+
+        // 1️⃣ Text inputs
+        $(this).find('input.required').each(function(){
+            if ($(this).val().trim() === ''){
+                isValid = false;
+                $(this).addClass('is-invalid');
+            } else {
+                $(this).removeClass('is-invalid');
+            }
+        });
+
+        // 2️⃣ Dropdowns
+        $(this).find('select.required').each(function(){
+            if ($(this).val() === '' || $(this).val() === null){
+                isValid = false;
+                $(this).addClass('is-invalid');
+            } else {
+                $(this).removeClass('is-invalid');
+            }
+        });
+
+        // 3️⃣ Checkbox / Radio groups
+        $(this).find('.required-group').each(function(){
+            if ($(this).find('input:checked').length === 0){
+                isValid = false;
+                $(this).addClass('is-invalid');
+            } else {
+                $(this).removeClass('is-invalid');
+            }
+        });
+
+        // 4️⃣ Profile photo
+        var photoInput = $('#upProfile');
+        var hasPhoto = photoInput.val() !== '' || "{{ $users->profile && $users->profile->picture_link ? 'true' : 'false' }}";
+        if (hasPhoto === false || hasPhoto === 'false'){
+            isValid = false;
+            photoInput.addClass('is-invalid');
+        } else {
+            photoInput.removeClass('is-invalid');
+        }
+
+        // ❌ Show generic toast if any required field missing
+        if (!isValid){
+            $.toast({
+                heading: 'Missing Fields',
+                text: 'Please fill in all required fields marked with *.',
+                position: 'top-center',
+                icon: 'error',
+                hideAfter: false
+            });
+            return false; // stop submission
+        }
+
+        // ✅ Proceed with AJAX submit
         $(".loading").show();
-        $('#applicant-info-form').ajaxSubmit({
-            url:  url,
+        var url = "{{ url('save-application-update') }}";
+        $(this).ajaxSubmit({
+            url: url,
             type: "post",
             success: function(data){
-            if(data == 'email') {
                 $(".loading").hide();
-                $.toast({
-                    heading: 'Error',
-                    text: 'Email already exist',
-                    showHideTransition: 'fade',
-                    position: 'top-center',
-                    icon: 'error'
-                })
-            } else {
                 $.toast({
                     heading: 'Success',
-                    text: 'Successfully Updated Profile, Please refresh page to retrieve changes',
-                    showHideTransition: 'fade',
+                    text: 'Profile updated successfully!',
+                    position: 'top-center',
                     icon: 'success'
-                })
-                $(".loading").hide();
-              //   setTimeout(function(){
-              //     window.location.reload(false);
-              // },500);
-            }
+                });
             },
-            error: function (data) {
+            error: function(){
                 $(".loading").hide();
                 $.toast({
                     heading: 'Error',
-                    text: 'Something went wrong, Please finish profiling',
-                    showHideTransition: 'fade',
+                    text: 'Something went wrong!',
+                    position: 'top-center',
                     icon: 'error'
-                })
-            },
+                });
+            }
         });
     });
+
+
+
     var dobs = $('#dob').val();
     function age(dob) {
         if(dob) {
@@ -1736,7 +1823,7 @@
     } );
     $( ".btn-delete-pds" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-pds') }}";
+        var url = "{{ url('/delete-pds') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1760,7 +1847,7 @@
 
     $( ".btn-delete-wes" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-wes') }}";
+        var url = "{{ url('/delete-wes') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1783,7 +1870,7 @@
     } );
     $( ".btn-delete-tc" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-tc') }}";
+        var url = "{{ url('/delete-tc') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1806,7 +1893,7 @@
     } );
     $( ".btn-delete-coe" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-coe') }}";
+        var url = "{{ url('/delete-coe') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1829,7 +1916,7 @@
     } );
     $( ".btn-delete-ipcr" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-ipcr') }}";
+        var url = "{{ url('/delete-ipcr') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1853,7 +1940,7 @@
 
     $( ".btn-delete-tor" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-tor') }}";
+        var url = "{{ url('/delete-tor') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1876,7 +1963,7 @@
     } );
     $( ".btn-delete-elig" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-elig') }}";
+        var url = "{{ url('/delete-elig') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1899,7 +1986,7 @@
     } );
     $( ".btn-delete-doc" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ secure_url('/delete-doc') }}";
+        var url = "{{ url('/delete-doc') }}";
         $.ajax({
             async: true,
             url: url,
