@@ -1658,7 +1658,7 @@
         }
     });
     // $('#applicant-info-form').on('submit',function(e){
-    //     var url = "{{ url('save-application-update') }}";
+    //     var url = "{{ secure_url('save-application-update') }}";
     //     e.preventDefault();
     //     $(".loading").show();
     //     $('#applicant-info-form').ajaxSubmit({
@@ -1758,7 +1758,7 @@
 
         // ✅ Proceed with AJAX submit
         $(".loading").show();
-        var url = "{{ url('save-application-update') }}";
+        var url = "{{ secure_url('save-application-update') }}";
         $(this).ajaxSubmit({
             url: url,
             type: "post",
@@ -1823,7 +1823,7 @@
     } );
     $( ".btn-delete-pds" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-pds') }}";
+        var url = "{{ secure_url('/delete-pds') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1847,7 +1847,7 @@
 
     $( ".btn-delete-wes" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-wes') }}";
+        var url = "{{ secure_url('/delete-wes') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1870,7 +1870,7 @@
     } );
     $( ".btn-delete-tc" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-tc') }}";
+        var url = "{{ secure_url('/delete-tc') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1893,7 +1893,7 @@
     } );
     $( ".btn-delete-coe" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-coe') }}";
+        var url = "{{ secure_url('/delete-coe') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1916,7 +1916,7 @@
     } );
     $( ".btn-delete-ipcr" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-ipcr') }}";
+        var url = "{{ secure_url('/delete-ipcr') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1940,7 +1940,7 @@
 
     $( ".btn-delete-tor" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-tor') }}";
+        var url = "{{ secure_url('/delete-tor') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1963,7 +1963,7 @@
     } );
     $( ".btn-delete-elig" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-elig') }}";
+        var url = "{{ secure_url('/delete-elig') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1986,7 +1986,7 @@
     } );
     $( ".btn-delete-doc" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-doc') }}";
+        var url = "{{ secure_url('/delete-doc') }}";
         $.ajax({
             async: true,
             url: url,
