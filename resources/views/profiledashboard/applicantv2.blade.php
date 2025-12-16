@@ -547,15 +547,16 @@
                         <p class="text-danger">NOTE: Please make sure to fill in the required fields and attachments.</p>
                         <hr>
                         <div class="col-md-4 my-4">
+                           <div class="text-center">
+                                <!-- Show current picture if exists -->
+                                @if($users->profile && $users->profile->picture_link)
+                                    <img class="img-circle profile-picture" src="{{ asset('storage/app/public/'.$users->id.'/'.$users->profile->picture_link) }}" alt="User Avatar" width="120">
+                                @else
+                                    <img class="img-circle" src="{{ asset('public/img/profile.png') }}" alt="User Avatar" width="120">
+                                @endif
+                            </div>
+
                             <h6 class="card-subtitle req-field mb-1">Upload Photo: <span style="color:red;">*</span></h6>
-
-                            <!-- Show current picture if exists -->
-                            @if($users->profile && $users->profile->picture_link)
-                                <div class="mb-2">
-                                    <img src="{{ asset('storage/' . $users->profile->picture_link) }}" alt="Profile Picture" class="img-thumbnail" width="150">
-                                </div>
-                            @endif
-
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="custom-file">
@@ -653,7 +654,7 @@
                              <div class="col-md-4">
                                 <h6 class="card-subtitle req-field">Ethnicity:</h6>
                                 <div class="form-group">
-                                    <select class="form-control form-control-border ethnicity" name="ethnicity">
+                                    <select class="form-control form-control-border ethnicity" name="ethnicity" required>
                                       <option selected value="">Select Ethnicity</option>
                                       <option value="Filipino" @if($profile->ethnicity == 'Filipino') selected @endif>Filipino</option>
                                       <option value="Negrito" @if($profile->ethnicity == 'Negrito') selected @endif>Negrito</option>
@@ -1145,6 +1146,7 @@
 @endsection
 @section('js')
 <script>
+    // var hasValidationError = false;
     $(function () {
     bsCustomFileInput.init();
       $('.summernote').summernote({
@@ -1156,9 +1158,9 @@
       $('.datemask').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
       $('.select2').select2()
     });
-    $(".btn-save-profile").click(function (e) {
-        $( "#applicant-info-form" ).trigger( "submit" );
-    });
+    // $(".btn-save-profile").click(function (e) {
+    //     $( "#applicant-info-form" ).trigger( "submit" );
+    // });
     Dropzone.autoDiscover = false,
     $("#wesFile").dropzone({
       addRemoveLinks: true,
@@ -1356,55 +1358,128 @@
         });
       }
     });
+    // $("#pdsFile").dropzone({
+    //   addRemoveLinks: true,
+    //   autoProcessQueue: false,
+    //   maxFiles: 2000,
+    //   parallelUploads: 10000,
+    //   acceptedFiles: ".pdf",
+    //   paramName: "mypds[]",
+    //   url: "{{url('/save-application-update')}}",
+    //   dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
+    //   init: function() {
+    //     var myDropzone = this;
+    //     // Update selector to match your button
+    //     $(".btn-save-profile").click(function (e) {
+    //         if (myDropzone.getUploadingFiles().length > 0 || myDropzone.getQueuedFiles().length > 0) {
+    //             myDropzone.processQueue();
+    //         }
+    //     });
+    //     this.on('error', function(file, xhr, formData) {
+    //         $.toast({
+    //             heading: 'Invalid File Format',
+    //             text: 'Only PDF File will accept/Upload size too large!',
+    //             position: 'top-center',
+    //             icon: 'error',
+    //             hideAfter: false
+    //         })
+    //         this.removeFile(file);
+    //     });
+    //     this.on('sending', function(file, xhr, formData) {
+    //         // Append all form inputs to the formData Dropzone will POST
+    //         var data = $('#applicant-info-form').serializeArray();
+    //         $.each(data, function(key, el) {
+    //             formData.append(el.name, el.value);
+    //         });
+    //         $.toast({
+    //             heading: 'Uploading',
+    //             text: 'Uploading Personal Data Sheet',
+    //             position: 'top-center'
+    //         })
+    //     });
+    //     this.on("success", function(file, responseText) {
+    //         $.toast({
+    //             heading: 'Saved',
+    //             text: 'Successfully Saved Personal Data Sheet, Refresh page to apply changes',
+    //             position: 'top-center'
+    //         })
+    //         this.removeFile(file);
+    //     });
+    //   }
+    // });
+    // Updated line of code for PDS File
     $("#pdsFile").dropzone({
-      addRemoveLinks: true,
-      autoProcessQueue: false,
-      maxFiles: 2000,
-      parallelUploads: 10000,
-      acceptedFiles: ".pdf",
-      paramName: "mypds[]",
-      url: "{{url('/save-application-update')}}",
-      dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf .Upload file size up to 5mb only',
-      init: function() {
-        var myDropzone = this;
-        // Update selector to match your button
-        $(".btn-save-profile").click(function (e) {
-            if (myDropzone.getUploadingFiles().length > 0 || myDropzone.getQueuedFiles().length > 0) {
-                myDropzone.processQueue();
-            }
-        });
-        this.on('error', function(file, xhr, formData) {
-            $.toast({
-                heading: 'Invalid File Format',
-                text: 'Only PDF File will accept/Upload size too large!',
-                position: 'top-center',
-                icon: 'error',
-                hideAfter: false
-            })
-            this.removeFile(file);
-        });
-        this.on('sending', function(file, xhr, formData) {
-            // Append all form inputs to the formData Dropzone will POST
-            var data = $('#applicant-info-form').serializeArray();
-            $.each(data, function(key, el) {
-                formData.append(el.name, el.value);
+        addRemoveLinks: true,
+        autoProcessQueue: false,
+        maxFiles: 2000,
+        parallelUploads: 10000,
+        acceptedFiles: ".pdf",
+        paramName: "mypds[]",
+        url: "{{url('/save-application-update')}}",
+        dictDefaultMessage: 'Click or drop files here. Accepted file: .pdf. Upload file size up to 5MB only',
+        init: function() {
+            var myDropzone = this;
+            var alreadyUploaded = false; // Track if a file is already uploaded
+            // If you have existing files on the server, mark as uploaded
+            @if(isset($users->pds) && count($users->pds) > 0)
+                alreadyUploaded = true;
+            @endif
+            // Save button click
+            $(".btn-save-profile").click(function (e) {
+                e.preventDefault();
+                // Check if there are any new files or already uploaded files
+                if (!alreadyUploaded && myDropzone.getAcceptedFiles().length === 0) {
+                    $.toast({
+                        heading: 'Missing File Requirement',
+                        text: 'Please upload your Personal Data Sheet (PDF) before saving.',
+                        position: 'top-center',
+                        icon: 'error',
+                        hideAfter: false
+                    });
+                    return false; // stop further processing
+                }
+                // If there are files to upload, process them
+                if (myDropzone.getUploadingFiles().length > 0 || myDropzone.getQueuedFiles().length > 0) {
+                    myDropzone.processQueue();
+                } else {
+                    // No new files, but already uploaded => proceed to submit form via AJAX
+                    $("#applicant-info-form").submit();
+                }
             });
-            $.toast({
-                heading: 'Uploading',
-                text: 'Uploading Personal Data Sheet',
-                position: 'top-center'
-            })
-        });
-        this.on("success", function(file, responseText) {
-            $.toast({
-                heading: 'Saved',
-                text: 'Successfully Saved Personal Data Sheet, Refresh page to apply changes',
-                position: 'top-center'
-            })
-            this.removeFile(file);
-        });
-      }
+            this.on('error', function(file, xhr, formData) {
+                $.toast({
+                    heading: 'Invalid File Format',
+                    text: 'Only PDF files are accepted / Upload size too large!',
+                    position: 'top-center',
+                    icon: 'error',
+                    hideAfter: false
+                });
+                this.removeFile(file);
+            });
+
+            this.on('sending', function(file, xhr, formData) {
+                var data = $('#applicant-info-form').serializeArray();
+                $.each(data, function(key, el) {
+                    formData.append(el.name, el.value);
+                });
+                $.toast({
+                    heading: 'Uploading',
+                    text: 'Uploading Personal Data Sheet',
+                    position: 'top-center'
+                });
+            });
+            this.on("success", function(file, responseText) {
+                alreadyUploaded = true; // Mark that we now have at least one uploaded file
+                $.toast({
+                    heading: 'Saved',
+                    text: 'Successfully Saved Personal Data Sheet. Refresh page to apply changes',
+                    position: 'top-center'
+                });
+                this.removeFile(file);
+            });
+        }
     });
+    // Updated line of code for PDS File
     $("#torFile").dropzone({
       addRemoveLinks: true,
       autoProcessQueue: false,
