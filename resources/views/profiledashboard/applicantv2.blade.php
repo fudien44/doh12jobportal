@@ -890,7 +890,7 @@
                              <div class="col-sm-12">
                                 <div class="card border border-primary card-primary">
                                     <div class="card-header">
-                                        <h5>CSC Work Experience Sheet <span style="color:red;">*</span></h5>
+                                        <h5>CSC Work Experience Sheet</h5>
                                     </div>
                                     <div class="card-body">
                                         @if($users->wes)
@@ -925,7 +925,7 @@
                              <div class="col-sm-12">
                                 <div class="card border border-primary card-primary">
                                     <div class="card-header">
-                                        <h5>Training Certificates <span style="color:red;">*</span></h5>
+                                        <h5>Training Certificates</h5>
                                     </div>
                                     <div class="card-body">
                                         @if($users->tc)
@@ -1658,7 +1658,7 @@
         }
     });
     $('#applicant-info-form').on('submit',function(e){
-        var url = "{{ url('save-application-update') }}";
+        var url = "{{ secure_url('save-application-update') }}";
         e.preventDefault();
         $(".loading").show();
         $('#applicant-info-form').ajaxSubmit({
@@ -1736,7 +1736,7 @@
     } );
     $( ".btn-delete-pds" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-pds') }}";
+        var url = "{{ secure_url('/delete-pds') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1760,7 +1760,7 @@
 
     $( ".btn-delete-wes" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-wes') }}";
+        var url = "{{ secure_url('/delete-wes') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1783,7 +1783,7 @@
     } );
     $( ".btn-delete-tc" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-tc') }}";
+        var url = "{{ secure_url('/delete-tc') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1806,7 +1806,7 @@
     } );
     $( ".btn-delete-coe" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-coe') }}";
+        var url = "{{ secure_url('/delete-coe') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1829,7 +1829,7 @@
     } );
     $( ".btn-delete-ipcr" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-ipcr') }}";
+        var url = "{{ secure_url('/delete-ipcr') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1853,7 +1853,7 @@
 
     $( ".btn-delete-tor" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-tor') }}";
+        var url = "{{ secure_url('/delete-tor') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1876,7 +1876,7 @@
     } );
     $( ".btn-delete-elig" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-elig') }}";
+        var url = "{{ secure_url('/delete-elig') }}";
         $.ajax({
             async: true,
             url: url,
@@ -1899,7 +1899,7 @@
     } );
     $( ".btn-delete-doc" ).on( "click", function() {
         var id = $(this).attr('data-id');
-        var url = "{{ url('/delete-doc') }}";
+        var url = "{{ secure_url('/delete-doc') }}";
         $.ajax({
             async: true,
             url: url,
