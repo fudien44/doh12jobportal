@@ -13,6 +13,12 @@ use App\User;
 use App\Profile;
 use App\Application;
 use App\SalGrade;
+
+use Illuminate\Support\Facades\DB;
+
+
+
+
 class HomeController extends Controller
 {
     /**
@@ -74,6 +80,66 @@ class HomeController extends Controller
                 }
             }
             $jobs = $jobs->orderBy('date_posted','ASC')->get();
+
+
+
+        // Gender Distribution (numeric)
+        $maleCount = Profile::where('gender', 0)->count();
+        $femaleCount = Profile::where('gender', 1)->count();
+        $transgenderCount = Profile::where('gender', 2)->count();
+        $twoSpiritCount = Profile::where('gender', 3)->count();
+        $cisgenderCount = Profile::where('gender', 4)->count();
+        $nonBinaryCount = Profile::where('gender', 5)->count();
+        $genderqueerCount = Profile::where('gender', 6)->count();
+        $genderExpressionCount = Profile::where('gender', 7)->count();
+        $genderFluidCount = Profile::where('gender', 8)->count();
+        $genderNeutralCount = Profile::where('gender', 9)->count();
+        $preferNotSayCount = Profile::where('gender', 10)->count();
+
+        // Age Distribution
+        $today = Carbon::today();
+        $age1824 = Profile::whereBetween('dob', [$today->copy()->subYears(24), $today->copy()->subYears(18)])->count();
+        $age2529 = Profile::whereBetween('dob', [$today->copy()->subYears(29), $today->copy()->subYears(25)])->count();
+        $age3034 = Profile::whereBetween('dob', [$today->copy()->subYears(34), $today->copy()->subYears(30)])->count();
+        $age3539 = Profile::whereBetween('dob', [$today->copy()->subYears(39), $today->copy()->subYears(35)])->count();
+        $age40plus = Profile::where('dob', '<=', $today->copy()->subYears(40))->count();
+
+        // Education Level Distibution
+        $eduNA = Profile::where('highest_education', '0')->count();
+        $eduVocational = Profile::where('highest_education', '1')->count();
+        $eduCollege = Profile::where('highest_education', '2')->count();
+        $eduGraduate = Profile::where('highest_education', '3')->count();
+
+
+        // Ethinicity To 5
+        $topEthnicities = Profile::select('ethnicity', DB::raw('count(*) as total'))
+            ->groupBy('ethnicity')
+            ->orderByDesc('total')
+            ->limit(5)
+            ->pluck('total', 'ethnicity'); // ['Filipino' => 25, 'Tagalog' => 10, ...]
+
+        $ethLabels = $topEthnicities->keys()->toArray();
+        $ethData = $topEthnicities->values()->toArray();
+
+        // PWD status 
+        $pwdCount = Profile::where('is_pwd', 0)->count(); // 1 = PWD
+        $nonPwdCount = Profile::where('is_pwd', 1)->count();
+
+        // Solo Parent  
+        $soloYes = Profile::where('is_solpar', 0)->count();
+        $soloNo = Profile::where('is_solpar', 1)->count();
+
+        // Religion
+        $topReligions = Profile::select('religion', DB::raw('count(*) as total'))
+            ->groupBy('religion')
+            ->orderByDesc('total')
+            ->limit(5)
+            ->pluck('total', 'religion'); // ['CATHO' => 50, 'AGLIP' => 20, ...]
+
+        $relLabels = $topReligions->keys()->toArray();
+        $relData = $topReligions->values()->toArray();
+
+
             return view('home', [
                 'jobs' => $jobs,
                 'jobsposted' => $jobsposted,
@@ -83,7 +149,36 @@ class HomeController extends Controller
                 'jobs0type' => $jobs0type,
                 'jobs1type' => $jobs1type,
                 'sjobtype' => $sjobtype,
+                'maleCount' => $maleCount, // gender
+                'femaleCount' => $femaleCount,
+                'transgenderCount' => $transgenderCount,
+                'twoSpiritCount' => $twoSpiritCount,
+                'cisgenderCount' => $cisgenderCount,
+                'nonBinaryCount' => $nonBinaryCount,
+                'genderqueerCount' => $genderqueerCount,
+                'genderExpressionCount' => $genderExpressionCount,
+                'genderFluidCount' => $genderFluidCount,
+                'genderNeutralCount' => $genderNeutralCount,
+                'preferNotSayCount' => $preferNotSayCount,
+                'age1824' => $age1824, // age
+                'age2529' => $age2529,
+                'age3034' => $age3034,
+                'age3539' => $age3539,
+                'age40plus' => $age40plus,
+                'eduNA' => $eduNA, // education
+                'eduVocational' => $eduVocational,
+                'eduCollege' => $eduCollege,
+                'eduGraduate' => $eduGraduate,
+                'ethLabels' => $ethLabels, //ethnicity
+                'ethData' => $ethData,
+                'pwdCount' => $pwdCount, // pwd
+                'nonPwdCount' => $nonPwdCount,
+                'soloYes' => $soloYes, //solo parent
+                'soloNo' => $soloNo,
+                'relLabels' => $relLabels, //religion
+                'relData' => $relData,
             ]);
+
             // if (Auth::user() && !Auth::user()->email_verified_at) {
             //     return redirect()->route('otp');
             // }
@@ -112,6 +207,12 @@ class HomeController extends Controller
             //     ]);
             // }
         }
+
+
+
+
+
+        
    
     }
         

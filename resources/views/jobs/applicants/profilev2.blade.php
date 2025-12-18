@@ -564,55 +564,57 @@
           <!-- /.card -->
         </div>
 
-        <div class="col-md-12">
+        <div class="col-12 col-md-12">
           <div class="card">
             <div class="card-header p-2">
-              <div class="card-title text-primary m-1">Application History (Under Development)</div>
+              <div class="card-title text-primary m-1">Application History</div>
             </div>
-            <div class="card-body">
-              @if($applications->isEmpty())
-                <p>No applications found for this user.</p>
-              @else
-              <table class="table table-hover">
-                  <thead>
-                      <tr class="text-primary">
-                          <th>Position Applied</th>
-                          <th>Area of Assignment</th>
-                          <th>Remarks</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      @foreach($applications as $application)
-                          <tr class="text-secondary">
-                              <!-- Job Title -->
-                              <td>{{ $application->job->job_title }}</td>
-                              <!-- Area of Assignment -->
-                              <td>{{ $application->job->area_ass }}</td>
-                              <!-- Remarks -->
-                              <td>
-                                  @if($application->msg->isNotEmpty())
-                                      {!! $application->latst->tp() !!}
-                                  @else
-                                      <small class="badge badge-danger" style="cursor: pointer;">
-                                          <i class="far fa-clock"></i> In review
-                                      </small>
-                                  @endif
-                              </td>
-                          </tr>
-                      @endforeach
-                  </tbody>
-              </table>
-
+            <div class="card-body table-responsive">
+                @if($applications->isEmpty())
+                    <p>No applications found for this user.</p>
+                @else
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="text-primary">
+                            <th>Position Applied</th>
+                            <th>Area of Assignment</th>
+                            <th>Date Applied</th>
+                            <th>Status of Employment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($applications as $application)
+                            <tr class="text-secondary">
+                                <!-- Job Title -->
+                                <td>{{ $application->job->job_title }}</td>
+                                <!-- Area of Assignment -->
+                                <td>{{ $application->job->area_ass }}</td>
+                                <!-- Date Applied -->
+                                <td>{{ $application->created_at ? date('F j, Y', strtotime($application->created_at)): ''}}</td>
+                                <!-- Status of Employment -->
+                                <td>
+                                    @if($application->msg->isNotEmpty())
+                                        {!! $application->latst->tp() !!}
+                                    @else
+                                        <small class="badge badge-danger">
+                                            <i class="far fa-clock"></i> In review
+                                        </small>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
               @endif
             </div>
           </div>
         </div>
 
-        
+
       </div>
     </div>
     <!-- /.col -->
-    
+
   </div>
 </div>
 @endsection
@@ -653,7 +655,7 @@
             }
         });
     } );
-    
+
     $( ".btn-delete-wes" ).on( "click", function() {
         var id = $(this).attr('data-id');
         var url = "{{ secure_url('/delete-wes') }}";
