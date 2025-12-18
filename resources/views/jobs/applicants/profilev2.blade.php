@@ -567,7 +567,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header p-2">
-              <div class="card-title text-primary m-1">Application History (Under Development)</div>
+              <div class="card-title text-primary m-1">Application History</div>
             </div>
             <div class="card-body">
               @if($applications->isEmpty())
@@ -578,7 +578,8 @@
                       <tr class="text-primary">
                           <th>Position Applied</th>
                           <th>Area of Assignment</th>
-                          <th>Remarks</th>
+                          <th>Date Applied</th>
+                          <th>Status of Employment</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -588,12 +589,14 @@
                               <td>{{ $application->job->job_title }}</td>
                               <!-- Area of Assignment -->
                               <td>{{ $application->job->area_ass }}</td>
-                              <!-- Remarks -->
+                              <!-- Date Applied -->
+                              <td>{{ $application->created_at ? date('F j, Y', strtotime($application->created_at)): ''}}</td>
+                              <!-- Status of Employment -->
                               <td>
                                   @if($application->msg->isNotEmpty())
                                       {!! $application->latst->tp() !!}
                                   @else
-                                      <small class="badge badge-danger" style="cursor: pointer;">
+                                      <small class="badge badge-danger">
                                           <i class="far fa-clock"></i> In review
                                       </small>
                                   @endif
@@ -602,17 +605,16 @@
                       @endforeach
                   </tbody>
               </table>
-
               @endif
             </div>
           </div>
         </div>
 
-        
+
       </div>
     </div>
     <!-- /.col -->
-    
+
   </div>
 </div>
 @endsection
@@ -653,7 +655,7 @@
             }
         });
     } );
-    
+
     $( ".btn-delete-wes" ).on( "click", function() {
         var id = $(this).attr('data-id');
         var url = "{{ secure_url('/delete-wes') }}";
