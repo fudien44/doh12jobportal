@@ -39,6 +39,20 @@
         <div class="card-body">
             {!! $msg->message !!}
         </div>
+         @if($msg->attch->count() > 0)
+                    <div class="card-body">
+                        <i>Attachments:</i><br/>
+                        @foreach($msg->attch as $attachment)
+                        <a href="{{ asset('public/storage/attach/'.$attachment->file_name) }}" target="_blank">
+                            {{ $attachment->file_name }}
+                        </a><br/>
+                        @endforeach
+                    </div>
+                @else
+                    <div class="card-body">
+                        <b>No Attachments</b>
+                    </div>
+                @endif
         <div class="modal-footer">
             <button type="button" class="btn btn-danger btn-delete-msg" data-id="{{$msg->id}}">Delete</button>
         </div>
