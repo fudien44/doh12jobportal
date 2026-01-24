@@ -60,32 +60,30 @@ class ExcelCtrl extends Controller
 
             $table_body .= "<tr>
                 <td style='vertical-align: middle; text-align: center;'>" . ($index + 1) . "</td>
-               <td style='vertical-align:top;'>
-                    <b>".$a->applicant->fname." ".$a->applicant->mname." ".$a->applicant->lname."</b><br><br>
-                    Contact Number: ".$a->applicant->contactno."<br>
-                    Email Address: ".$a->applicant->email ."<br>
-                    Age: ".\Carbon\Carbon::parse($a->applicant->profile->dob)->age."<br>
-                    Gender: ".$a->applicant->profile->gndr()."<br>
-                    Religion: ".$a->applicant->profile->relgion()."<br>
-                    Status: ".$a->applicant->profile->cs()."<br>
-                    Address: ".$a->applicant->profile->address."<br>
-                    <div style='margin-bottom: 40px; vertical-align: top;'>Years of Experience: ".$a->applicant->profile->work_experience."<br><br></div>
+               <td style='width: 420px;  white-space: pre-wrap; word-wrap: break-word; vertical-align: top; line-height: 1.2;'>
+                    <b>
+                   {$a->applicant->lname}, {$a->applicant->fname} {$a->applicant->mname} 
+                    </b><br><br>&#10;
+                    Contact Number: {$a->applicant->contactno}<br>&#10;
+                    Email Address: {$a->applicant->email}<br>&#10;
+                    Age: ".Carbon::parse($a->applicant->profile->dob)->age." years old<br>&#10;
+                    Gender: ".$a->applicant->profile->gndr()."<br>&#10;
+                    Religion: ".$a->applicant->profile->relgion()."<br>&#10;
+                    Civil Status: ".$a->applicant->profile->cs()."<br>&#10;
+                    Address: ".$a->applicant->profile->address."<br>&#10;
+                    Years of Experience: ".$a->applicant->profile->work_experience."<br><br><br>&#10;&#10;
                 </td>
-                <td style='vertical-align: top;'>
-                    <br>
-                    <br>
-                    <br>
-                    Course Title:".$a->applicant->profile->course."<br>
-                    Name of School/University:".$a->applicant->profile->school."<br>
-                    Eligibility/License/Honor Graduate: ".$a->applicant->profile->eligibity."
-                    <br>
-                    <br>'
-                    <br>
+                <td style='width:420px; vertical-align: middle; line-height:1.2; white-space: normal; mso-wrap-text: yes;'>
+                    Course Title: {$a->applicant->profile->course}
+                    <br style='mso-data-placement:same-cell'>
+                    Name of School/University: {$a->applicant->profile->school}
+                    <br style='mso-data-placement:same-cell'>
+                    Eligibility/ License/ Honor Graduate: {$a->applicant->profile->eligibity}
                 </td>
                 <td style='text-align: center; vertical-align: middle;'>{$ethnicity_pwd_solopar}</td>
-                <td></td>
-                <td></td>
-                <td style='text-align: center;'></td>
+                <td style='text-align: center; vertical-align: middle;'></td>
+                <td style='text-align: center; vertical-align: middle;'></td>
+                <td style='text-align: center; vertical-align: middle;'></td>
             </tr>";
         }
 
@@ -172,17 +170,33 @@ class ExcelCtrl extends Controller
 
         $display = "
             <h2 style='text-align: center;'>{$title}</h2>
-            <h3>Minimum Qualifications (based on CSC Qualification Standards)</h3>
-            <ul>
-                <li>Education: {$apps->education}</li>
-                <li>Experience: {$apps->experience}</li>
-                <li>Training: {$apps->training}</li>
-                <li>Eligibility: {$apps->eligibility}</li>
-            </ul>
-            <h3>Additional Requirements (based on DOH -CHD Regional Memorandum No.: 142 s. 2018)</h3>
-            <ul>
-                <li>Education: {$apps->add_req}</li>
-            </ul>
+            <h4>Minimum Qualifications (based on CSC Qualification Standards)</h4>
+            <table cellpadding='4' cellspacing='0' border='0' style='border-collapse:collapse;'>
+                <tr>
+                    <td style='width:180px;'>Education:</td>
+                    <td style='font-weight:bold;'>{$apps->education}</td>
+                </tr>
+                <tr>
+                    <td>Experience:</td>
+                    <td style='font-weight:bold;'>{$apps->experience}</td>
+                </tr>
+                <tr>
+                    <td>Training:</td>
+                    <td style='font-weight:bold;'>{$apps->training}</td>
+                </tr>
+                <tr>
+                    <td>Eligibility:</td>
+                    <td style='font-weight:bold;'>{$apps->eligibility}</td>
+                </tr>
+            </table>
+            <h4>Additional Requirements (based on DOH -CHD Regional Memorandum No.: 142 s. 2018)</h4>
+            <table cellpadding='4' cellspacing='0' border='0' style='border-collapse:collapse;'>
+                <tr>
+                    <td style='width:180px;'>Education:</td>
+                    <td style='font-weight:bold;'>{$apps->add_req}</td>
+                </tr>
+            </table>
+           
             <table cellspacing='1' cellpadding='5' border='1'>
             <tr>
                 <td style='background-color:lightgreen; text-align: center;'>NO.</td>
