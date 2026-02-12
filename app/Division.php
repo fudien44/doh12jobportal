@@ -16,4 +16,7 @@ class Division extends Model
     public function section() {
         return $this->hasMany(Section::class, 'office', 'id');
     }
+    public function psipop(){
+        return $this->hasMany(PsipopModel::class, 'division_id', 'id');
+    }
 }
