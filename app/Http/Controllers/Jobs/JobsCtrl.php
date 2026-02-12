@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Jobs;
 
+use App\ApiPosition;
+use App\ApiSalGrade;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -33,10 +35,12 @@ class JobsCtrl extends Controller
     	$jobs = Jobs::orderBy('date_posted','desc')->get();
     	$salary = SalGrade::all();
         $us = User::where('level', 1)->get();
+        // $positions = Position::orderBy('position')->pluck('position', 'id');
     	return view('jobs.jobspost',[
     		'jobs' => $jobs,
     		'salary' => $salary,
             'us' => $us,
+            // 'positions' => $positions,
     	]);
     }
     public function aeJobPost(Request $req) {

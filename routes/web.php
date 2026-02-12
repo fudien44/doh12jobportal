@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\DB;
+
 Route::match(['GET','POST'],'/', function () {
     return redirect()->route('home');
 });
@@ -48,7 +50,6 @@ Route::group(['middleware' => 'superadmin'], function(){
 
 // Cancel Application
 Route::post('/cancel-application', 'Jobs\JobsCtrl@cancelApplication');
-
 
 //Excel
 Route::get('/excel/rdr/{appid}', 'Excel\ExcelCtrl@rdr')->middleware('verified');
