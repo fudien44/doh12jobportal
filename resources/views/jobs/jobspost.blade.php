@@ -101,9 +101,29 @@
         <form id="post_form" method="POST">
           @csrf
           <input type="hidden" name="post_id" value="">
-        <div class="form-group">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Status of Employment</label>
+              <select id="term_emp" class="form-control-lg select2 term_emp" name="term_emp" >
+                <option selected value="">Select Status of Employment</option>
+                <option value="0" selected>PS-Contractual</option>
+                <option value="1">Contract of Service/ Job Order</option>
+                <option value="2">Plantilla/Permanent</option>
+              </select>
+            </div>
+          </div>
+        <div class="form-group" id="job_title_text">
           <label >Job Title</label>
           <input type="text" class="form-control form-control-border" name="job_title" placeholder="Job title" required>
+        </div>
+        <div class="form-group d-none" id="job_title_select">
+            <label>Job Title</label>
+            <select class="form-control select2" name="job_title_id">
+                <option value="">Select Job Title</option>
+                {{-- @foreach($positions as $id => $name)
+                    <option value="{{ $id }}">{{ $name }}</option>
+                @endforeach --}}
+            </select>
         </div>
         <div class="form-group">
           <label >Area of Assignment</label>
@@ -128,7 +148,7 @@
               <input type="text" class="form-control form-control-border" name="monthly_salary" placeholder="Monthly Salary" >
             </div>
           </div>
-          <div class="col-md-6">
+          {{-- <div class="col-md-6">
             <div class="form-group">
               <label>Status of Employment</label>
               <select class="form-control-lg select2 term_emp" name="term_emp" >
@@ -138,7 +158,7 @@
                 <option value="2">Plantilla/Permanent</option>
               </select>
             </div>
-          </div>
+          </div> --}}
           <div class="if-permanent d-none row">
             <div class="col-md-12"><hr>
               <h5>Minimum Qualifications(Based on CSC Qualification Standards)</h5>
@@ -360,6 +380,13 @@
                 $('.instruct').summernote("code",val.instruction)
                 $('.drp').val(drp).change()
 
+                // --- TRIGGER JOB TITLE TOGGLE ON EDIT ---
+                    toggleJobTitleField();
+
+                    if(val.term_emp == "2") {
+                         $('#job_title_select select').data('selected', val.job_title_id);
+                    }
+
               } else {
                 $(".loading").hide();
                 $.toast({
@@ -383,18 +410,76 @@
             },
         });
     });
-    $('.term_emp').on('select2:select', function (e) {
-        var data = e.params.data.id;
-        if(data == 2) {
-          $('.if-permanent').removeClass('d-none');
+     $('.term_emp').on('select2:select', function (e) {
+         var data = e.params.data.id;
+         if(data == 2) {
+           $('.if-permanent').removeClass('d-none');
+         } else {
+           $('.if-permanent').addClass('d-none');
+           $('input[type=text][name=eligibility]').val('')
+           $('input[type=text][name=education]').val('')
+           $('input[type=text][name=training]').val('')
+           $('input[type=text][name=experience]').val('')
+           $('input[type=text][name=add_req]').val('')
+         }
+     });
+
+     // --- DYNAMIC JOB TITLE TOGGLE FUNCTION ---
+   function toggleJobTitleField() {
+    var val = $('#term_emp').val();
+    var $select = $('#job_title_select select');
+
+    if(val === "2"){ // Plantilla/Permanent
+        $('#job_title_text').addClass('d-none');
+        $('#job_title_select').removeClass('d-none');
+        $('#job_title_text input').prop('disabled', true);
+            $select.prop('disabled', false);
+
+          // Initialize Select2
+            $select.select2({ placeholder: 'Select Job Title', width: '100%' });
+
+        // --- AJAX: Fetch positions from HRMIS ---
+                    $.ajax({
+                url: '/hrmis-positions', // your route in Job Portal
+                type: 'GET',
+                success: function(result){
+                  console.log('Positions fetched from HRMIS:', result);
+                    var $select = $('#job_title_select select');
+                    $select.empty().append('<option value="">Select Job Title</option>');
+
+                    if(result.length > 0){
+                        $.each(result, function(i, item){
+                            $select.append('<option value="'+item.id+'">'+item.position.position+ ' - ' +item.item_number +'</option>');
+                        });
+                        var existing = $select.data('selected');
+                        if(existing){
+                            $select.val(existing).trigger('change');
+                        }
+                    } else {
+                        console.warn('No positions returned from HRMIS');
+                    }
+                },
+                error: function(){
+                    alert('Failed to fetch positions from HRMIS.');
+                }
+            });
+
         } else {
-          $('.if-permanent').addClass('d-none');
-          $('input[type=text][name=eligibility]').val('')
-          $('input[type=text][name=education]').val('')
-          $('input[type=text][name=training]').val('')
-          $('input[type=text][name=experience]').val('')
-          $('input[type=text][name=add_req]').val('')
+            $('#job_title_text').removeClass('d-none');
+            $('#job_title_select').addClass('d-none');
+            $('#job_title_text input').prop('disabled', false);
+            $select.prop('disabled', true);
         }
+    }
+
+
+    // --- TRIGGER TOGGLE ON CHANGE ---
+    $('#term_emp').on('change', function() {
+        toggleJobTitleField();
     });
+
+    // --- INITIAL TRIGGER ON PAGE LOAD ---
+    toggleJobTitleField();
+
 </script>
 @endsection

@@ -48,6 +48,10 @@ Route::group(['middleware' => 'superadmin'], function(){
     Route::get('/users-edit/{id}', 'FnctnCtrl@editUser');
 });
 
+// HRMIS API
+Route::get('/hrmis-positions', 'HrmisApiCtrl@positionsJson');
+
+
 // Cancel Application
 Route::post('/cancel-application', 'Jobs\JobsCtrl@cancelApplication');
 

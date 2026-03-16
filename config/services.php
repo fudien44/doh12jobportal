@@ -34,4 +34,9 @@ return [
         'secret' => env('SPARKPOST_SECRET'),
     ],
 
+    'hrmis' => [
+    'url' => env('HRMIS_URL'),
+    'token' => env('HRMIS_TOKEN'),
+    ],
+
 ];

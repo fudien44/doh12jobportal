@@ -16,6 +16,7 @@ use App\Section;
 use App\SalGrade;
 use App\Application;
 use App\AppLetter;
+use App\Http\Controllers\HrmisApiCtrl;
 use App\MessageAttach;
 use Auth;
 use Storage;
@@ -45,12 +46,30 @@ class JobsCtrl extends Controller
     }
     public function aeJobPost(Request $req) {
         $drp = $req->drp != null ? implode(',', $req->drp) : '';
+         $jobTitle = $req->job_title;   // default for non-plantilla
+         $itemNo   = $req->item_no;     // optional fallback
+         $jobTitleId = null;            // only for plantilla
+
+          if($req->term_emp == 2 && $req->job_title_id){
+        // Fetch HRMIS position using ID
+       $hrmis = new HrmisApiCtrl();
+        $position = $hrmis->getPositionById($req->job_title_id);
+
+        if($position){
+            $jobTitle = $position['position']['position'] . ' - ' . $position['item_number'];
+            $itemNo   = $position['item_number'];
+              $jobTitleId = $req->job_title_id; // store HRMIS reference
+        }
+    }
+
+
     	$jobs = array(
     		"division_id" => $req->division_id,
     		"section_id" => $req->section_id,
-    		"job_title" => $req->job_title,
+    	    "job_title" => $jobTitle,
+            "job_title_id" =>$jobTitleId,
             "area_ass" => $req->area_ass,
-            "item_no" => $req->item_no,
+            "item_no" => $itemNo,
     		"job_description" => $req->job_description,
     		"salary_grade" => $req->salary_grade,
     		"monthly_salary" => $req->monthly_salary,
