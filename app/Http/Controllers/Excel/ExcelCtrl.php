@@ -46,8 +46,30 @@ class ExcelCtrl extends Controller
         <br>DEPARTMENT OF HEALTH - CENTER FOR HEALTH DEVELOPMENT SOCCSKSARGEN Region 
         <br>Date: ' . $dateOutput;
 
+        $sortOrder = [
+            4 => 1, //Accepted
+            3 => 2, //For Panel Interview
+            1 => 3, //Qualified for Written Examination
+            2 => 4, //Not Accepted
+            6 => 5, //Not Qualified for Interview
+            5 => 6, //Missing Requirements
+            0 => 7, //Not Qualified (Based on minimum QS)
+            
+            
+        ];
+
+        $sortedApplicants = $apps->applicants->sortBy(function ($a) use ($apps, $sortOrder) {
+            $j = $a->applicant->myjobs->where('job_id', $apps->id)->first();
+
+            $type = optional($j->latst)->type_message;
+
+            return $sortOrder[$type] ?? 999;
+        });
+
         $table_body = "";
-        foreach ($apps->applicants as $index => $a) {
+
+        //foreach($apps->applicants as $index => $a) --- BEFORE
+        foreach ($sortedApplicants->values() as $index => $a) {
         // dd($apps);
         $ethnicity_pwd_solopar = "No";
         if($a->applicant->profile->ethnicity || $a->applicant->profile->is_pwd == 1|| $a->applicant->profile->is_solopar == 1)
@@ -83,7 +105,7 @@ class ExcelCtrl extends Controller
                 <td style='text-align: center; vertical-align: middle;'>{$ethnicity_pwd_solopar}</td>
                 <td style='text-align: center; vertical-align: middle;'></td>
                 <td style='text-align: center; vertical-align: middle;'></td>
-                <td style='text-align: center; vertical-align: middle;'></td>
+                <td style='text-align: center; vertical-align: middle;'>{$remarks}</td>
             </tr>";
         }
 
