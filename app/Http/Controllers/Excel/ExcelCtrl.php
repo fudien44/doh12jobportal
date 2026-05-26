@@ -54,8 +54,6 @@ class ExcelCtrl extends Controller
             6 => 5, //Not Qualified for Interview
             5 => 6, //Missing Requirements
             0 => 7, //Not Qualified (Based on minimum QS)
-            
-            
         ];
 
         $sortedApplicants = $apps->applicants->sortBy(function ($a) use ($apps, $sortOrder) {
@@ -69,16 +67,19 @@ class ExcelCtrl extends Controller
         $table_body = "";
 
         //foreach($apps->applicants as $index => $a) --- BEFORE
-        foreach ($sortedApplicants->values() as $index => $a) {
         // dd($apps);
+        foreach ($sortedApplicants->values() as $index => $a) {
         $ethnicity_pwd_solopar = "No";
-        if($a->applicant->profile->ethnicity || $a->applicant->profile->is_pwd == 1|| $a->applicant->profile->is_solopar == 1)
-                {
-                $ethnicity_pwd_solopar = "Yes";
-                }
+        if($a->applicant->profile->ethnicity || $a->applicant->profile->is_pwd == 1|| $a->applicant->profile->is_solopar == 1) {
+            $ethnicity_pwd_solopar = "Yes";
+        }
+
         $j = $a->applicant->myjobs->where('job_id',$apps->id)->first();
 
-        $remarks = $j->latst ? $j->latst->tp() : '';
+        // $remarks = $j->latst ? $j->latst->tp() : ''; //OLD
+        $type = optional($j->latst)->type_message; //NEW
+        $qualifiedTypes = [4, 3, 1]; // Accepted, For Panel Interview, Qualified for Written Examination
+        $remarks = is_null($type) ? '' : (in_array($type, $qualifiedTypes) ? 'Qualified' : 'Not Qualified');
 
             $table_body .= "<tr>
                 <td style='vertical-align: middle; text-align: center;'>" . ($index + 1) . "</td>
