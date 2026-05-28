@@ -38,7 +38,7 @@ class HomeController extends Controller
     {
         $sjobtype = null;
         if(\Auth::user() && \Auth::user()->level == 1) {
-            $jobs = Jobs::whereRaw('FIND_IN_SET(?, drp)', \Auth::user()->id)->orderBy('job_title','asc')->get();
+            $jobs = Jobs::whereRaw('FIND_IN_SET(?, drp)', \Auth::user()->id)->orderBy('created_at','desc')->get();
             $salary = SalGrade::all();
             $us = User::where('level', 1)->get();
             return view('jobs.jobspost',[

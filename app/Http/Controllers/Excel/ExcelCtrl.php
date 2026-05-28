@@ -57,6 +57,7 @@ class ExcelCtrl extends Controller
         $j = $a->applicant->myjobs->where('job_id',$apps->id)->first();
 
         $remarks = $j->latst ? $j->latst->tp() : '';
+        $email = str_replace('@', '&#8203;@', $a->applicant->email);
 
             $table_body .= "<tr>
                 <td style='vertical-align: middle; text-align: center;'>" . ($index + 1) . "</td>
@@ -65,7 +66,7 @@ class ExcelCtrl extends Controller
                    {$a->applicant->lname}, {$a->applicant->fname} {$a->applicant->mname} 
                     </b><br><br>&#10;
                     Contact Number: {$a->applicant->contactno}<br>&#10;
-                    Email Address: {$a->applicant->email}<br>&#10;
+                    Email Address:{$email}<br>&#10;
                     Age: ".Carbon::parse($a->applicant->profile->dob)->age." years old<br>&#10;
                     Gender: ".$a->applicant->profile->gndr()."<br>&#10;
                     Religion: ".$a->applicant->profile->relgion()."<br>&#10;
