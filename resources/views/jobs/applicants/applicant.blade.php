@@ -63,6 +63,7 @@
             <th>Email Address</th>
             <th>Residential Address</th>
             <th>Ethnicity</th>
+            <th>Religion</th>
             <th>Solo Parent</th>
             <th>PWD</th>
             <th>Position Applied</th>
@@ -101,6 +102,7 @@
             <td>{{$a->applicant->profile ? $a->applicant->email : $a->applicant->profile}}</td>
             <td>{{$a->applicant->profile ? $a->applicant->profile->address : $a->applicant->profile}}</td>
             <td>{{$a->applicant->profile ? $a->applicant->profile->ethnicity : $a->applicant->profile}}</td>
+            <td>{{$a->applicant->profile ? $a->applicant->profile->relgion() : $a->applicant->profile}}</td>
             <td>{{$a->applicant->profile ? $a->applicant->profile->solpar() : $a->applicant->profile}}</td>
             <td>{{$a->applicant->profile ? $a->applicant->profile->pwd() : $a->applicant->profile}}</td>
             <td>

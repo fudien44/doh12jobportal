@@ -45,6 +45,7 @@
             <th>Contact No.</th>
             <th>Email Address</th>
             <th>Residential Address</th>
+            <th>Religion</th>
             <th>Ethnicity</th>
             <th>Solo Parent</th>
             <th>PWD</th>
@@ -73,6 +74,7 @@
             <td>{{$a->email}}</td>
             <td>{{$a->profile ? $a->profile->address : ''}}</td>
             <td>{{$a->profile ? $a->profile->ethnicity : ''}}</td>
+            <td>{{$a->profile ? $a->profile->relgion() : ''}}</td>
             <td>{{$a->profile ? $a->profile->solpar() : ''}}</td>
             <td>{{$a->profile ? $a->profile->pwd() : ''}}</td>
 
