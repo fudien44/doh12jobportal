@@ -1,4 +1,4 @@
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ asset('public/plugins/chart.umd.min.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Gender Chart
