@@ -176,10 +176,14 @@
                             <input class="form-check-input" type="radio" name="is_solpar"value="0"onchange="solo(0)"@if($profile->is_solpar == '0')checked @endif>
                             <label class="form-check-label">Yes</label>
                         </div>
+
+                        
                         <div class="form-group" id="solopar">
                             <input type="text" class="form-control form-control-border required" name="soloparent_no" placeholder="Please Specify I.D. No." value="{{$profile->soloparent_no}}">
                         </div>
                      </div>
+
+                     
                 </div>
                 <div class="row">
                     <div class="col-sm-12">

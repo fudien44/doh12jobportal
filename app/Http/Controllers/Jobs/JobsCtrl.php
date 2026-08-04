@@ -44,6 +44,13 @@ class JobsCtrl extends Controller
     	]);
     }
     public function aeJobPost(Request $req) {
+        
+        if ($req->term_emp == 2) {
+                $req->validate([
+                    'item_no' => 'required',
+                    'date_evaluation' => 'required|date',
+                ]);
+            }
         $drp = $req->drp != null ? implode(',', $req->drp) : '';
     	$jobs = array(
     		"division_id" => $req->division_id,
@@ -51,6 +58,7 @@ class JobsCtrl extends Controller
     		"job_title" => $req->job_title,
             "area_ass" => $req->area_ass,
             "item_no" => $req->item_no,
+            "date_evaluation" => $req->date_evaluation,
     		"job_description" => $req->job_description,
     		"salary_grade" => $req->salary_grade,
     		"monthly_salary" => $req->monthly_salary,
