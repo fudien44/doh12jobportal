@@ -250,39 +250,83 @@
                   </div>
                   <!-- /.tab-pane -->
                   <div class="tab-pane" id="otherinfo">
-                    <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label">PWD</label>
-                        <div class="col-sm-10">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="is_pwd"value="1" onchange="stat(1)" @if($profile->is_pwd == '1')checked @endif>
-                                <label class="form-check-label">No</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="is_pwd"value="0" onchange="stat(0)" @if($profile->is_pwd == '0')checked @endif>
-                                <label class="form-check-label">Yes</label>
-                            </div>
-                            <div class="form-group" id="status">
-                                <input type="text" class="form-control form-control-border required" name="pwd_no" placeholder="" value="{{$profile->pwd_no}}" readonly>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputName" class="col-sm-2 col-form-label">Solo Parent</label>
-                        <div class="col-sm-10">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="is_solpar"value="1"onchange="solo(1)"@if($profile->is_solpar == '1')checked @endif>
-                                <label class="form-check-label">No</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="is_solpar"value="0"onchange="solo(0)"@if($profile->is_solpar == '0')checked @endif>
-                                <label class="form-check-label">Yes</label>
-                            </div>
-                            <div class="form-group" id="solopar">
-                                <input type="text" class="form-control form-control-border required" name="soloparent_no" placeholder="" value="{{$profile->soloparent_no}}" readonly>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
+
+    <!-- PWD -->
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">PWD</label>
+        <div class="col-sm-10">
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       value="1"
+                       @if($profile->is_pwd == '1') checked @endif
+                       disabled>
+                <label class="form-check-label">No</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       value="0"
+                       @if($profile->is_pwd == '0') checked @endif
+                       disabled>
+                <label class="form-check-label">Yes</label>
+            </div>
+
+            <div class="mt-2">
+                <input type="text"
+                       class="form-control"
+                       value="{{ $profile->pwd_no }}"
+                       readonly>
+            </div>
+        </div>
+    </div>
+
+    <!-- Solo Parent -->
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Solo Parent</label>
+        <div class="col-sm-10">
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       value="1"
+                       @if($profile->is_solpar == '1') checked @endif
+                       disabled>
+                <label class="form-check-label">No</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input"
+                       type="radio"
+                       value="0"
+                       @if($profile->is_solpar == '0') checked @endif
+                       disabled>
+                <label class="form-check-label">Yes</label>
+            </div>
+
+            <div class="mt-2">
+                <input type="text"
+                       class="form-control"
+                       value="{{ $profile->soloparent_no }}"
+                       readonly>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ethnicity -->
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Ethnicity</label>
+        <div class="col-sm-10">
+            <input type="text"
+                   class="form-control"
+                   value="{{ $profile->ethnicity }}"
+                   readonly>
+        </div>
+    </div>
+
+</div>
                   <div class="tab-pane" id="attachments">
                     <div class="col-sm-12">
                         <label>Personal Data Sheet(CS Form No. 212, Revised 2017)</label><br>
@@ -652,7 +696,7 @@
                             </div> -->
 
                              <div class="col-md-4">
-                                <h6 class="card-subtitle req-field">Ethnicity:</h6>
+                                <h6 class="card-subtitle req-field">Ethnicity:<span style="color:red;">*</span></h6>
                                 <div class="form-group">
                                     <select class="form-control form-control-border ethnicity required" name="ethnicity" required>
                                       <option selected value="">Select Ethnicity</option>
@@ -710,11 +754,6 @@
                                   </select>
                                 </div>
                             </div>
-
-
-
-
-
 
                         </div>
                         <div class="row">
@@ -809,7 +848,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <h6 class="card-subtitle req-field">Eligibility/License/Honor Graduate (If Applicable):</h6>
+                                <h6 class="card-subtitle req-field">Eligibility / Professional License / Honor Graduate (if applicable). If none, enter "N/A"<span style="color:red;">*</span></h6>
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-border required" name="eligibility" value="{{$profile->eligibility}}">
                                 </div>
@@ -843,6 +882,8 @@
                                     <input class="form-check-input" type="radio" name="is_solpar"value="0"onchange="solo(0)"@if($profile->is_solpar == '0')checked @endif>
                                     <label class="form-check-label">Yes</label>
                                 </div>
+
+                                
                                 <div class="form-group" id="solopar">
                                     <input type="text" class="form-control form-control-border" name="soloparent_no" placeholder="Please Specify I.D. No." value="{{$profile->soloparent_no}}">
                                 </div>

@@ -41,6 +41,9 @@ class ProfileController extends Controller
     }
     public function applicationupdate(Request $request)
     {
+            $request->validate([
+            'ethnicity' => 'required',
+        ]);
         $profile_id = $request->profile_id;
         $user_id = Auth::user()->id;
         $user = Profile::findOrFail($profile_id);

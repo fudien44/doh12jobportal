@@ -263,9 +263,25 @@
                     <input class="form-check-input" type="radio" name="is_solpar"value="0"onchange="solo(0)"@if($profile->is_solpar == '0')checked @endif>
                     <label class="form-check-label">Yes</label>
                 </div>
+
+                <div class="col-md-12">
+   
                 <div class="form-group" id="solopar">
                     <input type="text" class="form-control form-control-border required" name="soloparent_no" placeholder="Please Specify I.D. No." value="{{$profile->soloparent_no}}">
                 </div>
+
+                               <h6 class="card-subtitle req-field">Ethnicity</h6>
+
+                  <div class="form-group" id="ethnicity">
+                      <input
+                          type="text"
+                          class="form-control form-control-border required"
+                          name="ethnicity"
+                          value="{{ $profile->ethnicity }}"
+                          readonly
+                      >
+                  </div>
+              </div>
              </div>
           </div>
         </div>

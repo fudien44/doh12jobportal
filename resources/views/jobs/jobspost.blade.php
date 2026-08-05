@@ -122,58 +122,95 @@
               </select>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Monthly Salary</label>
-              <input type="text" class="form-control form-control-border" name="monthly_salary" placeholder="Monthly Salary" >
-            </div>
+         <div class="col-md-6">
+              <div class="form-group">
+                  <label>Monthly Salary</label>
+                  <input type="text" class="form-control form-control-border"
+                        name="monthly_salary"
+                        placeholder="Monthly Salary">
+              </div>
           </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Status of Employment</label>
-              <select class="form-control-lg select2 term_emp" name="term_emp" >
-                <option selected value="">Select Status of Employment</option>
-                <option value="0">PS-Contractual</option>
-                <option value="1">Contract of Service/ Job Order</option>
-                <option value="2">Plantilla/Permanent</option>
-              </select>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Status of Employment</label>
+                    <select class="form-control-lg select2 term_emp" name="term_emp">
+                        <option selected value="">Select Status of Employment</option>
+                        <option value="0">PS-Contractual</option>
+                        <option value="1">Contract of Service / Job Order</option>
+                        <option value="2">Plantilla / Permanent</option>
+                    </select>
+                </div>
             </div>
-          </div>
-          <div class="if-permanent d-none row">
-            <div class="col-md-12"><hr>
-              <h5>Minimum Qualifications(Based on CSC Qualification Standards)</h5>
+
+            <!-- Lalabas lang kapag Plantilla -->
+            <div class="col-md-6 plantilla-item d-none">
+                <div class="form-group">
+                    <label>Plantilla Item No.</label>
+                    <input type="text"
+                            class="form-control form-control-border"
+                            name="item_no"
+                            id="item_no"
+                            placeholder="Plantilla Item No.">
+                </div>
             </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label>Education</label>
-                <input type="text" class="form-control form-control-border" name="education" placeholder="Education" >
+
+            <div class="if-permanent col-md-6 d-none">
+                <div class="form-group">
+                    <label>Date of Evaluation</label>
+                    <input type="date"
+                            class="form-control"
+                            name="date_evaluation"
+                            id="date_evaluation">
+                </div>
+            </div>
+
+            <div class="if-permanent col-md-12 d-none">
+                <hr>
+                <h5>Minimum Qualifications (Based on CSC Qualification Standards)</h5>
+            </div>
+
+            <div class="if-permanent col-md-3 d-none">
+                <div class="form-group">
+                    <label>Education</label>
+                    <input type="text" class="form-control form-control-border"
+                          name="education">
+                </div>
+            </div>
+
+            <div class="if-permanent col-md-3 d-none">
+                <div class="form-group">
+                    <label>Experience</label>
+                    <input type="text" class="form-control form-control-border"
+                          name="experience">
+                </div>
+            </div>
+
+            <div class="if-permanent col-md-3 d-none">
+                <div class="form-group">
+                    <label>Training</label>
+                    <input type="text" class="form-control form-control-border"
+                          name="training">
+                </div>
+            </div>
+
+              <div class="if-permanent col-md-3 d-none">
+                  <div class="form-group">
+                      <label>Eligibility</label>
+                      <input type="text" class="form-control form-control-border"
+                            name="eligibility">
+                  </div>
               </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label>Experience</label>
-                <input type="text" class="form-control form-control-border" name="experience" placeholder="Experience" >
+
+              <div class="if-permanent col-md-12 d-none">
+                  <div class="form-group">
+                      <label>Additional Requirements (Based on DOH-CHD Regional Memorandum No. 142 s. 2018)</label>
+                      <input type="text"
+                            class="form-control form-control-border"
+                            name="add_req">
+                  </div>
               </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label>Training</label>
-                <input type="text" class="form-control form-control-border" name="training" placeholder="Training" >
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group">
-                <label>Eligibility</label>
-                <input type="text" class="form-control form-control-border" name="eligibility" placeholder="Eligibility" >
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="form-group">
-                <label>Additional Requirements(based on DOH-CHD Regional Memorandum No.: 142 s. 2018)</label>
-                <input type="text" class="form-control form-control-border" name="add_req" placeholder="Additional Requirements" >
-              </div>
-            </div>
-          </div>
+          
           <div class="col-md-12"><hr></div>
           <div class="col-md-4">
             <div class="form-group">
@@ -302,7 +339,7 @@
         });
     });
     $('#post_form').on('submit',function(e){
-        var url = "{{ secure_url('/save-update-job-post') }}";
+        var url = "{{ url('/save-update-job-post') }}";
         e.preventDefault();
         $(".loading").show();
         $('#post_form').ajaxSubmit({
@@ -313,15 +350,14 @@
                   window.location.reload(false);
               },500);
             },
-            error: function (data) {
-                $(".loading").hide();
-                $.toast({
-                    heading: 'Error',
-                    text: 'Something went wrong, Please contact administrator',
-                    showHideTransition: 'fade',
-                    icon: 'error'
-                })
-            },
+            error: function (xhr, status, error) {
+    $(".loading").hide();
+
+    console.log("XHR:", xhr);
+    console.log("Status:", status);
+    console.log("Error:", error);
+    console.log("Response:", xhr.responseText);
+},
         });
     });
     $('#jobs_tbl').on('click', '.btn-edit',function() {
@@ -383,18 +419,31 @@
             },
         });
     });
-    $('.term_emp').on('select2:select', function (e) {
-        var data = e.params.data.id;
-        if(data == 2) {
-          $('.if-permanent').removeClass('d-none');
-        } else {
-          $('.if-permanent').addClass('d-none');
-          $('input[type=text][name=eligibility]').val('')
-          $('input[type=text][name=education]').val('')
-          $('input[type=text][name=training]').val('')
-          $('input[type=text][name=experience]').val('')
-          $('input[type=text][name=add_req]').val('')
-        }
-    });
+  $('.term_emp').on('change', function () {
+
+    if ($(this).val() == '2') {
+
+        $('.plantilla-item').removeClass('d-none');
+        $('.if-permanent').removeClass('d-none');
+
+        $('input[name=item_no]').prop('required', true);
+        $('input[name=date_evaluation]').prop('required', true);
+
+    } else {
+
+        $('.plantilla-item').addClass('d-none');
+        $('.if-permanent').addClass('d-none');
+
+        $('input[name=item_no]').prop('required', false).val('');
+        $('input[name=date_evaluation]').prop('required', false).val('');
+
+        $('input[name=eligibility]').val('');
+        $('input[name=education]').val('');
+        $('input[name=training]').val('');
+        $('input[name=experience]').val('');
+        $('input[name=add_req]').val('');
+    }
+
+});
 </script>
 @endsection
